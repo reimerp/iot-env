@@ -14,18 +14,18 @@ datasources:
   # <string, required> datasource type. Required
   type: influxdb
   # <string, required> access mode. direct or proxy. Required
-  access: proxy
+  access: direct
   # <int> org id. will default to orgId 1 if not specified
   orgId: 1
   # <string> url
-  url: http://influxdb:${INFLUXDB_PORT}
+  url: $INFLUXDB_URL
   # <string> database password, if used
   secureJsonData:
-    password: "${INFLUXDB_PASSWORD}"
+    password: $INFLUXDB_PASSWORD
   # <string> database user, if used
-  user: "${INFLUXDB_USER}"
+  user: $INFLUXDB_USER
   # <string> database name, if used
-  database: "${INFLUXDB_DB}"
+  database: "influx"
   # <bool> enable/disable basic auth
   basicAuth: false
 #  withCredentials:
@@ -48,13 +48,13 @@ datasources:
 
 - name: InfluxSensors
   type: influxdb
-  access: proxy
+  access: direct
   orgId: 1
-  url: http://influxdb:${INFLUXDB_PORT}
-  secureJsonData:
-    password: "${INFLUXDB_PASSWORD}"
+  url: $INFLUXDB_URL
   # TODO: this user nees only read access
-  user: "${INFLUXDB_USER}"
+  secureJsonData:
+    password: $INFLUXDB_PASSWORD
+  user: $INFLUXDB_USER
   database: "sensors"
   basicAuth: false
   jsonData:

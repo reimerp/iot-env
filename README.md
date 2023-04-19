@@ -82,3 +82,8 @@ I added changed telegraf configs / grafana dashboards here, where it differs fro
 
 telegraf is using two instances, one for local statsd dashboard on one for mqtt input, there are also distinct databases for these usecases
 
+
+# Some Dashboard Examples
+
+[Screenshots](screenshots/)
+

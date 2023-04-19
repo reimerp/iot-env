@@ -23,7 +23,7 @@ doserver() {
     echo '{"Time":"'$time'","server":"'$server'","size":'$csize',"hits":'$chits',"miss":'$cmiss'}'
 }
 
-if [ "_$server" = "_fb" ]; then
+if [ "_$server" = "_fb" -o "_$server" = "_probook" ]; then
 doserver $server | mosquitto_pub -h ${MQTT_ADDRESS} -u ${MQTT_USER} -P ${MQTT_PASSWORD} -t test/dnscache/$server -q 1 -l
 else
 doserver $server

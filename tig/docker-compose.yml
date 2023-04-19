@@ -13,9 +13,9 @@ services:
     restart: always
     # define a host alias for mqtt server, not to have this spread over in every config file
     extra_hosts:
-    - "mqtt:192.168.176.3"
+      - "mqtt:192.168.176.3"
     volumes:
-    # This file needs edited with your MQTT topics, host, etc
+      # This file needs edited with your MQTT topics, host, etc
       - ./telegraf_mqtt/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - ./telegraf_mqtt/etc/telegraf.d:/etc/telegraf.d:ro
       - ./telegraf_mqtt/tmp/input:/tmp/input
