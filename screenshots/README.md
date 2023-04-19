@@ -4,7 +4,7 @@
 
 some indoor sensors and the lighblue is outdoor.
 
-! [Temperature](./DB_Temp.png?raw=true)
+![Temperature](./DB_Temp.png?raw=true)
 
 
 some devices
