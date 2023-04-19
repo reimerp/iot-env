@@ -1,0 +1,127 @@
+# - Setup defined networks to protect influxdb and telegraf
+# - Define a backup process for data
+# - Monitor implications of version tags/docker container lifecycles
+
+services:
+
+  # Message formattet (MQTT -> InfluxDB)
+  # https://hub.docker.com/_/telegraf
+  telegraf_mqtt:
+    container_name: telegraf_mqtt
+    image: telegraf:${TELEGRAF_TAG}
+    command: --config-directory /etc/telegraf.d
+    restart: always
+    # define a host alias for mqtt server, not to have this spread over in every config file
+    extra_hosts:
+    - "mqtt:192.168.176.3"
+    volumes:
+    # This file needs edited with your MQTT topics, host, etc
+      - ./telegraf_mqtt/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf_mqtt/etc/telegraf.d:/etc/telegraf.d:ro
+      - ./telegraf_mqtt/tmp/input:/tmp/input
+    env_file:
+      - .env
+      - env.telegraf
+      - env.telegraf_mqtt
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+
+  telegraf_stats:
+    container_name: telegraf_stats
+    image: telegraf:${TELEGRAF_TAG}
+    restart: always
+    # 8125 is a statsd port
+    #ports:
+      # - '${IP_LOCALHOST}:8125:8125/udp'
+      # -"5050:5050"
+    volumes:
+      - ./telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /:/hostfs:ro
+    env_file:
+      - .env
+      - env.telegraf
+      - env.telegraf_stats
+    network_mode: "host"
+    # host type networking iincomp port_bindings can't be used with links
+    depends_on:
+      - influxdb
+    #links:
+    #  - influxdb
+
+  # Data storage
+  # https://hub.docker.com/_/influxdb
+  influxdb:
+    # Name this container so other containers can find it easily
+    # Name used in:
+    # - Grafana data source
+    # - Telegraf config
+    container_name: influxdb
+    image: influxdb:1.8-alpine
+    # image: quay.io/influxdb/influxdb:v2.0.3
+    ports:
+      - "0.0.0.0:${INFLUXDB_PORT}:${INFLUXDB_PORT}/tcp"
+    env_file:
+      - .env
+      - env.influxdb
+    restart: always
+    volumes:
+      - ./:/imports
+      # Data persistence (could also be a bind mount: /srv/docker/influxdb/data:/var/lib/influxdb)
+      - influxdb_data:/var/lib/influxdb
+      # Backups...
+      # - ./influxdb-backup:/backup
+      # Host can run the following on a crontab, then rsnapshot can pickup:
+      # docker exec -it influxdb influxd backup -database sensors /backup
+
+  # Dashboard/graphing
+  # https://hub.docker.com/r/grafana/grafana
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:8.2.7
+    depends_on:
+      - influxdb
+    env_file: env.grafana
+    restart: always
+    links:
+      - influxdb
+    # hostname: grafana
+    ports:
+      - 0.0.0.0:3000:3000/tcp
+    volumes:
+      # Grafana gets grumpy over bind mount permissions, use a volume
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards/
+    # dns is req for plugin installation
+    dns:
+      - 8.8.8.8
+
+  # MQTT Broker, handles data from sensors
+  # https://hub.docker.com/_/eclipse-mosquitto
+#  mosquitto:
+#    container_name: mosquitto
+#    image: eclipse-mosquitto:1.6
+#    ports:
+#      - "1883:1883"
+#      - "9001:9001"
+#    depends_on:
+#      - influxdb
+#    restart: always
+#    volumes:
+#      # Use a volume for storage
+#      - mosquitto-storage:/mosquitto/data
+
+volumes:
+  grafana_data: {}
+  influxdb_data: {}
+
+# networks:
+#   put_net:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#         config:
+#           -
+#             subnet: 192.168.2.0/24
