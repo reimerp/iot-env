@@ -36,8 +36,8 @@ I will start with
 
 1. fritzbox
 
-I used a 6490 which was replaced by a 6660 this year, both are cable (docsis) devices. Since I had a lot of trouble with the line state and the bandwith with my former provider, I deceided to long term monitor some of the states you find in the GUI onf the FB.
-A couple of python scripts run by systemd.timers on the pi to query values by the web interface (lua scripts on the fb). There was an article in the famous computer magazine c't this year about this, but I've had this running for years now, even on a DSL device 3 years ago.
+I used a 6490 which was replaced by a 6660 this year, both are cable (docsis) devices. Since I had a lot of trouble with the line state and the bandwith with my former provider, I deceided to long term monitor some of the states you find in the GUI on the FB.
+A couple of python scripts run by systemd.timers on the pi to query values by the web interface (lua scripts on the fb). There was an article in the famous computer magazine c't in '22 about this using influx 2, but I've had this running for years now, even on a DSL device 3 years ago.
 
 The scripts in details:
 - the login and sessionID stuff required by FB web interface (fritz.py)
@@ -58,14 +58,14 @@ machine mqtt login <your_mqtt user> password <your_mqtt pw>
 2. ookla speed test
 
 speedtest.sh (hourly timer on pi)
+
 Simply calls the speedtest cli (json output) and pipes output to mosquitto_pub.
 Again netrc is used for mqtt password, but now called from a bash script.
 Data is sent with QOS 1 to store data when my TIG stack is unavailable (laptop sleeps)
 
-3. mosquitto
+3. mosquitto (plain service on pi)
 
-plain service on pi
-- currently out of scope -
+- currently out of scope
 
 4. TIG
 
@@ -75,7 +75,9 @@ https://github.com/bcremer/docker-telegraf-influx-grafana-stack.git
 so docker-compose is used to start the services.
 
 Telegraf fetches data from topics, does very minimal conversion and puts data in influx DB.
-Influx is still v.1.8
+
+Influx is still v.1.8.
+
 Grafana displays dashboards.
 
 I added changed telegraf configs / grafana dashboards here, where it differs from the base project.
