@@ -2,7 +2,7 @@
 
 MQTT_ADDRESS=hassbian
 
-[ -z $HOME  ] && export HOME=/home/pi
+[ -z $HOME ] && export HOME=/home/pi
 read -r _ _ _ MQTT_USER _ MQTT_PASSWORD < <(grep mqtt_remote ${HOME}/.netrc);
 
 # fester Server, weil Server der Vereinigten Stadtwerke haben nur 0.76M
