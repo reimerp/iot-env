@@ -20,10 +20,7 @@ class Fritz:
         user = n.authenticators(host)[0]
         password = n.authenticators(host)[2]
 
-        self.debug = False
-
-        if not self.debug:    # TODO lässt sich nicht abschalten
-            self.sid = self.get_sid(user, password)
+        self.sid = self.get_sid(user, password)
 
     def get_sid(self, user, password):
         """Authenticate and get a Session ID"""
@@ -53,11 +50,9 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='FritzBox Sid Helper')
     parser.add_argument('-H', '--host', default='fritz.box', help='FritzBox hostname')
-    parser.add_argument('--no-debug', action='store_true', help='Debug OFF')
     args = parser.parse_args()
 
     f = Fritz(args.host)
-    f.debug = not args.no_debug
     print(f.sid)
 
 

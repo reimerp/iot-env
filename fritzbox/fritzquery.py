@@ -7,7 +7,6 @@ from fritz import Fritz
 class FritzQuery(Fritz):
     def __init__(self, host='fritz.box'):
       super().__init__(host)
-      if self.debug: print(self.sid)
 
     def getData(self, name, val):
 #      data = dict(
@@ -17,7 +16,7 @@ class FritzQuery(Fritz):
       params={'sid':self.sid, name:val}
       resp = requests.get(url=self.fritzurl + '/query.lua' , params=params)
       # resp.headers['Content-Type'] 'text/html -> error
-      if self.debug: print(vars(resp))
+      #print(vars(resp))
       return resp.json()
       #return resp.text
 
@@ -34,7 +33,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     fq = FritzQuery(args.host)
-    fq.debug = not args.no_debug
     temp = fq.getTemp()
     print(temp)
 

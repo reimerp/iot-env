@@ -21,11 +21,9 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='FritzBox Data Helper')
     parser.add_argument('-H', '--host', default='fritz.box', help='FritzBox hostname')
-    parser.add_argument('--no-debug', action='store_true', help='Debug OFF')
     args = parser.parse_args()
 
     fd = FritzData(args.host)
-    fd.debug = not args.no_debug
     data = fd.getData('docInfo')
     import json
     print(json.dumps(data))
