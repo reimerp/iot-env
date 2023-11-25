@@ -2,6 +2,7 @@
 #
 
 import sys
+import platform
 from hashlib import md5 as md5func
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
@@ -15,7 +16,7 @@ class Fritz:
         if self.fritzurl.endswith('/'):
             self.fritzurl = self.fritzurl[0:-1]
 
-        if 1==1:
+        if 'probook'==platform.node():
             sys.path.insert(0, '../../../python')
             from pykeypass import KeePass
             keepass = KeePass('Fritzbox')
