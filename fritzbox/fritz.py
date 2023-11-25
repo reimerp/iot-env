@@ -1,10 +1,10 @@
-#!/usr/bin/env -S -i python3
+#!/usr/bin/env -S -i DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} python3
 #
 
+import sys
 from hashlib import md5 as md5func
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
-import netrc
 
 class Fritz:
     def __init__(self, host='fritz.box'):
@@ -15,15 +15,32 @@ class Fritz:
         if self.fritzurl.endswith('/'):
             self.fritzurl = self.fritzurl[0:-1]
 
-        # uses ~/.netrc mechanism: "machine fritz.box login xxx password yyy"
-        n = netrc.netrc()
-        user = n.authenticators(host)[0]
-        password = n.authenticators(host)[2]
+        if 1==1:
+            sys.path.insert(0, '../../../python')
+            from pykeypass import KeePass
+            keepass = KeePass('Fritzbox')
+            keepass.parse()
+            user = keepass.username
+            password = keepass.password
+        else:
+            import netrc
+            # uses ~/.netrc mechanism: "machine fritz.box login xxx password yyy"
+            n = netrc.netrc()
+            user = n.authenticators(host)[0]
+            password = n.authenticators(host)[2]
 
-        self.sid = self.get_sid(user, password)
+        for attempt in range(2, 0, -1):
+            try:
+                self.sid = self.get_sid(user, password)
+                break
+            except PermissionError as e:
+                if attempt == 1: raise e
 
+    """
+       Authenticate and get a Session ID
+    """
     def get_sid(self, user, password):
-        """Authenticate and get a Session ID"""
+        sid = '0000000000000000'
         with urlopen(self.fritzurl + '/login_sid.lua') as f:
             dom = parse(f)
             sid = dom.findtext('./SID')
@@ -40,10 +57,10 @@ class Fritz:
                 dom = parse(f)
                 sid = dom.findtext('./SID')
 
-        if sid == '0000000000000000':
-            raise PermissionError('access denied')
+        if sid != '0000000000000000':
+          return sid
 
-        return sid
+        raise PermissionError('access denied')
 
 # only debug
 if __name__ == '__main__':
@@ -54,5 +71,3 @@ if __name__ == '__main__':
 
     f = Fritz(args.host)
     print(f.sid)
-
-

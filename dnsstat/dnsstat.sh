@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
+
 # das geht ins syslog
 # ps aux | grep [d]nsmasq | awk '{print $2}' | xargs -r kill -USR1
 # ps -eo pid,comm | awk '$2~/^dnsmasq$/ { print $1 }' | xargs -r kill -USR1
@@ -7,7 +8,11 @@ server=${1:-fb}
 
 MQTT_ADDRESS=hassbian
 
-read -r _ _ _ MQTT_USER _ MQTT_PASSWORD < <(grep mqtt_remote ${HOME}/.netrc);
+if [ "_$(hostname -d)" = "_hassbian" ]; then
+  read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote ${HOME}/.netrc)
+else
+  eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
+fi
 
 dodig() {
     dig +short chaos txt $1 @$server|sed 's/"//g'
@@ -24,7 +29,7 @@ doserver() {
 }
 
 if [ "_$server" = "_fb" -o "_$server" = "_probook" ]; then
-doserver $server | mosquitto_pub -h ${MQTT_ADDRESS} -u ${MQTT_USER} -P ${MQTT_PASSWORD} -t test/dnscache -q 1 -l
+  doserver $server | mosquitto_pub -h ${MQTT_ADDRESS} -u ${MQTT_USER} -P ${MQTT_PASS} -t test/dnscache -q 1 -l
 else
-doserver $server
+  doserver $server
 fi
