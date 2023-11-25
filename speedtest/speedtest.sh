@@ -4,7 +4,7 @@ MQTT_ADDRESS=hassbian
 
 [ -z $HOME ] && export HOME=/home/pi
 
-if [ "_$(hostname -d)" = "_hassbian" ]; then
+if [ "_$(hostname -s)" = "_hassbian" ]; then
   read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote ${HOME}/.netrc)
 else
   eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"

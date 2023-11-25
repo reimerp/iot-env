@@ -16,7 +16,7 @@ class Fritz:
         if self.fritzurl.endswith('/'):
             self.fritzurl = self.fritzurl[0:-1]
 
-        if 'probook'==platform.node():
+        if 'probook' == platform.node():
             sys.path.insert(0, '../../../python')
             from pykeypass import KeePass
             keepass = KeePass('Fritzbox')
