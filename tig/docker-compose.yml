@@ -22,10 +22,10 @@ services:
       - .env
       - env.telegraf
       - env.telegraf_mqtt
-#    depends_on:
-#      - influxdb
-#    links:
-#      - influxdb
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
 
   telegraf_stats:
     container_name: telegraf_stats
