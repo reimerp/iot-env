@@ -21,7 +21,7 @@ datasources:
   url: $INFLUXDB_URL
   # <string> database password, if used
   secureJsonData:
-    password: $INFLUXDB_PASSWORD
+    password: $INFLUXDB_PASS
   # <string> database user, if used
   user: $INFLUXDB_USER
   # <string> database name, if used
@@ -53,7 +53,7 @@ datasources:
   url: $INFLUXDB_URL
   # TODO: this user nees only read access
   secureJsonData:
-    password: $INFLUXDB_PASSWORD
+    password: $INFLUXDB_PASS
   user: $INFLUXDB_USER
   database: "sensors"
   basicAuth: false

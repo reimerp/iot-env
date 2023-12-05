@@ -7,26 +7,25 @@ services:
   # Message formattet (MQTT -> InfluxDB)
   # https://hub.docker.com/_/telegraf
   telegraf_mqtt:
-    container_name: telegraf_mqtt
+    #container_name: telegraf_mqtt2
     image: telegraf:${TELEGRAF_TAG}
-    command: --config-directory /etc/telegraf.d
+    #command: --config-directory /etc/telegraf/telegraf.d
     restart: always
     # define a host alias for mqtt server, not to have this spread over in every config file
     extra_hosts:
       - "mqtt:192.168.176.3"
     volumes:
       # This file needs edited with your MQTT topics, host, etc
-      - ./telegraf_mqtt/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      - ./telegraf_mqtt/etc/telegraf.d:/etc/telegraf.d:ro
+      - ./telegraf_mqtt/etc/telegraf/:/etc/telegraf/:ro
       - ./telegraf_mqtt/tmp/input:/tmp/input
     env_file:
       - .env
       - env.telegraf
       - env.telegraf_mqtt
-    depends_on:
-      - influxdb
-    links:
-      - influxdb
+#    depends_on:
+#      - influxdb
+#    links:
+#      - influxdb
 
   telegraf_stats:
     container_name: telegraf_stats
@@ -79,7 +78,7 @@ services:
   # https://hub.docker.com/r/grafana/grafana
   grafana:
     container_name: grafana
-    image: grafana/grafana:8.2.7
+    image: grafana/grafana:9.5.8
     depends_on:
       - influxdb
     env_file: env.grafana
