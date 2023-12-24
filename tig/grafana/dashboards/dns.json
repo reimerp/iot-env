@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -20,19 +23,23 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -92,16 +99,22 @@
             "mean"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "$tag_server $col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -158,19 +171,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Ratio",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -240,8 +256,8 @@
       "gridPos": {
         "h": 11,
         "w": 12,
-        "x": 0,
-        "y": 7
+        "x": 12,
+        "y": 0
       },
       "id": 4,
       "interval": "5m",
@@ -253,16 +269,22 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "$tag_server $col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -338,14 +360,12 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Cache",
       "type": "timeseries"
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 32,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -359,5 +379,6 @@
   "timezone": "",
   "title": "DNS",
   "uid": "gcIAqlCGz",
-  "version": 3
+  "version": 1,
+  "weekStart": ""
 }

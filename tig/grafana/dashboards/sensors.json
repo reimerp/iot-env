@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -20,14 +23,15 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1675905547519,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -35,6 +39,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": -6,
@@ -178,7 +184,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 19,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -188,16 +194,22 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "[[tag_topic]]",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -235,19 +247,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Temperatur",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -357,27 +372,32 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 19,
+        "w": 24,
         "x": 0,
         "y": 7
       },
       "id": 15,
       "interval": "5m",
-      "maxDataPoints": null,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "[[tag_topic]]",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -414,19 +434,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Luffeuchte",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -461,10 +484,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -490,7 +509,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 24,
         "x": 0,
         "y": 14
       },
@@ -500,16 +519,22 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "[[tag_topic]]",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -546,19 +571,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Luftdruck",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -622,7 +650,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 24,
         "x": 0,
         "y": 22
       },
@@ -631,16 +659,22 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "$tag_topic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -677,19 +711,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Licht",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -738,7 +775,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 10,
+        "w": 12,
         "x": 0,
         "y": 30
       },
@@ -748,16 +785,22 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "[[tag_topic]]",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -794,19 +837,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Energie",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -855,8 +901,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 9,
-        "x": 10,
+        "w": 12,
+        "x": 12,
         "y": 30
       },
       "id": 10,
@@ -865,16 +911,22 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "[[tag_topic]]",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -917,13 +969,14 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Voltage",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -931,6 +984,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": -5,
@@ -995,8 +1050,8 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 19,
+        "h": 9,
+        "w": 24,
         "x": 0,
         "y": 37
       },
@@ -1013,16 +1068,22 @@
             "sum"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "Strom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -1037,7 +1098,7 @@
               "type": "fill"
             }
           ],
-          "hide": false,
+          "hide": true,
           "measurement": "sensors",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1062,16 +1123,25 @@
           "tags": []
         },
         {
-          "alias": "Strom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
                 "$interval"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "MT681_Meter_number::tag"
+              ],
+              "type": "tag"
             }
           ],
-          "hide": true,
+          "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1112,6 +1182,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -1155,32 +1229,29 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "strom",
       "type": "timeseries"
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 32,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "sensors",
           "value": "sensors"
         },
-        "datasource": "InfluxSensors",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fXPLv4j4k"
+        },
         "definition": "SHOW SERIES WHERE \"topic\"='strom'",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "measurement",
         "options": [],
@@ -1200,10 +1271,7 @@
           "text": "5m",
           "value": "5m"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
-        "label": null,
         "name": "interval",
         "options": [
           {
@@ -1231,12 +1299,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-8h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Sensors",
   "uid": "zOm5PCPGz",
-  "version": 20
+  "version": 3,
+  "weekStart": ""
 }

@@ -14,7 +14,7 @@ datasources:
   # <string, required> datasource type. Required
   type: influxdb
   # <string, required> access mode. direct or proxy. Required
-  access: direct
+  access: proxy
   # <int> org id. will default to orgId 1 if not specified
   orgId: 1
   # <string> url
@@ -48,7 +48,7 @@ datasources:
 
 - name: InfluxSensors
   type: influxdb
-  access: direct
+  access: proxy
   orgId: 1
   url: $INFLUXDB_URL
   # TODO: this user nees only read access
@@ -56,6 +56,38 @@ datasources:
     password: $INFLUXDB_PASS
   user: $INFLUXDB_USER
   database: "sensors"
+  basicAuth: false
+  jsonData:
+    timeInterval: "5s"
+  version: 1
+  editable: false
+
+- name: InfluxTelegraf
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: $INFLUXDB_URL
+  # TODO: this user nees only read access
+  secureJsonData:
+    password: $INFLUXDB_PASS
+  user: $INFLUXDB_USER
+  database: "telegraf"
+  basicAuth: false
+  jsonData:
+    timeInterval: "5s"
+  version: 1
+  editable: false
+
+- name: InfluxInternal
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: $INFLUXDB_URL
+  # TODO: this user nees only read access
+  secureJsonData:
+    password: $INFLUXDB_PASS
+  user: $INFLUXDB_USER
+  database: "_internal"
   basicAuth: false
   jsonData:
     timeInterval: "5s"

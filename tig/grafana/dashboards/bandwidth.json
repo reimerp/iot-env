@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -20,13 +23,15 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 1,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -34,6 +39,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -69,10 +76,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -82,13 +85,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "256QAM"
+              "options": "4096QAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-red",
+                  "fixedColor": "super-light-green",
                   "mode": "fixed"
                 }
               }
@@ -97,13 +100,74 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4QAM"
+              "options": "4K"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1024QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "512QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "256QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed",
+                  "seriesBy": "last"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "128QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -118,7 +182,22 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-yellow",
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "16QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-purple",
                   "mode": "fixed"
                 }
               }
@@ -142,13 +221,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4K"
+              "options": "4QAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-red",
+                  "fixedColor": "dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -158,7 +237,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 22,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -170,16 +249,22 @@
             "sum"
           ],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "multi",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "$tag_type",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -231,13 +316,14 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Download Channel Count and Modulation",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -245,6 +331,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -293,13 +381,89 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4QAM"
+              "options": "4096QAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-blue",
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "4K"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1024QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "512QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "256QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed",
+                  "seriesBy": "last"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "128QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
                   "mode": "fixed"
                 }
               }
@@ -323,7 +487,22 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4QAM"
+              "options": "16QAM"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "8QAM"
             },
             "properties": [
               {
@@ -338,13 +517,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "4K"
+              "options": "4QAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-red",
+                  "fixedColor": "dark-purple",
                   "mode": "fixed"
                 }
               }
@@ -354,29 +533,34 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 22,
+        "w": 24,
         "x": 0,
         "y": 6
       },
       "id": 8,
       "interval": "5m",
-      "maxDataPoints": null,
       "options": {
         "legend": {
           "calcs": [
             "sum"
           ],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "multi",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
           "alias": "$tag_type",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -428,13 +612,14 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Upload Channel Count and Modulation",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -442,6 +627,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -562,7 +749,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 22,
+        "w": 24,
         "x": 0,
         "y": 12
       },
@@ -577,15 +764,21 @@
             "min"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -664,13 +857,14 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Bandwidth",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -678,6 +872,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 1,
@@ -702,7 +898,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -740,7 +936,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 22,
+        "w": 24,
         "x": 0,
         "y": 20
       },
@@ -755,15 +951,21 @@
             "min"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -806,19 +1008,22 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Latency",
       "type": "timeseries"
     },
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -878,7 +1083,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 22,
+        "w": 24,
         "x": 0,
         "y": 28
       },
@@ -888,15 +1093,21 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -939,26 +1150,25 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Packet Loss",
       "type": "timeseries"
     }
   ],
-  "refresh": "1h",
-  "schemaVersion": 32,
+  "refresh": "5m",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 13
+  "version": 7,
+  "weekStart": ""
 }

@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -20,14 +23,15 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1659352047212,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": "InfluxSensors",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fXPLv4j4k"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -35,6 +39,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -80,7 +86,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 17,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -89,15 +95,21 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
           "alias": "$tag_topic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -144,6 +156,10 @@
         },
         {
           "alias": "$tag_topic",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fXPLv4j4k"
+          },
           "groupBy": [
             {
               "params": [
@@ -192,25 +208,24 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 32,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "devices",
           "value": "devices"
         },
-        "datasource": "InfluxSensors",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fXPLv4j4k"
+        },
         "definition": "SHOW SERIES WHERE \"topic\"='pi'",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "measurement",
         "options": [],
@@ -231,5 +246,6 @@
   "timezone": "",
   "title": "Devices",
   "uid": "pYizQ2Anz",
-  "version": 8
+  "version": 5,
+  "weekStart": ""
 }

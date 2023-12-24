@@ -492,91 +492,163 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
           "unit": "short"
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "256QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4096QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "super-light-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4QAM"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4K"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "super-light-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "64QAM"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-yellow",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "1024QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8QAM"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "512QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "dark-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4K"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "super-light-red",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "256QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "light-yellow",
+                    "mode": "fixed",
+                    "seriesBy": "last"
+                    }
                 }
-              }
-            ]
-          }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "128QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-yellow",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "64QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-red",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "16QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "light-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "8QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "dark-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            }
         ]
       },
       "gridPos": {
@@ -713,66 +785,157 @@
           "unit": "short"
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4096QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "super-light-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "64QAM"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-red",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4K"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "super-light-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4QAM"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "1024QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4K"
+                ]
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "super-light-red",
-                  "mode": "fixed"
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "512QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "dark-green",
+                    "mode": "fixed"
+                    }
                 }
-              }
-            ]
-          }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "256QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "light-yellow",
+                    "mode": "fixed",
+                    "seriesBy": "last"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "128QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-yellow",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "64QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-red",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "16QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "light-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "8QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "semi-dark-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            },
+            {
+                "matcher": {
+                "id": "byName",
+                "options": "4QAM"
+                },
+                "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                    "fixedColor": "dark-purple",
+                    "mode": "fixed"
+                    }
+                }
+                ]
+            }
         ]
       },
       "gridPos": {
@@ -955,5 +1118,5 @@
   "timezone": "",
   "title": "Fritzbox",
   "uid": "heObo2rMk",
-  "version": 6
+  "version": 7
 }
