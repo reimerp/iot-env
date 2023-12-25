@@ -6,16 +6,16 @@
 
 server=${1:-fb}
 
-MQTT_ADDRESS=hassbian
+MQTT_SERV=hassbian
 
 if [ "_$(hostname -s)" = "_hassbian" ]; then
-  read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote ${HOME}/.netrc)
+  read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
 else
   eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
 fi
 
 dodig() {
-    dig +short chaos txt $1 @$server|sed 's/"//g'
+    dig +short chaos txt "$1" @"$server" | sed 's/"//g'
 }
 
 doserver() {
@@ -25,11 +25,11 @@ doserver() {
     chits=$(dodig hits.bind)
     cmiss=$(dodig misses.bind)
 
-    echo '{"Time":"'$time'","server":"'$server'","size":'$csize',"hits":'$chits',"miss":'$cmiss'}'
+    printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits":%i,"miss":%i}}\n' "$time" "$server" "$csize" "$chits" "$cmiss"
 }
 
-if [ "_$server" = "_fb" -o "_$server" = "_probook" ]; then
-  doserver $server | mosquitto_pub -h ${MQTT_ADDRESS} -u ${MQTT_USER} -P ${MQTT_PASS} -t test/dnscache -q 1 -l
+if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then
+  doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t test/dnscache -q 1 -l
 else
-  doserver $server
+  doserver "$server"
 fi
