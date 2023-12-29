@@ -6,12 +6,13 @@
 
 server=${1:-fb}
 
-MQTT_SERV=hassbian
-
-if [ "_$(hostname -s)" = "_hassbian" ]; then
-  read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
-else
-  eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
+if [ -z "$MQTT_PASS" ]; then
+  MQTT_SERV=hassbian
+  if [ "_$(hostname -s)" = "_hassbian" ]; then
+    read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
+  else
+    eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
+  fi
 fi
 
 dodig() {
@@ -25,7 +26,7 @@ doserver() {
     chits=$(dodig hits.bind)
     cmiss=$(dodig misses.bind)
 
-    printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits":%i,"miss":%i}}\n' "$time" "$server" "$csize" "$chits" "$cmiss"
+    printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits":%i,"miss":%i}}' "$time" "$server" "$csize" "$chits" "$cmiss"
 }
 
 if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then

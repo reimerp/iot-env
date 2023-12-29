@@ -18,7 +18,7 @@ class FritzDocInfoSensor(MqttBase):
     def publish(self):
         val = json.dumps(self.data)
         if self.verbose: print('#', val)
-        (rc, mid) = self.mqttc.publish('fb/docinfo', val)
+        (rc, mid) = self.mqttc.publish('fb/fb_docinfo', val)
         if rc != mqtt.MQTT_ERR_SUCCESS: MqttBase.eprint('Publish Error {} {}'.format(rc, mqtt.error_string(rc)))
         if rc == mqtt.MQTT_ERR_QUEUE_SIZE: self.run = 0
 
