@@ -2,6 +2,7 @@
 from datetime import datetime
 import re
 import json
+from sys import exit
 
 from jsontemplate import JsonTemplates
 from snmp import Snmp
@@ -33,10 +34,12 @@ def build_arr(a):
   return a
 
 json_tmp = JsonTemplates()
-result = json_tmp.load('netgear.json')
+import os
+
+result = json_tmp.load(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'netgear.json'))
 if not result[0]:
   print("Error with template")
-  # Exit here
+  exit()
 
 r = []
 add_oid(r, result[1])
