@@ -1,1 +1,21 @@
-{"Time":"2021-02-16T14:45:59","ENERGY":{"TotalStartTime":"2019-02-16T00:33:50","Total":5.255,"Yesterday":0.001,"Today":0.002,"Power":8,"ApparentPower":13,"ReactivePower":10,"Factor":0.64,"Voltage":238.5,"Current":0.053}}
+{
+  "Time": "2024-01-08T16:15:26",
+  "BME280": {
+    "Temperature": 20.7,
+    "Humidity": 63.7,
+    "DewPoint": 13.6,
+    "Pressure": 1033.7,
+    "SeaPressure": 1037.5
+  },
+  "TSL2561": {
+    "Illuminance": 24.39,
+    "IR": 217,
+    "Broadband": 964
+  },
+  "ESP32": {
+    "Temperature": 67.2,
+    "HallEffect": 77
+  },
+  "PressureUnit": "hPa",
+  "TempUnit": "C"
+}

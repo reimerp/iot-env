@@ -1,4 +1,4 @@
-#!/usr/bin/env -S -i python3
+#!/usr/bin/env -S -i DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} python3
 #
 
 import requests
@@ -13,7 +13,7 @@ class FritzData(Fritz):
         sid=self.sid,
         page=page
       )
-      resp = requests.post(url=self.fritzurl + '/data.lua' , data=data)
+      resp = requests.post(url=self.fritzurl + '/data.lua', data=data)
       return resp.json() # Check the JSON Response Content documentation below
 
 # only debug

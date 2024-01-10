@@ -1,7 +1,6 @@
 #!/usr/bin/env -S -i DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} python3
 #
 
-import sys
 import platform
 from hashlib import md5 as md5func
 from urllib.request import urlopen
@@ -17,7 +16,9 @@ class Fritz:
             self.fritzurl = self.fritzurl[0:-1]
 
         if 'probook' == platform.node():
-            sys.path.insert(0, '../../../python')
+            from pathlib import Path
+            import sys
+            sys.path.insert(0, str(Path.home()) + '/projects/python')
             from pykeypass import KeePass
             keepass = KeePass('Fritzbox')
             keepass.parse()
