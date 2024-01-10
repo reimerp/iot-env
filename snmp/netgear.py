@@ -1,3 +1,4 @@
+#!/usr/bin/env -S -i python3
 from datetime import datetime
 import re
 import json
