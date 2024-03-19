@@ -1,8 +1,18 @@
-#!/usr/bin/env -S -i python3
+#!/bin/sh
+"true" '''\'
+if [ -n "${VIRTUAL_ENV}" ]; then
+P="${VIRTUAL_ENV}/bin"
+else
+P="$(dirname "$(readlink -f "$0")")"/.direnv/python-3.11.6/bin
+fi
+exec "$P/python3" "$0" "$@"
+'''
+
 from datetime import datetime
 import re
 import json
 from sys import exit
+import os
 
 from jsontemplate import JsonTemplates
 from snmp import Snmp
@@ -11,42 +21,44 @@ from mqtt_pub import MqttPub
 __port_regex = re.compile(r'\.1\s*}}')
 __oid_regex = re.compile(r'{{\s*(?P<oid>[.0-9]+)\s*}}')
 
+"""
+Hinzufügen aller oids aus d zu l
+"""
 def add_oid(r: list, d: dict):
   for i in d.values():
     if not isinstance(i, str): continue
     m = __oid_regex.search(i)
     if m:
-      oid = m.group('oid')
-      r.append((str(oid), None))
+      r.append((str(m.group('oid')), None))
+  return r
 
-def build_arr(a):
+"""
+
+"""
+def build_arr(r, a):
   ports = json_tmp.get('Ports')
-  add_oid(r, a[0])
+  r = add_oid(r, a[0])
   i = 2
-  while i<=ports:
+  while i <= ports:
     l = a[0].copy()
     for k, v in l.items():
-      replaced = re.sub(__port_regex, '.'  + str(i) + ' }}', v)
-      l[k] = replaced
-    add_oid(r, l)
+      l[k] = re.sub(__port_regex, '.'  + str(i) + ' }}', v)
+    r = add_oid(r, l)
     a.append(l)
-    i+=1
+    i += 1
   return a
 
 json_tmp = JsonTemplates()
-import os
 
 result = json_tmp.load(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'netgear.json'))
 if not result[0]:
-  print("Error with template")
+  print('Error with template')
   exit()
 
 r = []
-add_oid(r, result[1])
+r = add_oid(r, result[1])   # root level hinzu
 
-a = json_tmp.get('snmp')
-
-build_arr(a)
+build_arr(r, json_tmp.get('snmp'))
 
 s = Snmp()
 s.req(r)

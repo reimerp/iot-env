@@ -5,7 +5,8 @@ import netrc
 from json import dumps
 from datetime import datetime
 
-# a simple dict wrapper for json String output
+""" a simple dict wrapper for json String output, dict uses ', json "
+"""
 class jsondict(dict):
   def __str__(self):
     return dumps(self)
