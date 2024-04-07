@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -263,7 +263,7 @@
           "alias": "$tag_type",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -286,12 +286,12 @@
             }
           ],
           "hide": false,
-          "measurement": "fb",
+          "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "query": "SELECT count(\"powerLevel\") FROM \"fb\" WHERE (\"mode\" = 'Us') AND $timeFilter GROUP BY time(5m), \"type\" fill(null)",
           "rawQuery": false,
-          "refId": "B",
+          "refId": "Ds",
           "resultFormat": "time_series",
           "select": [
             [
@@ -322,7 +322,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -559,7 +559,7 @@
           "alias": "$tag_type",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -582,12 +582,12 @@
             }
           ],
           "hide": false,
-          "measurement": "fb",
+          "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "query": "SELECT count(\"powerLevel\") FROM \"fb\" WHERE (\"mode\" = 'Us') AND $timeFilter GROUP BY time(5m), \"type\" fill(null)",
           "rawQuery": false,
-          "refId": "B",
+          "refId": "Us",
           "resultFormat": "time_series",
           "select": [
             [
@@ -618,7 +618,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -720,30 +720,6 @@
                 "value": "binBps"
               }
             ]
-          },
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "speedtest.Upload {interface_macAddr: B8:27:EB:01:98:50}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
           }
         ]
       },
@@ -777,7 +753,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -863,7 +839,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -909,8 +885,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -964,7 +939,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -1014,7 +989,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1056,8 +1031,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1106,7 +1080,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -1159,16 +1133,82 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "InfluxSensors",
+          "value": "InfluxSensors"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "influxdb",
+        "refresh": 1,
+        "regex": "/[sS]ensor/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "fb_docinfo",
+          "value": "fb_docinfo"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW SERIES WHERE \"topic\"='fb_docinfo'",
+        "description": "selects potential measurements",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "measurement",
+        "options": [],
+        "query": "SHOW SERIES WHERE \"topic\"='fb_docinfo'",
+        "refresh": 1,
+        "regex": "/(?<value>[^,]*),.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "m",
+          "value": "m"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "description": "selects retention policy",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "rp",
+        "options": [],
+        "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }

@@ -4,19 +4,13 @@
       {
         "builtIn": 1,
         "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
+          "type": "grafana",
+          "uid": "-- Grafana --"
         },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
@@ -32,11 +26,11 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -45,24 +39,21 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 60,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "smooth",
-            "lineStyle": {
-              "fill": "solid"
-            },
+            "lineInterpolation": "stepBefore",
             "lineWidth": 1,
             "pointSize": 2,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
-            "spanNulls": 7200000,
+            "showPoints": "auto",
+            "spanNulls": 600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -80,12 +71,48 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mdev"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pl"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
@@ -93,7 +120,9 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -103,9 +132,11 @@
           "sort": "none"
         }
       },
+      "repeat": "target",
+      "repeatDirection": "v",
       "targets": [
         {
-          "alias": "$tag_topic",
+          "alias": "rtt",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -119,9 +150,50 @@
             },
             {
               "params": [
-                "topic"
+                "null"
               ],
-              "type": "tag"
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "$rp",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rtt"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=~",
+              "value": "/^$target$/"
+            }
+          ]
+        },
+        {
+          "alias": "mdev",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
             },
             {
               "params": [
@@ -134,15 +206,13 @@
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
-          "query": "SELECT mean(\"Temperature\") FROM \"devices\" WHERE $timeFilter GROUP BY time($__interval) fill(none)",
-          "rawQuery": false,
-          "refId": "A",
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "Temperature"
+                  "mdev"
                 ],
                 "type": "field"
               },
@@ -152,10 +222,16 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=~",
+              "value": "/^$target$/"
+            }
+          ]
         },
         {
-          "alias": "$tag_topic",
+          "alias": "pl",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -169,28 +245,22 @@
             },
             {
               "params": [
-                "topic"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
                 "null"
               ],
               "type": "fill"
             }
           ],
           "hide": false,
-          "measurement": "sensors",
+          "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
+          "policy": "$rp",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "ESP32_Temperature"
+                  "pl"
                 ],
                 "type": "field"
               },
@@ -200,14 +270,20 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=~",
+              "value": "/^$target$/"
+            }
+          ]
         }
       ],
-      "title": "Temperatur",
+      "title": "$target",
       "type": "timeseries"
     }
   ],
-  "refresh": "5m",
+  "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -233,24 +309,25 @@
       {
         "current": {
           "selected": true,
-          "text": "devices",
-          "value": "devices"
+          "text": "ping",
+          "value": "ping"
         },
         "datasource": {
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW SERIES WHERE \"topic\"='pi'",
+        "definition": "SHOW SERIES WHERE \"topic\"='ping'",
+        "description": "selects potential measurements",
         "hide": 1,
         "includeAll": false,
         "multi": false,
         "name": "measurement",
         "options": [],
-        "query": "SHOW SERIES WHERE \"topic\"='pi'",
+        "query": "SHOW SERIES WHERE \"topic\"='ping'",
         "refresh": 1,
-        "regex": "/(?<value>[^,]*),.*/",
+        "regex": "^(?<value>[^,]+),.*",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 0,
         "type": "query"
       },
       {
@@ -264,6 +341,7 @@
           "uid": "${datasource}"
         },
         "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "description": "selects retention policy",
         "hide": 1,
         "includeAll": false,
         "multi": false,
@@ -275,17 +353,40 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW TAG VALUES FROM \"$measurement\" WITH KEY=\"target\"",
+        "hide": 1,
+        "includeAll": true,
+        "multi": false,
+        "name": "target",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM \"$measurement\" WITH KEY=\"target\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Devices",
-  "uid": "pYizQ2Anz",
-  "version": 9,
+  "title": "Ping",
+  "uid": "c4ee02c0-5d99-4291-bb1c-70ed38dc6e33",
+  "version": 5,
   "weekStart": ""
 }

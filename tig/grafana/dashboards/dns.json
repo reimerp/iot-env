@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -113,7 +113,7 @@
           "alias": "$tag_server $col",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -132,7 +132,7 @@
           "measurement": "dnscache",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT 100 * non_negative_derivative(median(\"hits\"), 5m) / (non_negative_derivative(median(\"hits\"), 5m) + non_negative_derivative(median(\"miss\"), 5m)) AS \"cache hits\" FROM \"dnscache\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
+          "query": "SELECT 100 * non_negative_derivative(median(\"hits\"), 5m) / (non_negative_derivative(median(\"hits\"), 5m) + non_negative_derivative(median(\"miss\"), 5m)) AS \"cache hits\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -177,7 +177,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -283,7 +283,7 @@
           "alias": "$tag_server $col",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -303,7 +303,7 @@
           "measurement": "dnscache",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(median(\"hits\"), 5m) AS \"hits\", non_negative_derivative(median(\"miss\"), 5m) AS \"miss\" FROM \"dnscache\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
+          "query": "SELECT non_negative_derivative(median(\"hits\"), 5m) AS \"hits\", non_negative_derivative(median(\"miss\"), 5m) AS \"miss\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -369,10 +369,76 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "InfluxSensors",
+          "value": "InfluxSensors"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "influxdb",
+        "refresh": 1,
+        "regex": "/[sS]ensor/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "dnscache",
+          "value": "dnscache"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW SERIES WHERE \"topic\"='dnscache'",
+        "description": "selects potential measurements",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "measurement",
+        "options": [],
+        "query": "SHOW SERIES WHERE \"topic\"='dnscache'",
+        "refresh": 1,
+        "regex": "^(?<value>[^,]+),.*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "m",
+          "value": "m"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "description": "selects retention policy",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "rp",
+        "options": [],
+        "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},

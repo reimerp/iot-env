@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -208,7 +208,7 @@
           "alias": "[[tag_topic]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -253,7 +253,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -396,7 +396,7 @@
           "alias": "[[tag_topic]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -440,7 +440,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -533,7 +533,7 @@
           "alias": "[[tag_topic]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -577,7 +577,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -673,7 +673,7 @@
           "alias": "$tag_topic",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -717,7 +717,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -799,7 +799,7 @@
           "alias": "[[tag_topic]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -843,7 +843,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -925,7 +925,7 @@
           "alias": "[[tag_topic]]",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -975,7 +975,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fXPLv4j4k"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -1082,7 +1082,7 @@
           "alias": "Strom",
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -1125,7 +1125,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -1184,7 +1184,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "fXPLv4j4k"
+            "uid": "${datasource}"
           },
           "groupBy": [
             {
@@ -1242,12 +1242,29 @@
       {
         "current": {
           "selected": false,
+          "text": "InfluxSensors",
+          "value": "InfluxSensors"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "influxdb",
+        "refresh": 1,
+        "regex": "/[sS]ensor/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
           "text": "sensors",
           "value": "sensors"
         },
         "datasource": {
           "type": "influxdb",
-          "uid": "fXPLv4j4k"
+          "uid": "${datasource}"
         },
         "definition": "SHOW SERIES WHERE \"topic\"='strom'",
         "hide": 0,
@@ -1306,6 +1323,6 @@
   "timezone": "",
   "title": "Sensors",
   "uid": "zOm5PCPGz",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

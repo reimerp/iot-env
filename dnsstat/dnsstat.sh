@@ -26,7 +26,7 @@ doserver() {
     chits=$(dodig hits.bind)
     cmiss=$(dodig misses.bind)
 
-    printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits":%i,"miss":%i}}' "$time" "$server" "$csize" "$chits" "$cmiss"
+    printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits_total":%i,"miss_total":%i}}' "$time" "$server" "$csize" "$chits" "$cmiss"
 }
 
 if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then

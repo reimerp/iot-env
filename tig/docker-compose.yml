@@ -4,10 +4,21 @@
 
 services:
 
+  telegraf_logs:
+    container_name: tig_telegraf_logs
+    image: telegraf:${TELEGRAF_TAG}
+    restart: always
+    ports:
+      - "127.0.0.1:6514:6514/udp"
+    volumes:
+      - ./telegraf_logs/etc/telegraf/:/etc/telegraf/:ro
+      - ./telegraf_logs/tmp/input:/tmp/input
+      - /:/hostfs:ro
+
   # Message formattet (MQTT -> InfluxDB)
   # https://hub.docker.com/_/telegraf
   telegraf_mqtt:
-    #container_name: telegraf_mqtt2
+    container_name: tig_telegraf_mqtt
     image: telegraf:${TELEGRAF_TAG}
     #command: --config-directory /etc/telegraf/telegraf.d
     restart: always
@@ -28,7 +39,7 @@ services:
       - influxdb
 
   telegraf_stats:
-    container_name: telegraf_stats
+    container_name: tig_telegraf_stats
     image: telegraf:${TELEGRAF_TAG}
     restart: always
     # 8125 is a statsd port
@@ -36,7 +47,7 @@ services:
       # - '${IP_LOCALHOST}:8125:8125/udp'
       # -"5050:5050"
     volumes:
-      - ./telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf_stats/etc/telegraf/:/etc/telegraf/:ro
       - /:/hostfs:ro
     env_file:
       - .env
@@ -56,11 +67,11 @@ services:
     # Name used in:
     # - Grafana data source
     # - Telegraf config
-    container_name: influxdb
-    image: influxdb:1.8-alpine
+    container_name: tig_influxdb
+    image: docker.io/influxdb:1.8-alpine
     # image: quay.io/influxdb/influxdb:v2.0.3
     ports:
-      - "0.0.0.0:${INFLUXDB_PORT}:${INFLUXDB_PORT}/tcp"
+      - 0.0.0.0:${INFLUXDB_PORT}:${INFLUXDB_PORT}/tcp
     env_file:
       - .env
       - env.influxdb
@@ -77,11 +88,14 @@ services:
   # Dashboard/graphing
   # https://hub.docker.com/r/grafana/grafana
   grafana:
-    container_name: grafana
+    container_name: tig_grafana
     image: grafana/grafana:9.5.8
+    # image: grafana/grafana-oss:10.3.1
     depends_on:
       - influxdb
-    env_file: env.grafana
+    env_file:
+      - .env
+      - env.grafana
     restart: always
     links:
       - influxdb
