@@ -5,6 +5,7 @@ P="${VIRTUAL_ENV}/bin"
 else
 P="$(dirname "$(readlink -f "$0")")"/.direnv/python-3.11.6/bin
 fi
+[ -d $P ] || P="/usr/bin"
 exec "$P/python3" "$0" "$@"
 '''
 
