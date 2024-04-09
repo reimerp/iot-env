@@ -105,7 +105,7 @@
       },
       "targets": [
         {
-          "alias": "$tag_topic",
+          "alias": "$tag_device",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -119,7 +119,7 @@
             },
             {
               "params": [
-                "topic"
+                "device::tag"
               ],
               "type": "tag"
             },
@@ -240,15 +240,15 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW SERIES WHERE \"topic\"='pi'",
+        "definition": "SHOW MEASUREMENTS",
         "hide": 1,
         "includeAll": false,
         "multi": false,
         "name": "measurement",
         "options": [],
-        "query": "SHOW SERIES WHERE \"topic\"='pi'",
+        "query": "SHOW MEASUREMENTS",
         "refresh": 1,
-        "regex": "/(?<value>[^,]*),.*/",
+        "regex": "/^devices/",
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"

@@ -132,7 +132,7 @@
           "measurement": "dnscache",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT 100 * non_negative_derivative(median(\"hits\"), 5m) / (non_negative_derivative(median(\"hits\"), 5m) + non_negative_derivative(median(\"miss\"), 5m)) AS \"cache hits\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
+          "query": "SELECT 100 * non_negative_derivative(median(\"hits_total\"), 5m) / (non_negative_derivative(median(\"hits_total\"), 5m) + non_negative_derivative(median(\"miss_total\"), 5m)) AS \"cache hits\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -303,7 +303,7 @@
           "measurement": "dnscache",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(median(\"hits\"), 5m) AS \"hits\", non_negative_derivative(median(\"miss\"), 5m) AS \"miss\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
+          "query": "SELECT non_negative_derivative(median(\"hits_total\"), 5m) AS \"hits\", non_negative_derivative(median(\"miss_total\"), 5m) AS \"miss\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -389,7 +389,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "dnscache",
           "value": "dnscache"
         },
@@ -397,16 +397,16 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW SERIES WHERE \"topic\"='dnscache'",
+        "definition": "SHOW MEASUREMENTS",
         "description": "selects potential measurements",
         "hide": 1,
         "includeAll": false,
         "multi": false,
         "name": "measurement",
         "options": [],
-        "query": "SHOW SERIES WHERE \"topic\"='dnscache'",
+        "query": "SHOW MEASUREMENTS",
         "refresh": 1,
-        "regex": "^(?<value>[^,]+),.*",
+        "regex": "/^dnscache/",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"

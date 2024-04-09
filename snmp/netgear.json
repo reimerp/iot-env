@@ -8,15 +8,15 @@
       "ifIndex": "{{ 1.3.6.1.2.1.2.2.1.1.1 }}",
       "ifPhysAddress": "{{ 1.3.6.1.2.1.2.2.1.6.1 }}",
       "ifSpeed": "{{ 1.3.6.1.2.1.2.2.1.5.1 }}",
-      "ifInUcastPkts": "{{ 1.3.6.1.2.1.2.2.1.11.1 }}",
-      "ifOutUcastPkts": "{{ 1.3.6.1.2.1.2.2.1.17.1 }}",
-      "ifInDiscards": "{{ 1.3.6.1.2.1.2.2.1.13.1 }}",
-      "ifInErrors": "{{ 1.3.6.1.2.1.2.2.1.14.1 }}",
-      "ifOutDiscards": "{{ 1.3.6.1.2.1.2.2.1.19.1 }}",
-      "ifOutErrors": "{{ 1.3.6.1.2.1.2.2.1.20.1 }}",
-      "etherStatsPkts": "{{ 1.3.6.1.2.1.16.1.1.1.5.1 }}", 
-      "etherStatsBroadcastPkts": "{{ 1.3.6.1.2.1.16.1.1.1.6.1 }}",
-      "etherStatsMulticastPkts": "{{ 1.3.6.1.2.1.16.1.1.1.7.1 }}"
+      "ifInUcastPkts_count": "{{ 1.3.6.1.2.1.2.2.1.11.1 }}",
+      "ifOutUcastPkts_count": "{{ 1.3.6.1.2.1.2.2.1.17.1 }}",
+      "ifInDiscards_total": "{{ 1.3.6.1.2.1.2.2.1.13.1 }}",
+      "ifInErrors_total": "{{ 1.3.6.1.2.1.2.2.1.14.1 }}",
+      "ifOutDiscards_total": "{{ 1.3.6.1.2.1.2.2.1.19.1 }}",
+      "ifOutErrors_total": "{{ 1.3.6.1.2.1.2.2.1.20.1 }}",
+      "etherStatsPkts_count": "{{ 1.3.6.1.2.1.16.1.1.1.5.1 }}",
+      "etherStatsBroadcastPkts_count": "{{ 1.3.6.1.2.1.16.1.1.1.6.1 }}",
+      "etherStatsMulticastPkts_count": "{{ 1.3.6.1.2.1.16.1.1.1.7.1 }}"
     }
   ]
 }
