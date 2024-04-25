@@ -30,7 +30,7 @@ doserver() {
 }
 
 if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then
-  doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t metrics/dnscache -q 1 -l
+  doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "metrics/dnscache/$server" -q 1 -l
 else
   doserver "$server"
 fi
