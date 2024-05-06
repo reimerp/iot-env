@@ -87,7 +87,7 @@ def test():
     print('nachher', v)
 
 if __name__ == '__main__':
-    test()
-    #sensor = RemoteSensor()
+    #test()
+    sensor = RemoteSensor()
     #sensor.verbose = True
-    #sensor.connect_mqtt()
+    sensor.connect_mqtt()
