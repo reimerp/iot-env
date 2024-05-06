@@ -27,6 +27,10 @@ class RemoteSensor(MqttBase):
         r = v.copy()    # leave passed value untouched
         r['time'] = RemoteSensor.getTime()
         r['Vcc'] = r['battery_ok'] * 3.3
+        if r['model'] == 'GT-WT02':
+          # fix temp offset and non working hum
+          r['temperature_C'] = r['temperature_C'] - 2.0
+          r['humidity'] = 0.0
         return '{{"Time":"{time}","Temperature":{temperature_C},"Humidity":{humidity},"Vcc":{Vcc},"TempUnit":"C"}}'.format(**r)
 
     def publish(self):
@@ -76,15 +80,14 @@ class RemoteSensor(MqttBase):
         self.disconnect()
 
 def test():
-    v = {'model': 'inFactory-TH', 'id': 5, 'channel': 1, 'battery_ok': 1, 'temperature_C': 11.0, 'humidity': 66, 'mic': 'CRC'}
-    print("vv", v)
+    v = {'model': 'GT-WT02', 'id': 5, 'channel': 1, 'battery_ok': 1, 'temperature_C': 11.0, 'humidity': 66, 'mic': 'CRC'}
+    print('vorher ', v)
     a = RemoteSensor.format(v)
-    print('a', a)
-    print('vn', v)
+    print('format ', a)
+    print('nachher', v)
 
 if __name__ == '__main__':
-    #test()
-    sensor = RemoteSensor()
+    test()
+    #sensor = RemoteSensor()
     #sensor.verbose = True
-    sensor.connect_mqtt()
-
+    #sensor.connect_mqtt()
