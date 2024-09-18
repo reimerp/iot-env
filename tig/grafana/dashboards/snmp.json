@@ -4,33 +4,28 @@
       {
         "builtIn": 1,
         "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
+          "type": "grafana",
+          "uid": "-- Grafana --"
         },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 1,
+  "graphTooltip": 0,
+  "id": 16,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${datasource}"
+        "uid": "P5CDC2E275C596C5D"
       },
       "description": "",
       "fieldConfig": {
@@ -45,21 +40,21 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "stepBefore",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 2,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": 2400000,
+            "showPoints": "auto",
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -78,7 +73,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "pps"
         },
         "overrides": []
       },
@@ -88,8 +83,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 2,
-      "interval": "5m",
+      "id": 1,
       "options": {
         "legend": {
           "calcs": [],
@@ -102,13 +96,14 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "8.2.6",
+      "repeat": "metric",
+      "repeatDirection": "v",
       "targets": [
         {
-          "alias": "[[tag_frequency]] MHz",
+          "alias": "Port $tag_ifIndex",
           "datasource": {
             "type": "influxdb",
-            "uid": "${datasource}"
+            "uid": "P5CDC2E275C596C5D"
           },
           "groupBy": [
             {
@@ -119,7 +114,7 @@
             },
             {
               "params": [
-                "frequency"
+                "ifIndex::tag"
               ],
               "type": "tag"
             },
@@ -130,49 +125,53 @@
               "type": "fill"
             }
           ],
-          "measurement": "fb",
+          "measurement": "snmp",
           "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean($field) FROM \"$rp\"./^$measurement$/ WHERE (\"mode\" = 'Ds' AND frequency =~ /^$frequency$/) AND $timeFilter GROUP BY time($__interval), \"frequency\" fill(null)",
-          "rawQuery": true,
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "/^$field$/"
+                  "$metric"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "mean"
+              },
+              {
+                "params": [
+                  "1h"
+                ],
+                "type": "non_negative_derivative"
               }
             ]
           ],
           "tags": [
             {
-              "key": "topic",
-              "operator": "=",
-              "value": "docinfo"
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
             },
             {
               "condition": "AND",
-              "key": "mode",
-              "operator": "=",
-              "value": "Ds"
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
             }
           ]
         }
       ],
-      "title": "$field",
+      "title": "$metric",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${datasource}"
+        "uid": "P5CDC2E275C596C5D"
       },
       "description": "",
       "fieldConfig": {
@@ -187,21 +186,21 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "stepBefore",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 2,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": false,
+            "showPoints": "auto",
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -217,179 +216,20 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
-          "unit": "short"
+          "unit": "pps"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "id": 4,
-      "interval": "5m",
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.6",
-      "repeat": "errors",
-      "repeatDirection": "v",
-      "targets": [
-        {
-          "alias": "[[tag_frequency]] MHz",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "frequency"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "fb",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT non_negative_derivative(mean($errors), 5m) FROM  \"$rp\"./^$measurement$/ WHERE (\"mode\" = 'Ds' AND frequency =~ /^$frequency$/) AND $timeFilter GROUP BY time($__interval), \"frequency\" fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "nonCorrErrors"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "5m"
-                ],
-                "type": "non_negative_derivative"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "topic",
-              "operator": "=",
-              "value": "docinfo"
-            },
-            {
-              "condition": "AND",
-              "key": "mode",
-              "operator": "=",
-              "value": "Ds"
-            }
-          ]
-        }
-      ],
-      "title": "Error Rate $errors",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "log": 10,
-              "type": "log"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
         "w": 24,
         "x": 0,
         "y": 14
       },
-      "id": 5,
-      "interval": "5m",
+      "id": 3,
       "options": {
         "legend": {
           "calcs": [],
@@ -402,13 +242,13 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "8.2.6",
+      "repeatDirection": "v",
       "targets": [
         {
-          "alias": "[[tag_frequency]] MHz",
+          "alias": "In $tag_ifIndex",
           "datasource": {
             "type": "influxdb",
-            "uid": "${datasource}"
+            "uid": "P5CDC2E275C596C5D"
           },
           "groupBy": [
             {
@@ -419,7 +259,7 @@
             },
             {
               "params": [
-                "frequency"
+                "ifIndex::tag"
               ],
               "type": "tag"
             },
@@ -430,18 +270,16 @@
               "type": "fill"
             }
           ],
-          "measurement": "fb",
+          "measurement": "snmp",
           "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(\"corrErrors\"), 5m) FROM  \"$rp\"./^$measurement$/ WHERE (\"mode\" = 'Ds' AND frequency =~ /^$frequency$/)  AND $timeFilter GROUP BY time($__interval), \"frequency\" fill(null)",
-          "rawQuery": true,
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "corrErrors"
+                  "ifInUcastPkts_count"
                 ],
                 "type": "field"
               },
@@ -459,260 +297,23 @@
           ],
           "tags": [
             {
-              "key": "topic",
-              "operator": "=",
-              "value": "docinfo"
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
             },
             {
               "condition": "AND",
-              "key": "mode",
-              "operator": "=",
-              "value": "Ds"
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
             }
           ]
-        }
-      ],
-      "title": "Error Rate Correctable",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 0,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4096QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "super-light-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4K"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "super-light-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "1024QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "512QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "256QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-yellow",
-                  "mode": "fixed",
-                  "seriesBy": "last"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "128QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "64QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "16QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4QAM"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 22
-      },
-      "id": 10,
-      "interval": "5m",
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.6",
-      "repeat": "mode",
-      "repeatDirection": "v",
-      "targets": [
         {
-          "alias": "$tag_type",
+          "alias": "Out $tag_ifIndex",
           "datasource": {
             "type": "influxdb",
-            "uid": "${datasource}"
+            "uid": "P5CDC2E275C596C5D"
           },
           "groupBy": [
             {
@@ -723,7 +324,7 @@
             },
             {
               "params": [
-                "type"
+                "ifIndex::tag"
               ],
               "type": "tag"
             },
@@ -735,41 +336,550 @@
             }
           ],
           "hide": false,
-          "measurement": "/^$measurement$/",
+          "measurement": "snmp",
           "orderByTime": "ASC",
           "policy": "$rp",
-          "query": "SELECT count(\"powerLevel\") FROM \"default\"./^$measurement$/ WHERE (\"mode\" = 'Ds') AND $timeFilter GROUP BY time($__interval), \"type\" fill(null)",
-          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ifOutUcastPkts_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "5m"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  " * -1"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
+            }
+          ]
+        }
+      ],
+      "title": "Overall",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5CDC2E275C596C5D"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "port",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "In $port",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "snmp",
+          "orderByTime": "ASC",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "powerLevel"
+                  "ifInUcastPkts_count"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "count"
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "5m"
+                ],
+                "type": "non_negative_derivative"
               }
             ]
           ],
           "tags": [
             {
-              "key": "mode",
+              "key": "ifPhysAddress::tag",
               "operator": "=~",
-              "value": "/^$mode$/"
+              "value": "/^$device$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
+            }
+          ]
+        },
+        {
+          "alias": "Out $port",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "snmp",
+          "orderByTime": "ASC",
+          "policy": "$rp",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ifOutUcastPkts_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "5m"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  " * -1"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
             }
           ]
         }
       ],
-      "title": "$mode Channel Count and Modulation",
+      "title": "Traffik Port $port",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5CDC2E275C596C5D"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 77
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "In $tag_ifIndex",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "ifIndex::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "snmp",
+          "orderByTime": "ASC",
+          "policy": "$rp",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ifSpeed"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
+            }
+          ]
+        }
+      ],
+      "title": "Speed / Up",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5CDC2E275C596C5D"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 84
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "metric2",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "In $tag_ifIndex",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "ifIndex::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "snmp",
+          "orderByTime": "ASC",
+          "policy": "$rp",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "$metric2"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "1h"
+                ],
+                "type": "non_negative_derivative"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ifPhysAddress::tag",
+              "operator": "=~",
+              "value": "/^$device$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ifIndex::tag",
+              "operator": "=~",
+              "value": "/^$port$/"
+            }
+          ]
+        }
+      ],
+      "title": "$metric2",
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -777,7 +887,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "InfluxSensors",
           "value": "InfluxSensors"
         },
@@ -787,6 +897,7 @@
         "name": "datasource",
         "options": [],
         "query": "influxdb",
+        "queryValue": "",
         "refresh": 1,
         "regex": "/[sS]ensor/",
         "skipUrlSync": false,
@@ -794,9 +905,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "fb_docinfo",
-          "value": "fb_docinfo"
+          "selected": true,
+          "text": "snmp",
+          "value": "snmp"
         },
         "datasource": {
           "type": "influxdb",
@@ -811,9 +922,9 @@
         "options": [],
         "query": "SHOW MEASUREMENTS",
         "refresh": 1,
-        "regex": "/^fb_docinfo/",
+        "regex": "/^snmp/",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 0,
         "type": "query"
       },
       {
@@ -843,31 +954,27 @@
       {
         "current": {
           "selected": true,
-          "text": "corrErrors",
-          "value": "corrErrors"
+          "text": "0x4494fc772f42",
+          "value": "0x4494fc772f42"
         },
         "datasource": {
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW FIELD KEYS from \"$measurement\"",
-        "hide": 0,
+        "definition": "SHOW TAG VALUES FROM \"snmp\" WITH KEY = \"ifPhysAddress\"",
+        "hide": 2,
         "includeAll": false,
         "multi": false,
-        "name": "field",
+        "name": "device",
         "options": [],
-        "query": "SHOW FIELD KEYS from \"$measurement\"",
+        "query": "SHOW TAG VALUES FROM \"snmp\" WITH KEY = \"ifPhysAddress\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "sort": 0,
+        "type": "query"
       },
       {
-        "allValue": ".*",
         "current": {
           "selected": true,
           "text": [
@@ -881,40 +988,13 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SELECT distinct(\"frequency\") FROM (SELECT \"powerLevel\",\"frequency\" FROM $rp.\"$measurement\" WHERE $timeFilter)",
-        "description": "TAG Values doesnt not support time ranges !",
+        "definition": "SHOW TAG VALUES FROM \"snmp\" WITH KEY = \"ifIndex\"",
         "hide": 0,
         "includeAll": true,
         "multi": true,
-        "name": "frequency",
+        "name": "port",
         "options": [],
-        "query": "SELECT distinct(\"frequency\") FROM (SELECT \"powerLevel\",\"frequency\" FROM $rp.\"$measurement\" WHERE $timeFilter)",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 3,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "${datasource}"
-        },
-        "definition": "SHOW TAG VALUES FROM $measurement WITH KEY = \"mode\"",
-        "hide": 2,
-        "includeAll": true,
-        "multi": false,
-        "name": "mode",
-        "options": [],
-        "query": "SHOW TAG VALUES FROM $measurement WITH KEY = \"mode\"",
+        "query": "SHOW TAG VALUES FROM \"snmp\" WITH KEY = \"ifIndex\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -923,45 +1003,83 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "nonCorrErrors",
-          "value": "nonCorrErrors"
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
         },
         "hide": 0,
         "includeAll": true,
         "multi": false,
-        "name": "errors",
+        "name": "metric",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "All",
             "value": "$__all"
           },
           {
-            "selected": true,
-            "text": "nonCorrErrors",
-            "value": "nonCorrErrors"
+            "selected": false,
+            "text": "ifInUcastPkts_count",
+            "value": "ifInUcastPkts_count"
           },
           {
             "selected": false,
-            "text": "corrErrors",
-            "value": "corrErrors"
+            "text": "ifOutUcastPkts_count",
+            "value": "ifOutUcastPkts_count"
           }
         ],
-        "query": "nonCorrErrors, corrErrors",
+        "query": "ifInUcastPkts_count, ifOutUcastPkts_count",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "hide": 1,
+        "includeAll": true,
+        "multi": false,
+        "name": "metric2",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "etherStatsPkts_count",
+            "value": "etherStatsPkts_count"
+          },
+          {
+            "selected": false,
+            "text": "etherStatsBroadcastPkts_count",
+            "value": "etherStatsBroadcastPkts_count"
+          },
+          {
+            "selected": false,
+            "text": "etherStatsMulticastPkts_count",
+            "value": "etherStatsMulticastPkts_count"
+          }
+        ],
+        "query": "etherStatsPkts_count, etherStatsBroadcastPkts_count, etherStatsMulticastPkts_count\n",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Fritzbox",
-  "uid": "heObo2rMk",
-  "version": 4,
+  "title": "SNMP",
+  "uid": "a119ce3d-5ee2-486d-9588-3d5290a2958e",
+  "version": 5,
   "weekStart": ""
 }

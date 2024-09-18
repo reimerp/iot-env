@@ -53,7 +53,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": 600000,
+            "spanNulls": 2400000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -283,7 +283,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "false",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],

@@ -8,9 +8,9 @@ class JsonTemplates:
 #-----------------------------------------------------------------------
  def __init__(self):
   self.__template = None
-  self.__var_regex = re.compile('\{\{\s*[.a-zA-Z0-9_]+\s*\}\}')
-  self.__arr_regex = re.compile('\{\%\s*[.a-zA-Z0-9_]+\s*\%\}')
-  self.__cln_regex = re.compile('[.a-zA-Z0-9_]+')
+  self.__var_regex = re.compile(r'\{\{\s*[.a-zA-Z0-9_]+\s*\}\}')
+  self.__arr_regex = re.compile(r'\{\%\s*[.a-zA-Z0-9_]+\s*\%\}')
+  self.__cln_regex = re.compile(r'[.a-zA-Z0-9_]+')
   self.__version__ = '0.2.1'
 
 #-----------------------------------------------------------------------
@@ -108,3 +108,20 @@ class JsonTemplates:
   except Exception as ex:
    return (False, 'Error: {}'.format(ex))
   return (True, result)
+
+if __name__ == '__main__':
+  json_tmp = JsonTemplates()
+
+  result = json_tmp.load(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'netgear.json'))
+  if not result[0]:
+    print('Error with template')
+    exit()
+
+  #print(result[1])
+  sysDescr = json_tmp.get('sysDescr')
+  print(sysDescr)
+
+  result = json_tmp.loads('{ "Go": "{{name}}" }')
+  print(result)
+  z = json_tmp.generate({'name': 'reimer'})
+  print(z)
