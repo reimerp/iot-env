@@ -157,14 +157,18 @@ class Snmp:
 
     self.snmpEngine.observer.unregisterObserver()
 
-if __name__ == '__main__':
+def test():
   s = Snmp()
   s.req(
-      [
-        (('1.3.6.1.2.1.16.1.1.1.7.1'), None),
-        ('1.3.6.1.2.1.16.1.1.1.7.2', None),
-        ('1.3.6.1.2.1.2.2.1.8.7', None),
-        ((1, 3, 6, 1, 2, 1, 1, 1, 0), None)  # "GS108Tv2"
-      ]
+    [
+      (('1.3.6.1.2.1.16.1.1.1.7.1'), None),
+      ('1.3.6.1.2.1.16.1.1.1.7.2', None),
+      ('1.3.6.1.2.1.2.2.1.8.7', None),
+      ((1, 3, 6, 1, 2, 1, 1, 1, 0), None)  # "GS108Tv2"
+    ]
   )
   print(s.result)
+  print(type(s.result))
+
+if __name__ == '__main__':
+  test()

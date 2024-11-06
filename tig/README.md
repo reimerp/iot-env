@@ -40,7 +40,7 @@ $ docker compose exec influxdb influx -database sensors -execute 'SHOW DATABASES
 Run the influx interactive console:
 
 ```bash
-$ docker compose exec influxdb influx
+$ docker compose exec influxdb influx -precision=rfc3339
 
 Connected to http://localhost:8086 version 1.8.10
 InfluxDB shell version: 1.8.10

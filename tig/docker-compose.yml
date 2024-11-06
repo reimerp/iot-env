@@ -9,11 +9,14 @@ services:
     image: telegraf:${TELEGRAF_TAG}
     restart: always
     ports:
-      - "127.0.0.1:6514:6514/udp"
+    - "127.0.0.1:6514:6514/udp"
     volumes:
-      - ./telegraf_logs/etc/telegraf/:/etc/telegraf/:ro
-      - ./telegraf_logs/tmp/input:/tmp/input
-      - /:/hostfs:ro
+    - ./telegraf_logs/etc/telegraf/:/etc/telegraf/:ro
+    - ./telegraf_logs/tmp/input:/tmp/input
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - ./debug/:/tmp/debug/
+    - /:/hostfs:ro
+    user: "telegraf:116"
 
   # Message formattet (MQTT -> InfluxDB)
   # https://hub.docker.com/_/telegraf

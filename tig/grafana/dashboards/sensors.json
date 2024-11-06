@@ -367,11 +367,35 @@
                 }
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "badBT"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 7
@@ -380,8 +404,13 @@
       "interval": "5m",
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "min",
+            "mean",
+            "max",
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -511,7 +540,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 18
       },
       "id": 9,
       "interval": "5m",
@@ -652,7 +681,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 26
       },
       "id": 12,
       "options": {
@@ -777,7 +806,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 34
       },
       "id": 8,
       "interval": "5m",
@@ -903,7 +932,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 34
       },
       "id": 10,
       "interval": "5m",
@@ -1053,7 +1082,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 41
       },
       "hideTimeOverride": false,
       "id": 16,
@@ -1316,13 +1345,13 @@
     ]
   },
   "time": {
-    "from": "now-8h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Sensors",
   "uid": "zOm5PCPGz",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
