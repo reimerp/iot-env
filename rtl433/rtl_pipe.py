@@ -42,6 +42,7 @@ class RemoteSensor(MqttBase):
         if rc != mqtt.MQTT_ERR_SUCCESS: MqttBase.eprint(f'Publish Error {rc} {mqtt.error_string(rc)}')
         if rc == mqtt.MQTT_ERR_QUEUE_SIZE: self.run = 0
 
+    # check mit 2 topics
     def measure(self):
         log_ignore = True
         while self.pipe.poll() is None:
