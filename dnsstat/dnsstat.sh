@@ -21,7 +21,7 @@ dodig() {
 
 doserver() {
     server=$1
-    time=$(date +%FT%T)
+    time=$(date -u +%FT%TZ)
     csize=$(dodig cachesize.bind)
     chits=$(dodig hits.bind)
     cmiss=$(dodig misses.bind)
@@ -30,7 +30,7 @@ doserver() {
 }
 
 if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then
-  doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "metrics/dnscache/$server" -q 1 -l
+  doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "metrics/dnscache/$server" -l
 else
   doserver "$server"
 fi
