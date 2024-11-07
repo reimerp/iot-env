@@ -425,6 +425,18 @@
                 "value": "binBps"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Download 90:61:AE:55:4E:ED"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Download probook eth0"
+              }
+            ]
           }
         ]
       },
@@ -456,6 +468,7 @@
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "alias": "$col $tag_interface_macAddr",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -643,6 +656,7 @@
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "alias": "$tag_interface_macAddr",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -785,6 +799,7 @@
       "pluginVersion": "8.2.6",
       "targets": [
         {
+          "alias": "$tag_interface_macAddr",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -932,13 +947,13 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }

@@ -2,7 +2,7 @@
 
 import paho.mqtt.publish as publish
 from json import dumps
-from datetime import datetime
+from datetime import datetime, timezone
 import platform
 
 """ a simple dict wrapper for json String output, dict uses ', json "
@@ -19,7 +19,7 @@ class MqttPub():
 
   @staticmethod
   def getTime() -> str:
-    return f'{datetime.now():%Y-%m-%dT%H:%M:%S}'
+    return f'{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}'
 
   @staticmethod
   def getcred(param: str) -> dict:
@@ -62,5 +62,6 @@ class MqttPub():
     publish.single(self.topic, payload=str(payload), qos=1, hostname='hassbian', client_id='cmdline_publisher', auth=self.auth)
 
 if __name__ == '__main__':
+    print(MqttPub.getTime());
     m = MqttPub()
-    m.do_publish(m.build_payload())
+    #m.do_publish(m.build_payload())
