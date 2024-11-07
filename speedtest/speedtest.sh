@@ -18,5 +18,5 @@ fi
 # mehrfach accept ist egal
 
 speedtest --accept-license --accept-gdpr -s 4087 -f json | \
-  jq -c 'del(.type,.result,.interface.internalIp,.interface.name,.interface.isVpn,.isp,.server.port,.server.name,.server.location,.server.host,.server.country,.server.ip)|{"Time":.timestamp,"speedtest":.}|del(.speedtest.timestamp)' | \
+  jq -c 'del(.download.bytes,.download.elapsed,.interface.internalIp,.interface.name,.interface.isVpn,.isp,.result,.server.port,.server.name,.server.location,.server.host,.server.country,.server.ip,.type,.upload.bytes,.upload.elapsed)|{"Time":.timestamp,"speedtest":.}|del(.speedtest.timestamp)' | \
   mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "test/speedtest/${HOST}" -l
