@@ -74,7 +74,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -172,7 +172,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -287,7 +287,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Up",
           "resultFormat": "time_series",
           "select": [
@@ -410,7 +410,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -508,7 +508,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -553,7 +553,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -659,7 +659,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -748,7 +748,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -867,7 +867,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1003,7 +1003,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1125,7 +1125,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1209,7 +1209,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "query": "SELECT last(\"v_NewExternalIPAddress\") FROM \"default\"./^$measurement$/ WHERE (\"box\" =~ /^$box$/) AND $timeFilter",
           "rawQuery": false,
           "refId": "A",
@@ -1293,7 +1293,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "query": "SELECT last(\"v_NewExternalIPv6Address\") FROM \"default\"./^$measurement$/ WHERE (\"box\" =~ /^$box$/) AND $timeFilter",
           "rawQuery": false,
           "refId": "A",
@@ -1401,7 +1401,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1525,7 +1525,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1660,7 +1660,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1761,7 +1761,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1867,7 +1867,7 @@
           "groupBy": [],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1973,7 +1973,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2083,7 +2083,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2199,7 +2199,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2302,7 +2302,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2397,7 +2397,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2511,7 +2511,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2633,7 +2633,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2803,7 +2803,7 @@
           "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2850,7 +2850,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -2995,7 +2995,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -3064,7 +3064,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -3269,7 +3269,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -3420,7 +3420,7 @@
           "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Down",
           "resultFormat": "time_series",
           "select": [
@@ -3468,7 +3468,7 @@
           "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Up",
           "resultFormat": "time_series",
           "select": [
@@ -3648,7 +3648,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "In",
           "resultFormat": "time_series",
           "select": [
@@ -3705,7 +3705,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Out",
           "resultFormat": "time_series",
           "select": [
@@ -3888,7 +3888,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Dn",
           "resultFormat": "time_series",
           "select": [
@@ -3945,7 +3945,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "Up",
           "resultFormat": "time_series",
           "select": [
@@ -4115,7 +4115,7 @@
           "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -4168,7 +4168,7 @@
           ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -4222,7 +4222,7 @@
           "hide": true,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "C",
           "resultFormat": "time_series",
           "select": [
@@ -4276,7 +4276,7 @@
           "hide": true,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "m",
+          "policy": "$rp",
           "refId": "D",
           "resultFormat": "time_series",
           "select": [
