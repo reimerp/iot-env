@@ -31,7 +31,7 @@ class RemoteSensor(MqttBase):
           # fix temp offset and non working hum
           r['temperature_C'] = r['temperature_C'] - 2.0
           r['humidity'] = 0.0
-        return '{{"Time":"{time}","Temperature":{temperature_C},"Humidity":{humidity},"Vcc":{Vcc},"TempUnit":"C"}}'.format(**r)
+        return '{{"Time":"{time}","RTL433":{{"Temperature":{temperature_C},"Humidity":{humidity},"Vcc":{Vcc},"TempUnit":"C"}}}}'.format(**r)
 
     def publish(self):
         self.oldTS = datetime.now();
