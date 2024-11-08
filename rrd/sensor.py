@@ -12,7 +12,7 @@ class RemoteMqtt2Rrd(Mqtt2Rrd):
         # target.addTopic(f'tasmota/sensor/tele/SENSOR')    # DEBUG
 
     def rrd_out(self, ts, data: dict) -> str:
-        sensor = data['BME280']
+        sensor = data['BME680']
         return f"{ts:%s}:{sensor['Temperature']}:{sensor['Humidity']}:{sensor['Pressure']}"
 
     def update(self, target = None, debug = False) -> None:

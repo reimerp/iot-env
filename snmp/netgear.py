@@ -64,7 +64,7 @@ build_arr(r, json_tmp.get('snmp'))
 s = Snmp()
 s.req(r)
 repl = s.result
-repl['Time'] = MqttPub.getTime()
+repl['Time'] = MqttPub.getUTCTime()
 
 # ifOperStatus ist egal, if ist down wenn speed 0
 new_dict = json_tmp.generate(repl)
