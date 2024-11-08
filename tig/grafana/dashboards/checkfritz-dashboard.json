@@ -2810,7 +2810,7 @@
             [
               {
                 "params": [
-                  "v_NewUpstreamMaxRate"
+                  "v_NewLayer1UpstreamMaxBitRate"
                 ],
                 "type": "field"
               },
@@ -2857,7 +2857,7 @@
             [
               {
                 "params": [
-                  "v_NewDownstreamMaxRate"
+                  "v_NewLayer1DownstreamMaxBitRate"
                 ],
                 "type": "field"
               },
@@ -3557,7 +3557,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3789,7 +3790,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4022,7 +4024,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4328,7 +4331,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "fb_tr069",
           "value": "fb_tr069"
         },

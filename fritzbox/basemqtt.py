@@ -6,7 +6,7 @@ from inspect import getfile
 import signal
 from sys import stderr, stdout
 from time import asctime, sleep
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import netrc
 
 class MqttBase(object):
@@ -27,6 +27,10 @@ class MqttBase(object):
     @staticmethod
     def getTime() -> str:
         return f'{datetime.now():%Y-%m-%dT%H:%M:%S}'
+
+    @staticmethod
+    def getUTCTime() -> str:
+        return f'{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}'
 
     @staticmethod
     def getTs(isotimestring: str) -> datetime:

@@ -4,7 +4,7 @@
 import re
 from fritzdata import FritzData
 from basemqtt import MqttBase
-getTime = MqttBase.getTime
+getTime = MqttBase.getUTCTime
 
 class FritzDoc(FritzData):
     def __init__(self, host='fritz.box'):
@@ -97,13 +97,13 @@ class FritzDoc(FritzData):
             d['mode'] = 'Us'
             out.append(d)
         return out
-    
+
     def getDocInfo(self) -> list:
        out = {}
        out['Time'] = self.time
        out['docinfo'] = self.getDocArr()
        return out
-   
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='FritzBox Doc Reader')

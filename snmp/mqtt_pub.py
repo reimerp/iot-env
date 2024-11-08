@@ -18,7 +18,7 @@ class MqttPub():
     self.topic = topic
 
   @staticmethod
-  def getTime() -> str:
+  def getUTCTime() -> str:
     return f'{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}'
 
   @staticmethod
@@ -54,7 +54,7 @@ class MqttPub():
     inp = 1
     out = 2
     up = 3
-    return jsondict({'Time':MqttPub.getTime(),'mrtg':{'dev':dev,'in':inp,'out':out,'up':up}})
+    return jsondict({'Time':MqttPub.getUTCTime(),'mrtg':{'dev':dev,'in':inp,'out':out,'up':up}})
 
   def do_publish(self, payload):
     #print(payload, self.auth)
@@ -62,6 +62,6 @@ class MqttPub():
     publish.single(self.topic, payload=str(payload), qos=1, hostname='hassbian', client_id='cmdline_publisher', auth=self.auth)
 
 if __name__ == '__main__':
-    print(MqttPub.getTime());
+    print(MqttPub.getUTCTime());
     m = MqttPub()
     #m.do_publish(m.build_payload())
