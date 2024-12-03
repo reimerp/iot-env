@@ -1,5 +1,4 @@
-#!/usr/bin/env -S -i python3
-#
+#!/usr/bin/env -S -i DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} python3
 
 import requests
 from fritz import Fritz
