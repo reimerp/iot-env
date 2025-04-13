@@ -5,7 +5,7 @@ import syslog
 class Tasmota2Rrd(RemoteMqtt2Rrd):
 
     def rrd_out(self, ts, data):
-        sensor = data['DS18B20']
+        sensor = data['BME280']
         return '{:%s}:{}'.format(ts, sensor['Temperature'])
 
 if __name__ == '__main__':

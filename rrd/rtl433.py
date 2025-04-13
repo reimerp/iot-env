@@ -9,7 +9,8 @@ class Tasmota2Rrd(RemoteMqtt2Rrd):
         target.addTopic('{}/inFactory-TH'.format(self.name()))
 
     def rrd_out(self, ts, data):
-        return '{:%s}:{}:{}'.format(ts, data['Temperature'], data['Humidity'])
+        sensor = data['RTL433']
+        return '{:%s}:{}:{}'.format(ts, sensor['Temperature'], sensor['Humidity'])
 
 if __name__ == '__main__':
     syslog.openlog(logoption = syslog.LOG_PID, facility = syslog.LOG_USER)
