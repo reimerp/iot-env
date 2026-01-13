@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
+  "id": 24,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -287,7 +288,7 @@
             }
           ],
           "hide": false,
-          "measurement": "/^$measurement$/",
+          "measurement": "/^$docinfo$/",
           "orderByTime": "ASC",
           "policy": "$rp",
           "query": "SELECT count(\"powerLevel\") FROM \"fb\" WHERE (\"mode\" = 'Us') AND $timeFilter GROUP BY time(5m), \"type\" fill(null)",
@@ -315,6 +316,18 @@
               "value": "/^$mode$/"
             }
           ]
+        },
+        {
+          "alias": "$tag_type",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "hide": true,
+          "query": " SELECT count(\"mean\") FROM (SELECT MEAN(powerLevel) FROM \"$rp\"./^$docinfo$/  WHERE (\"mode\" =~ /^$mode$/) AND $timeFilter GROUP by time($__interval),type,channelID) GROUP by type,time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
         }
       ],
       "title": "$mode Channel Count and Modulation",
@@ -401,28 +414,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "speedtest.Download"
+              "options": "Download B8:27:EB:01:98:50"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Download"
+                "value": "Download hassbian"
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "speedtest.Upload"
+              "options": "Upload B8:27:EB:01:98:50"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Upload"
-              },
-              {
-                "id": "unit",
-                "value": "binBps"
+                "value": "Upload hassbian"
               }
             ]
           },
@@ -434,14 +443,76 @@
             "properties": [
               {
                 "id": "displayName",
+                "value": "Download probook wlan"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Upload 90:61:AE:55:4E:ED"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Upload probook wlan"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Download 48:BA:4E:F7:1B:1C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
                 "value": "Download probook eth0"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Upload 48:BA:4E:F7:1B:1C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Upload probook eth0"
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Upload probook eth0",
+                  "Upload probook wlan",
+                  "Upload hassnian"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 22,
         "w": 24,
         "x": 0,
         "y": 12
@@ -493,9 +564,9 @@
               "type": "fill"
             }
           ],
-          "measurement": "speedtest",
+          "measurement": "/^$speedtest$/",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -629,10 +700,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 11,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 34
       },
       "id": 6,
       "interval": "5m",
@@ -683,7 +754,7 @@
           ],
           "measurement": "speedtest",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -780,7 +851,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 45
       },
       "id": 4,
       "interval": "5m",
@@ -824,9 +895,9 @@
               "type": "fill"
             }
           ],
-          "measurement": "speedtest",
+          "measurement": "/^$speedtest$/",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -876,30 +947,6 @@
       {
         "current": {
           "selected": false,
-          "text": "fb_docinfo",
-          "value": "fb_docinfo"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "${datasource}"
-        },
-        "definition": "SHOW MEASUREMENTS",
-        "description": "selects potential measurements",
-        "hide": 1,
-        "includeAll": false,
-        "multi": false,
-        "name": "measurement",
-        "options": [],
-        "query": "SHOW MEASUREMENTS",
-        "refresh": 1,
-        "regex": "/^fb_docinfo/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
           "text": "m",
           "value": "m"
         },
@@ -924,6 +971,54 @@
       {
         "current": {
           "selected": false,
+          "text": "fb_docinfo",
+          "value": "fb_docinfo"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW SERIES",
+        "description": "selects potential measurements",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "docinfo",
+        "options": [],
+        "query": "SHOW SERIES",
+        "refresh": 1,
+        "regex": "^(?<value>[^,]+),channelID.*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "speedtest",
+          "value": "speedtest"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW SERIES",
+        "description": "selects potential measurements",
+        "hide": 1,
+        "includeAll": false,
+        "multi": false,
+        "name": "speedtest",
+        "options": [],
+        "query": "SHOW SERIES",
+        "refresh": 1,
+        "regex": "^(?<value>[^,]+),interface_macAddr.*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -931,13 +1026,13 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW TAG VALUES FROM $measurement WITH KEY = \"mode\"",
+        "definition": "SHOW TAG VALUES FROM $docinfo WITH KEY = \"mode\"",
         "hide": 0,
         "includeAll": true,
         "multi": false,
         "name": "mode",
         "options": [],
-        "query": "SHOW TAG VALUES FROM $measurement WITH KEY = \"mode\"",
+        "query": "SHOW TAG VALUES FROM $docinfo WITH KEY = \"mode\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -954,6 +1049,6 @@
   "timezone": "",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 1,
+  "version": 4,
   "weekStart": ""
 }

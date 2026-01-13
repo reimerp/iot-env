@@ -89,3 +89,15 @@ telegraf is using two instances, one for local statsd dashboard on one for mqtt 
 
 [Screenshots](screenshots/)
 
+# Q1
+
+mosquitto_pub -q 1
+and client:
+```
+  qos = 1
+  persistent_session = true
+  client_id = "telegraf_zulu_${AGENT_HOSTNAME}"
+```
+
+will buffer messages on mqtt when client is offline. Works quite well, but due to implementation of retention policies in influx,
+messages will be inserted in high res rp (ok) but the missing continuos querys will not be repeated, so that the log term rp is still missing messages...

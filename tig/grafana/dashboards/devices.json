@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 31,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -39,11 +39,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -52,12 +54,13 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
             },
             "lineWidth": 1,
-            "pointSize": 2,
+            "pointSize": 4,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -99,10 +102,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_device",
@@ -136,7 +141,7 @@
           "policy": "$rp",
           "query": "SELECT mean(\"Temperature\") FROM \"devices\" WHERE $timeFilter GROUP BY time($__interval) fill(none)",
           "rawQuery": false,
-          "refId": "A",
+          "refId": "Temperature",
           "resultFormat": "time_series",
           "select": [
             [
@@ -184,7 +189,7 @@
           "measurement": "sensors",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "B",
+          "refId": "ESP",
           "resultFormat": "time_series",
           "select": [
             [
@@ -201,38 +206,82 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "$tag_device",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "device::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensors",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "Temp_int",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Temp_int"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Temperatur",
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "5m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
           "text": "InfluxSensors",
           "value": "InfluxSensors"
         },
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "influxdb",
         "refresh": 1,
         "regex": "/[sS]ensor/",
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "current": {
-          "selected": true,
           "text": "devices",
           "value": "devices"
         },
@@ -243,19 +292,16 @@
         "definition": "SHOW MEASUREMENTS",
         "hide": 1,
         "includeAll": false,
-        "multi": false,
         "name": "measurement",
         "options": [],
         "query": "SHOW MEASUREMENTS",
         "refresh": 1,
         "regex": "/^devices/",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "m",
           "value": "m"
         },
@@ -266,14 +312,11 @@
         "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
         "hide": 1,
         "includeAll": false,
-        "multi": false,
         "name": "rp",
         "options": [],
         "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -286,6 +329,6 @@
   "timezone": "",
   "title": "Devices",
   "uid": "pYizQ2Anz",
-  "version": 9,
+  "version": 2,
   "weekStart": ""
 }

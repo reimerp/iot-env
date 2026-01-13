@@ -21,12 +21,11 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 26,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -39,11 +38,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -52,6 +53,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 4,
@@ -87,7 +89,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "sensors.mean"
+              "options": "aussen"
             },
             "properties": [
               {
@@ -116,12 +118,15 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.8",
       "targets": [
         {
+          "alias": "aussen",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -184,11 +189,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -197,6 +204,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 4,
@@ -239,6 +247,30 @@
                 }
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "sensors.mean"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
           }
         ]
       },
@@ -257,10 +289,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -304,7 +338,7 @@
             {
               "key": "topic",
               "operator": "=",
-              "value": "vorlauf"
+              "value": "warm"
             }
           ]
         }
@@ -314,39 +348,36 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "preload": false,
+  "refresh": false,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
           "text": "InfluxSensors",
           "value": "InfluxSensors"
         },
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "influxdb",
         "refresh": 1,
         "regex": "/[sS]ensor/",
-        "skipUrlSync": false,
         "type": "datasource"
       }
     ]
   },
   "time": {
-    "from": "now-5y",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Heizung",
   "uid": "2-AkxiDVk",
-  "version": 3,
+  "version": 2,
   "weekStart": ""
 }

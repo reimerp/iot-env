@@ -91,3 +91,7 @@ Killed by Ctrl+C
 # Grafana
 - Alerts sind im Dashboard (siehe influx) aber nicht in meinen
 - Annotations sind wo?
+
+
+
+docker compose exec telegraf_mqtt telegraf config check

@@ -134,7 +134,7 @@
               }
             ]
           },
-          "unit": "Kbits"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -179,7 +179,7 @@
             [
               {
                 "params": [
-                  "v_NewDownstreamCurrRate"
+                  "v_NewLayer1UpstreamMaxBitRate"
                 ],
                 "type": "field"
               }
@@ -236,7 +236,7 @@
               }
             ]
           },
-          "unit": "Kbits"
+          "unit": "binbps"
         },
         "overrides": []
       },
@@ -294,7 +294,7 @@
             [
               {
                 "params": [
-                  "v_NewUpstreamCurrRate"
+                  "v_NewLayer1DownstreamMaxBitRate"
                 ],
                 "type": "field"
               },
@@ -361,7 +361,7 @@
         "x": 14,
         "y": 0
       },
-      "id": 29,
+      "id": 28,
       "interval": "",
       "links": [],
       "options": {
@@ -437,12 +437,12 @@
               "condition": "AND",
               "key": "interface",
               "operator": "=",
-              "value": "wlanGuest"
+              "value": "wlan5"
             }
           ]
         }
       ],
-      "title": "IoT clients",
+      "title": "5ghz clients",
       "type": "stat"
     },
     {
@@ -887,12 +887,6 @@
                   "1s"
                 ],
                 "type": "non_negative_derivative"
-              },
-              {
-                "params": [
-                  "*8"
-                ],
-                "type": "math"
               }
             ]
           ],
@@ -1164,7 +1158,18 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "mappings": [],
+          "displayName": "",
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1173,7 +1178,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": []
       },
@@ -1183,15 +1189,17 @@
         "x": 0,
         "y": 7
       },
-      "id": 31,
+      "id": 34,
+      "interval": "",
+      "links": [],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
-        "justifyMode": "center",
+        "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [],
-          "fields": "/^IPv4$/",
+          "fields": "/^fb_tr069\\.last$/",
           "values": false
         },
         "showPercentChange": false,
@@ -1201,7 +1209,6 @@
       "pluginVersion": "9.5.8",
       "targets": [
         {
-          "alias": "IPv4",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -1210,15 +1217,13 @@
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
-          "query": "SELECT last(\"v_NewExternalIPAddress\") FROM \"default\"./^$measurement$/ WHERE (\"box\" =~ /^$box$/) AND $timeFilter",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "v_NewExternalIPAddress"
+                  "v_NewLastConnectionError"
                 ],
                 "type": "field"
               },
@@ -1237,7 +1242,7 @@
           ]
         }
       ],
-      "title": "IPv4",
+      "title": "Last connection error",
       "type": "stat"
     },
     {
@@ -1248,16 +1253,36 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "mappings": [],
+          "displayName": "",
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
+                "color": "dark-red",
                 "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 80
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 90
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": []
       },
@@ -1267,15 +1292,19 @@
         "x": 3,
         "y": 7
       },
-      "id": 32,
+      "id": 35,
+      "interval": "",
+      "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
+        "graphMode": "area",
+        "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [],
-          "fields": "/^IPv6$/",
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
           "values": false
         },
         "showPercentChange": false,
@@ -1285,7 +1314,7 @@
       "pluginVersion": "9.5.8",
       "targets": [
         {
-          "alias": "IPv6",
+          "alias": "$tag_interface",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -1294,21 +1323,15 @@
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
-          "query": "SELECT last(\"v_NewExternalIPv6Address\") FROM \"default\"./^$measurement$/ WHERE (\"box\" =~ /^$box$/) AND $timeFilter",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "v_NewExternalIPv6Address"
+                  "v_NewDownstreamNoiseMargin"
                 ],
                 "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
               }
             ]
           ],
@@ -1321,7 +1344,7 @@
           ]
         }
       ],
-      "title": "IPv6",
+      "title": "Downstream noise margin",
       "type": "stat"
     },
     {
@@ -1577,7 +1600,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "displayName": "",
@@ -1606,12 +1628,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
+        "h": 2,
+        "w": 2,
         "x": 14,
         "y": 8
       },
-      "id": 28,
+      "id": 26,
       "interval": "",
       "links": [],
       "options": {
@@ -1667,7 +1689,7 @@
             [
               {
                 "params": [
-                  "v_NewTotalAssociations"
+                  "v_NewChannel"
                 ],
                 "type": "field"
               },
@@ -1687,12 +1709,12 @@
               "condition": "AND",
               "key": "interface",
               "operator": "=",
-              "value": "wlan5"
+              "value": "wlan24"
             }
           ]
         }
       ],
-      "title": "5ghz clients",
+      "title": "2.4ghz channel",
       "type": "stat"
     },
     {
@@ -1700,7 +1722,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "displayName": "",
@@ -1730,114 +1751,11 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 9
+        "w": 2,
+        "x": 16,
+        "y": 8
       },
-      "id": 34,
-      "interval": "",
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [],
-          "fields": "/^fb_tr069\\.last$/",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "9.5.8",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "$rp",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "v_NewLastConnectionError"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "box",
-              "operator": "=~",
-              "value": "/^$box$/"
-            }
-          ]
-        }
-      ],
-      "title": "Last connection error",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "displayName": "",
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 80
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 9
-      },
-      "id": 35,
+      "id": 9,
       "interval": "",
       "links": [],
       "options": {
@@ -1864,7 +1782,26 @@
             "type": "influxdb",
             "uid": "${datasource}"
           },
-          "groupBy": [],
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "interface"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
@@ -1874,9 +1811,13 @@
             [
               {
                 "params": [
-                  "v_NewDownstreamNoiseMargin"
+                  "v_NewChannel"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
               }
             ]
           ],
@@ -1885,11 +1826,17 @@
               "key": "box",
               "operator": "=~",
               "value": "/^$box$/"
+            },
+            {
+              "condition": "AND",
+              "key": "interface",
+              "operator": "=",
+              "value": "wlan5"
             }
           ]
         }
       ],
-      "title": "Downstream noise margin",
+      "title": "5ghz channel",
       "type": "stat"
     },
     {
@@ -1929,7 +1876,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 11
+        "y": 9
       },
       "id": 36,
       "interval": "",
@@ -2039,7 +1986,7 @@
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 11
+        "y": 9
       },
       "id": 38,
       "interval": "",
@@ -2155,7 +2102,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 11
+        "y": 9
       },
       "id": 39,
       "interval": "",
@@ -2232,6 +2179,90 @@
         }
       ],
       "title": "VOIP connections",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 14,
+        "y": 10
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^IPv6$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.8",
+      "targets": [
+        {
+          "alias": "IPv6",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "groupBy": [],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "$rp",
+          "query": "SELECT last(\"v_NewExternalIPv6Address\") FROM \"default\"./^$measurement$/ WHERE (\"box\" =~ /^$box$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "v_NewExternalIPv6Address"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "box",
+              "operator": "=~",
+              "value": "/^$box$/"
+            }
+          ]
+        }
+      ],
+      "title": "IPv6",
       "type": "stat"
     },
     {
@@ -2429,250 +2460,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "fieldConfig": {
-        "defaults": {
-          "displayName": "",
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-blue",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 2,
-        "x": 14,
-        "y": 12
-      },
-      "id": 26,
-      "interval": "",
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "9.5.8",
-      "targets": [
-        {
-          "alias": "$tag_interface",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "interface"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "$rp",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "v_NewChannel"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "box",
-              "operator": "=~",
-              "value": "/^$box$/"
-            },
-            {
-              "condition": "AND",
-              "key": "interface",
-              "operator": "=",
-              "value": "wlan24"
-            }
-          ]
-        }
-      ],
-      "title": "2.4ghz channel",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "displayName": "",
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-blue",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 2,
-        "x": 16,
-        "y": 12
-      },
-      "id": 9,
-      "interval": "",
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "9.5.8",
-      "targets": [
-        {
-          "alias": "$tag_interface",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "interface"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "$rp",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "v_NewChannel"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "box",
-              "operator": "=~",
-              "value": "/^$box$/"
-            },
-            {
-              "condition": "AND",
-              "key": "interface",
-              "operator": "=",
-              "value": "wlan5"
-            }
-          ]
-        }
-      ],
-      "title": "5ghz channel",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2763,7 +2550,7 @@
         "h": 9,
         "w": 6,
         "x": 0,
-        "y": 14
+        "y": 12
       },
       "id": 12,
       "options": {
@@ -3337,7 +3124,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 23
+        "y": 21
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -4450,6 +4237,6 @@
   "timezone": "",
   "title": "CheckFritzbox",
   "uid": "knlZERmGz",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }

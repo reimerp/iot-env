@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 35,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1831,8 +1832,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2372,8 +2372,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2692,8 +2691,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2893,8 +2891,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3242,8 +3239,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3409,8 +3405,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3499,7 +3494,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "fb_tr069",
           "value": "fb_tr069"
         },
@@ -3516,14 +3511,14 @@
         "options": [],
         "query": "SHOW MEASUREMENTS",
         "refresh": 1,
-        "regex": "/^fb_docinfo/",
+        "regex": "/^fb_tr069/",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "m",
           "value": "m"
         },
@@ -3555,6 +3550,6 @@
   "timezone": "",
   "title": "FritzBoxTelegraf",
   "uid": "INoNQciRk",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

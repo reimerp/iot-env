@@ -4,19 +4,13 @@
       {
         "builtIn": 1,
         "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
+          "type": "grafana",
+          "uid": "-- Grafana --"
         },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
@@ -24,14 +18,15 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 21,
+  "id": 33,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${datasource}"
+        "uid": "P5CDC2E275C596C5D"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -47,171 +42,23 @@
             "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "opacity",
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 4,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": 3600000,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              },
-              {
-                "color": "transparent",
-                "value": 75
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
-      "id": 7,
-      "interval": "5m",
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.8",
-      "targets": [
-        {
-          "alias": "$tag_server $col",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "dnscache",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT 100 * non_negative_derivative(median(\"hits_total\"), 5m) / (non_negative_derivative(median(\"hits_total\"), 5m) + non_negative_derivative(median(\"miss_total\"), 5m)) AS \"cache hits\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "hits"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " / 100"
-                ],
-                "type": "math"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "miss"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Ratio",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
+            "showPoints": "always",
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -230,52 +77,21 @@
                 "value": null
               }
             ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "dnscache.hits"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Hits"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "dnscache.miss"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Miss"
-              }
-            ]
           }
-        ]
+        },
+        "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 12,
-        "x": 12,
+        "h": 8,
+        "w": 24,
+        "x": 0,
         "y": 0
       },
-      "id": 4,
-      "interval": "5m",
+      "id": 2,
       "options": {
         "legend": {
-          "calcs": [
-            "min",
-            "mean",
-            "max"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -288,10 +104,263 @@
       "pluginVersion": "11.5.8",
       "targets": [
         {
-          "alias": "$tag_server $col",
+          "alias": "$tag_device",
           "datasource": {
             "type": "influxdb",
-            "uid": "${datasource}"
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "device::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensors",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "Temp_int",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Temp_int"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "+10"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "device::tag",
+              "operator": "=",
+              "value": "abseite"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_device",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "device::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensors",
+          "orderByTime": "ASC",
+          "policy": "m",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Temp_int"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "device::tag",
+              "operator": "=",
+              "value": "abseite"
+            }
+          ]
+        }
+      ],
+      "title": "example Temperatur Abseite",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5CDC2E275C596C5D"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": 2400000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.8",
+      "targets": [
+        {
+          "alias": "autogen + 1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ping",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "Autogen",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rtt"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " +1"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=",
+              "value": "192.168.176.1"
+            }
+          ]
+        },
+        {
+          "alias": "m",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
           },
           "groupBy": [
             {
@@ -308,67 +377,89 @@
             }
           ],
           "hide": false,
-          "measurement": "dnscache",
+          "measurement": "ping",
           "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT non_negative_derivative(median(\"hits_total\"), 5m) AS \"hits\", non_negative_derivative(median(\"miss_total\"), 5m) AS \"miss\" FROM \"$rp\".\"$measurement\" WHERE $timeFilter GROUP BY time($__interval), server fill(null)",
-          "rawQuery": true,
-          "refId": "A",
+          "policy": "m",
+          "refId": "M",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "hits"
+                  "rtt"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "median"
-              },
-              {
-                "params": [
-                  "5m"
-                ],
-                "type": "non_negative_derivative"
-              },
-              {
-                "params": [
-                  "hits"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "miss"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "median"
-              },
-              {
-                "params": [
-                  "5m"
-                ],
-                "type": "non_negative_derivative"
-              },
-              {
-                "params": [
-                  "miss"
-                ],
-                "type": "alias"
+                "type": "mean"
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=",
+              "value": "192.168.176.1"
+            }
+          ]
+        },
+        {
+          "alias": "m",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5CDC2E275C596C5D"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "tmp",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rtt"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " +2"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "target::tag",
+              "operator": "=",
+              "value": "192.168.176.1"
+            }
+          ]
         }
       ],
-      "title": "Cache",
+      "title": "Example Ping RTT",
       "type": "timeseries"
     }
   ],
@@ -377,66 +468,7 @@
   "schemaVersion": 40,
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allowCustomValue": false,
-        "current": {
-          "text": "InfluxSensors",
-          "value": "InfluxSensors"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "name": "datasource",
-        "options": [],
-        "query": "influxdb",
-        "refresh": 1,
-        "regex": "/[sS]ensor/",
-        "type": "datasource"
-      },
-      {
-        "current": {
-          "text": "dnscache",
-          "value": "dnscache"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "${datasource}"
-        },
-        "definition": "SHOW SERIES WHERE \"server\"='probook'",
-        "description": "selects potential measurements",
-        "hide": 1,
-        "includeAll": false,
-        "name": "measurement",
-        "options": [],
-        "query": {
-          "query": "SHOW SERIES WHERE \"server\"='probook'",
-          "refId": "InfluxVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "/(?<value>[^,]*),.*/",
-        "type": "query"
-      },
-      {
-        "current": {
-          "text": "m",
-          "value": "m"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "${datasource}"
-        },
-        "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
-        "description": "selects retention policy",
-        "hide": 1,
-        "includeAll": false,
-        "name": "rp",
-        "options": [],
-        "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
-        "refresh": 2,
-        "regex": "",
-        "type": "query"
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now-6h",
@@ -444,8 +476,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "DNS",
-  "uid": "gcIAqlCGz",
-  "version": 1,
+  "title": "Retentention Policy",
+  "uid": "b44aa8a7-ca68-41a6-a0ca-26b54747bd2c",
+  "version": 4,
   "weekStart": ""
 }
