@@ -166,7 +166,7 @@
           ],
           "tags": [
             {
-              "key": "topic",
+              "key": "device::tag",
               "operator": "=",
               "value": "inFactory-TH"
             }
@@ -336,7 +336,7 @@
           ],
           "tags": [
             {
-              "key": "topic",
+              "key": "device::tag",
               "operator": "=",
               "value": "warm"
             }
@@ -378,6 +378,6 @@
   "timezone": "",
   "title": "Heizung",
   "uid": "2-AkxiDVk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

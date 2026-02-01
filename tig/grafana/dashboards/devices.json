@@ -136,7 +136,7 @@
             }
           ],
           "hide": false,
-          "measurement": "/^$measurement$/",
+          "measurement": "/^$devices$/",
           "orderByTime": "ASC",
           "policy": "$rp",
           "query": "SELECT mean(\"Temperature\") FROM \"devices\" WHERE $timeFilter GROUP BY time($__interval) fill(none)",
@@ -148,54 +148,6 @@
               {
                 "params": [
                   "Temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "$tag_topic",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${datasource}"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "topic"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "sensors",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "ESP",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "ESP32_Temperature"
                 ],
                 "type": "field"
               },
@@ -289,14 +241,17 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW MEASUREMENTS",
+        "definition": "SHOW SERIES WHERE \"device\" = 'fb'",
         "hide": 1,
         "includeAll": false,
-        "name": "measurement",
+        "name": "devices",
         "options": [],
-        "query": "SHOW MEASUREMENTS",
+        "query": {
+          "query": "SHOW SERIES WHERE \"device\" = 'fb'",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
-        "regex": "/^devices/",
+        "regex": "/(?<value>[^,]*),.*/",
         "sort": 1,
         "type": "query"
       },
@@ -329,6 +284,6 @@
   "timezone": "",
   "title": "Devices",
   "uid": "pYizQ2Anz",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
