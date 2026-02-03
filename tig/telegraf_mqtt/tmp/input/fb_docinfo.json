@@ -1,0 +1,44 @@
+{
+  "Time": "2024-01-08T16:08:32",
+  "docinfo": [
+    {
+      "powerLevel": 10.3,
+      "nonCorrErrors": 37,
+      "corrErrors": 11824,
+      "latency": 0.32,
+      "mse": 38.6,
+      "channelID": 10,
+      "frequency": "634.000",
+      "type": "256QAM",
+      "mode": "Ds"
+    },
+    {
+      "powerLevel": 6.6,
+      "nonCorrErrors": 397,
+      "plc": "264",
+      "mer": "43",
+      "fft": "4K",
+      "channelID": 193,
+      "frequency": "134.975 - 324.975",
+      "type": "4096QAM",
+      "mode": "Ds"
+    },
+    {
+      "powerLevel": 45,
+      "multiplex": "ATDMA",
+      "channelID": 2,
+      "frequency": "44.600",
+      "type": "64QAM",
+      "mode": "Us"
+    },
+    {
+      "powerLevel": 39.5,
+      "activesub": "640",
+      "fft": "2K",
+      "channelID": 41,
+      "frequency": "29.775 - 64.775",
+      "type": "256QAM",
+      "mode": "Us"
+    }
+  ]
+}
