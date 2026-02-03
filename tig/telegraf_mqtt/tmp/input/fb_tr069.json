@@ -1,0 +1,95 @@
+{
+  "Time": "2024-01-08T15:59:42",
+  "FritzTR069": [
+    {
+      "box": "3C3712A0E8E0",
+      "v": {
+        "NewUpTime": 4718061,
+        "NewDescription": "FRITZ!Box 6660 Cable Release 252.07.50",
+        "NewHostNumberOfEntries": 60
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "wan",
+      "v": {
+        "NewConnectionStatus": "Connected",
+        "NewLastConnectionError": "ERROR_NONE",
+        "NewUptime": 907022,
+        "NewWANAccessType": "Cable",
+        "NewLayer1UpstreamMaxBitRate": 57500000,
+        "NewLayer1DownstreamMaxBitRate": 1150000000,
+        "NewPhysicalLinkStatus": "Up",
+        "NewExternalIPAddress": "",
+        "NewExternalIPv6Address": "2a02:3102:4000:4:7886:5d9c:eeb1:b5d",
+        "NewByteSendRate": 635,
+        "NewByteReceiveRate": 5627,
+        "NewPacketSendRate": 0,
+        "NewPacketReceiveRate": 0,
+        "NewTotalBytesSent": 1609333815,
+        "NewTotalBytesReceived": 224874852,
+        "NewAutoDisconnectTime": 0,
+        "NewIdleDisconnectTime": 0,
+        "NewUpnpControlEnabled": false,
+        "NewRoutedBridgedModeBoth": 1,
+        "NewX_AVM_DE_TotalBytesSent64": 117573450807,
+        "NewX_AVM_DE_TotalBytesReceived64": 2074694078820,
+        "NewX_AVM_DE_WANAccessType": "Cable"
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "dect",
+      "v": {
+        "NewNumberOfEntries": 1
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "voip",
+      "v": {
+        "NewNumberOfNumbers": 3
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "lan",
+      "v": {
+        "NewTotalBytesSent": 3165884134,
+        "NewTotalBytesReceived": 2153094979,
+        "NewTotalPacketsSent": 115354377,
+        "NewTotalPacketsReceived": 67947884
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "wlan24",
+      "v": {
+        "NewTotalPacketsSent": 2083581,
+        "NewTotalPacketsReceived": 2536172,
+        "NewTotalAssociations": 12,
+        "NewChannel": 6
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "wlan5",
+      "v": {
+        "NewTotalPacketsSent": 132823244,
+        "NewTotalPacketsReceived": 50696613,
+        "NewTotalAssociations": 6,
+        "NewChannel": 116
+      }
+    },
+    {
+      "box": "3C3712A0E8E0",
+      "interface": "wlanGuest",
+      "v": {
+        "NewTotalPacketsSent": 0,
+        "NewTotalPacketsReceived": 0,
+        "NewTotalAssociations": 0,
+        "NewChannel": 6
+      }
+    }
+  ]
+}

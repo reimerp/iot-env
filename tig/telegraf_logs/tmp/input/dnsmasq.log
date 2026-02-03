@@ -1,0 +1,2 @@
+Nov 12 22:04:12 dnsmasq[404634]: reply connectivity-check.ubuntu.com is 2620:2d:4000:1::22
+Nov 12 22:04:29 dnsmasq[404634]: query[A] d.dropbox.com from 127.0.0.1
