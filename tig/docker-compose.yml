@@ -85,11 +85,11 @@ services:
     env_file:
     - env.influxdb
     volumes:
-    - ./:/imports
+    #- ./:/imports
     # Data persistence (could also be a bind mount: /srv/docker/influxdb/data:/var/lib/influxdb)
     - influxdb_data:/var/lib/influxdb
     # Backups...
-    # - ./influxdb-backup:/backup
+    - ./influxdb-backup:/backup
     # Host can run the following on a crontab, then rsnapshot can pickup:
     # docker exec -it influxdb influxd backup -database sensors /backup
 
