@@ -37,9 +37,8 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - ./debug/:/tmp/debug/
     - /:/hostfs:ro
-    # to read docker.sock, gid 116 is req
-    #on prolab user: "telegraf:116"
-    user: "telegraf:109"
+    # to read docker.sock, docker gid is req
+    user: "telegraf:${DOCKER_GID}"
 
   # Message formattet (MQTT -> InfluxDB)
   # https://hub.docker.com/_/telegraf
