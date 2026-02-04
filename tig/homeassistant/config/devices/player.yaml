@@ -1,0 +1,12 @@
+# Integration 'firetv' not found.
+#- platform: firetv
+#  name: Fire TV
+#  host: firetv
+- platform: enigma2
+  host: 192.168.176.42
+  name: "Formuler1"
+  use_channel_icon: true
+  deep_standby: true
+  mac_address: "0c:8c:8f:00:41:d8"
+#- platform: webostv
+#  host: 192.168.176.43

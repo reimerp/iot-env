@@ -1,0 +1,99 @@
+# hidden: geht nicht mehr
+# die THB gehen nur mit lokalem Bluetooth
+
+sensor.thb1_wohn_2728_anzahl:
+  hidden: true
+media_player.waipu_tv_stick:
+  icon: mdi:television-box
+sensor.andreas:
+  entity_picture: /local/andreas.jpg
+
+switch.tasmotabaum_baum:
+  friendly_name: "Flur Baum"
+  icon: mdi:tree
+switch.tasmotaflur_flur:
+  friendly_name: "Flur Licht"
+  icon: mdi:ceiling-light
+switch.tasmotavorhang_vorhang:
+  friendly_name: "Flur Vorhang"
+  icon: mdi:led-strip-variant
+
+sensor.tasmotaschlaf_bme280_dewpoint:
+  friendly_name: "Schlafzimmer Taupunkt"
+sensor.tasmotaschlaf_bme280_temperature:
+  friendly_name: "Schlafzimmer Temperatur"
+sensor.tasmotaschlaf_bme280_humidity:
+  friendly_name: "Schlafzimmer Luftfeuchtigkeit"
+sensor.tasmotaschlaf_bme280_pressure:
+  friendly_name: "Schlafzimmer Luftdruck"
+
+sensor.thb2_8af6_luftfeuchtigkeit:
+  friendly_name: "Abseite Luftfeuchtigkeit"
+sensor.thb2_8af6_temperatur:
+  friendly_name: "Abseite Temperatur"
+sensor.thb2_8af6_spannung:
+  friendly_name: "Abseite THB Batterie"
+  #icon: mdi:battery
+switch.tasmotaabseite_abseite:
+  friendly_name: "Abseite Lüfter"
+  icon: mdi:fan
+sensor.tasmotaabseite_esp32_temperature:
+  friendly_name: "Abseite ShellyPlus1 Temperatur"
+
+switch.tasmotabad_bad:
+  friendly_name: "Bad Lüfter"
+  icon: mdi:fan
+sensor.tasmotabad_esp32_temperature:
+  friendly_name: "Bad ShellyPlus1 Temperatur"
+
+sensor.tasmotasensor_bme680_dewpoint:
+  friendly_name: "Küche Taupunkt"
+sensor.tasmotasensor_bme680_temperature:
+  friendly_name: "Küche Temperatur"
+sensor.tasmotasensor_bme680_humidity:
+  friendly_name: "Küche Luftfeuchtigkeit"
+sensor.tasmotasensor_bme680_pressure:
+  friendly_name: "Küche Luftdruck"
+sensor.tasmotasensor_bme680_gas:
+  friendly_name: "Küche Luftqualität"
+sensor.tasmotasensor_tsl2561_illuminance:
+  friendly_name: "Küche Helligkeit"
+sensor.tasmotasensor_esp32_temperature:
+  friendly_name: "Küche ESP32 Temperatur"
+
+sensor.thb1_wohn_2728_luftfeuchtigkeit:
+  friendly_name: "Wohnzimmer Luftfeuchtigkeit"
+sensor.thb1_wohn_2728_temperatur:
+  friendly_name: "Wohnzimmer Temperatur"
+sensor.thb1_wohn_2728_spannung:
+  friendly_name: "Wohnzimmer THB Batterie"
+  #icon: mdi:battery
+switch.tasmotakerze_kerze:
+  icon: mdi:candelabra
+  friendly_name: "Wohnzimmer Kerze"
+sensor.tasmotakerze_energy_voltage:
+  friendly_name: "Netzspannung"
+light.tasmotatv_tv:
+  friendly_name: "Wohnzimmer TV Backlight"
+  icon: mdi:television-ambient-light
+media_player.andrejasradio:
+  icon: mdi:radio
+switch.reiners_echo_dot_bitte_nicht_storen:
+  icon: mdi:dots-horizontal-circle-outline
+
+sensor.tasmotawarm_ds18s20_1_temperature:
+  friendly_name: "Keller Fussboden"
+  icon: mdi:thermometer-lines
+sensor.tasmotawarm_ds18b20_2_temperature:
+  friendly_name: "Keller Warmwasser"
+  icon: mdi:thermometer-water
+sensor.tasmotastrom_mt681_total_in:
+  friendly_name: "Keller Stromverbrauch gesamt"
+  device_class: energy
+  state_class: total_increasing
+  unit_of_measurement: "kWh"
+sensor.tasmotastrom_mt681_power_curr:
+  friendly_name: "Keller Stromverbrauch aktuell"
+  device_class: power
+  state_class: measurement
+  unit_of_measurement: 'W'

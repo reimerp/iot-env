@@ -1,0 +1,16 @@
+- sensor:
+  - name: ABC Temperature
+    unique_id: uniqueid__abc_temperature
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    state: "{{ state_attr('climate.heater', 'current_temperature') | int(0) }}"
+
+  - name: "Bad absolute Luftfeuchtigkeit"
+    unique_id: template.atc_edc2_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.atc_edc2_temperature') | float %}
+      {% set cur_humidity = states('sensor.atc_edc2_humidity') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}

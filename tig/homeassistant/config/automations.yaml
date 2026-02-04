@@ -1,0 +1,41 @@
+#SEND ANNOUNCEMENT WHEN YOU ARRIVE HOME
+- alias: "Alexa Announce"
+  id: "alexa_announce"
+  triggers:
+    - platform: state
+      entity_id: person.reimer
+      to: "home"
+  actions:
+    - action: notify.send_message
+      data:
+        message: Welcome home Reimer
+      target:
+        entity_id: notify.reiners_echo_dot_durchsagen
+# ok handy
+- id: notify_flur_tv
+  alias: Notify on Status
+  description: Notify when mqtt message arrives
+  trigger:
+  - entity_id: switch.tasmotaflur_flur
+    #device_id: ef266682a87447ac81a9e9b0ecea29b3
+    domain: switch
+    platform: device
+    type: turned_on
+  condition: []
+  action:
+#  - data:
+#      message: flur on
+#    service: notify.notify
+  - service: notify.lg_webos_tv_uj6309
+    data:
+      message: Flur Licht angegangen
+
+
+#ok
+
+#action: notify.send_message
+#data:
+#  message: hallo alexa
+#target:
+#  entity_id: notify.reiners_echo_dot_sprechen
+#  # das ist das mit nem gong davor, geht auch an alexa Gruppen entity_id: notify.reiners_echo_dot_durchsagen

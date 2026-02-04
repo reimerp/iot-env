@@ -1,0 +1,15 @@
+default: warning
+logs:
+  custom_components.enigma: critical
+#  homeassistant.components.yamaha: critical
+  homeassistant.components.media_player: critical
+  # requests.packages.urllib3.connectionpool: critical
+  # frontend.js.latest: critical
+  # py.warnings: critical
+  # homeassistant.components.analytics: info
+  # alexapy.helpers: error
+  # custom_components.harmony_helper: debug
+filters:
+  homeassistant.components.media_player:
+    - "Updating webostv media_player took longer than the scheduled update interval"
+

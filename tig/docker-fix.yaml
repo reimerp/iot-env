@@ -1,0 +1,16 @@
+services:
+  ho-fix:
+    image: "docker.io/busybox"
+    restart: never
+    volumes:
+    - ./homeassistant/config:/config
+    - homeassistant_data:/data
+    - homeassistant_storage:/config/.storage
+    - /etc/localtime:/etc/localtime:ro
+    - /run/dbus:/run/dbus:ro
+    #network_mode: host
+
+volumes:
+  homeassistant_data: {}
+  homeassistant_storage: {}
+

@@ -17,6 +17,13 @@ http:
   trusted_proxies:
     - 127.0.0.1
 
+#database:
+#  path: /config/frigate.db
+
+recorder:
+  db_url: sqlite:////data/home-assistant_v2
+  commit_interval: 60
+
 homeassistant:
 # Name of the location where Home Assistant is running
   name: Reimers Home Assistant Instance
@@ -33,6 +40,7 @@ homeassistant:
   customize: !include customize.yaml
 
 automation: !include automations.yaml
+logger: !include logger.yaml
 media_player: !include devices/player.yaml
 mqtt: !include_dir_merge_named mqtt/
 #mqtt: !include mqtt/mqtt.yaml
