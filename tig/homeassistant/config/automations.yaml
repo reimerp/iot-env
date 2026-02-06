@@ -1,3 +1,165 @@
+- id: '1549980351867'
+  alias: Raster
+  trigger:
+  - minutes: /5
+    platform: time_pattern
+  condition: []
+  action:
+  - alias: ''
+    data:
+      payload: raster from homeasssistent
+      topic: test/topic
+    service: mqtt.publish
+- alias: Wake-me up using bedroom lights
+  trigger:
+    platform: template
+    value_template: '{{ states(''sensor.time'') == (states.input_datetime.wakeup_time.attributes.timestamp
+      | int | timestamp_custom(''%H:%M'', False)) }}'
+  condition:
+  - condition: state
+    entity_id: input_boolean.wakeup_enabled
+    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.wakeup_weekend
+      state: 'on'
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: light.turn_on
+    entity_id: group.bedroom
+    data:
+      transition: 600
+      brightness: 255
+  id: 4db819644f234463ac35152c956b9d78
+- id: '1592816091306'
+  alias: Reimer Mqtt Test
+  description: description
+  trigger:
+  - platform: mqtt
+    topic: test/monitor/inet
+  condition: []
+  action:
+  - service: persistent_notification.create
+    data:
+      title: Inet Status
+      message: '# Inet Status
+
+
+        Your message goes *here*
+
+        '
+      notification_id: inet_state_notification
+- id: '1640869317480'
+  alias: TV auf PC
+  description: ''
+  trigger: []
+  condition:
+  - condition: state
+    entity_id: input_boolean.pc_gaming
+    state: 'on'
+  action:
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.lg
+    data:
+      source: PC
+  - service: switch.turn_on
+    target:
+      entity_id: switch.pc
+- id: b4a6eeee95f943f38b2fda58ef067cb4
+  alias: Tasmota Firmware Version Check
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: groups/tasmotas/cmnd/STATUS
+      payload: '2'
+- id: '1660755876743'
+  alias: LG webOS Smart TV - Turn On Action
+  description: ''
+  use_blueprint:
+    path: cvroque/webostv_turn_on.yaml
+    input:
+      webostv: media_player.lg
+      webostv_mac: DC-4F-22-F8-F5-77
+- id: '1665249726951'
+  alias: Package Lost
+  description: Note when ping loss is > 90
+  trigger:
+  - platform: mqtt
+    topic: metrics/ping/2a02_8100_6_2__311
+    value_template: '{{ value_json[''ping''][''pl''] }}
+
+      '
+  condition: []
+  action:
+  - service: persistent_notification.create
+    data:
+      title: Package Loss
+      message: '# Ping Loss
+
+        {{ trigger.topic }} is {{ trigger.payload_json[''ping''][''pl''] }}
+
+        '
+      notification_id: package_loss_notification
+  mode: single
+- id: '1665511011214'
+  alias: Notify Internet
+  description: Notify LG when Internet is gone
+  trigger:
+  - platform: mqtt
+    topic: test/monitor/inet
+  condition: []
+  action:
+  - service: notify.lg_webos_tv_uj6309
+    data:
+      message: 'Internet {{ trigger.payload_json[''server''] }}: {{ trigger.payload_json[''error'']
+        }}'
+  mode: single
+- id: '1640877499206'
+  alias: Kein Internet
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.fritz_box_6490_cable_wan_status
+    from: 'on'
+  condition: []
+  action:
+  - service: notify.lg_webos_tv_uj6309
+    data:
+      message: Internet offline
+  mode: single
+- alias: Backup Home Assistant every night at 3 AM
+  trigger:
+  - platform: time
+    at: 03:00:00
+  action:
+  - service: backup.create
+  id: 92c5adbf2e9443fc98fbb2be6c231ea4
+- id: '1729109608364'
+  alias: Handy Laden
+  description: ''
+  trigger:
+  - type: battery_level
+    platform: device
+    device_id: abdbfe1830469ff8685652e614b7e824
+    entity_id: de149c1764febd2b5ec2b118c6cb39e2
+    domain: sensor
+    below: 10
+  condition: []
+  action:
+  - service: notify.lg_webos_tv_uj6309
+    data: {}
+  mode: single
 #SEND ANNOUNCEMENT WHEN YOU ARRIVE HOME
 - alias: "Alexa Announce"
   id: "alexa_announce"
@@ -39,3 +201,4 @@
 #target:
 #  entity_id: notify.reiners_echo_dot_sprechen
 #  # das ist das mit nem gong davor, geht auch an alexa Gruppen entity_id: notify.reiners_echo_dot_durchsagen
+

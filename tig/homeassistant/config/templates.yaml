@@ -1,4 +1,76 @@
 - sensor:
+  - name: "Outside Absolute Humidity"
+    unique_id: outside_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    #inv icon_template: mdi:water
+    state: >
+      {% set cur_temp = states('sensor.rtl433_aussensensor_temperatur') | float %}
+      {% set cur_humidity = states('sensor.rtl433_aussensensor_luftfeuchtigkeit') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+    attributes:
+      friendly_name: "Gramm Wasser pro m³ draußen"
+
+  - name: "Openweather Absolute Humidity"
+    unique_id: openweather_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.openweathermap_temperature') | float %}
+      {% set cur_humidity = states('sensor.openweathermap_humidity') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Openweather Forecast Absolute Humidity"
+    unique_id: openweather_forecast_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.openweathermap_forecast_temperature') | float %}
+      {% set cur_humidity = states('sensor.openweathermap_humidity') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Kitchen Absolute Humidity"
+    unique_id: kitchen_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.tasmotasensor_bme680_temperature') | float %}
+      {% set cur_humidity = states('sensor.tasmotasensor_bme680_humidity') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Sleep Absolute Humidity"
+    unique_id: sleep_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.tasmotaschlaf_bme280_temperature') | float %}
+      {% set cur_humidity = states('sensor.tasmotaschlaf_bme280_humidity') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Sleep BT Absolute Humidity"
+    unique_id: sleep_bt_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.schlaftemperatur') | float %}
+      {% set cur_humidity = states('sensor.schlaffeuchtigkeit') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Bath BT Absolute Humidity"
+    unique_id: bath_bt_abs_humidity
+    unit_of_measurement: 'g/m^3'
+    device_class: "humidity"
+    state: >
+      {% set cur_temp = states('sensor.badtemperatur') | float %}
+      {% set cur_humidity = states('sensor.badfeuchtigkeit') | float %}
+      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+
+  - name: "Total Current Power Production"
+    # solar_power_total_current_production:
+    unique_id: 9fb71580-0687-434e-96c0-efc58cdc43cd
+    unit_of_measurement: "W"
+    state: "{{(states('sensor.tasmotastrom_mt681_power_curr')|float) + (states('sensor.tasmotastrom_mt681_power_curr')|float)}}"
+
   - name: ABC Temperature
     unique_id: uniqueid__abc_temperature
     unit_of_measurement: "°C"
@@ -14,3 +86,4 @@
       {% set cur_temp = states('sensor.atc_edc2_temperature') | float %}
       {% set cur_humidity = states('sensor.atc_edc2_humidity') | float %}
       {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+

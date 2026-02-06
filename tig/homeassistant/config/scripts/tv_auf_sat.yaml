@@ -1,0 +1,15 @@
+# no notify.tv
+tv_auf_sat:
+  alias: TV auf SAT
+  sequence:
+  - service: notify.lg
+    data:
+      message: "Selecting SAT"
+  - service: media_player.volume_mute
+    entity_id: media_player.lg
+    data:
+      is_volume_muted: true
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.lg
+      source: Satellit
