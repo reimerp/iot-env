@@ -1,5 +1,5 @@
 # for debug output to file(s) or stdout
-# on logs be careful: self feeding
+# be careful: self feeding since goes to docker -> log
 [[outputs.file]]
   files = ["stdout"]
   # use_batch_format = false
@@ -7,4 +7,3 @@
   ## Output string fields as metric labels; when false string fields are discarded.
   #prometheus_string_as_label = true
   #data_format = "prometheus"
-
