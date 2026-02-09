@@ -4,23 +4,27 @@ services:
     command:
     - --strict-env-handling
     restart: unless-stopped
-    user: telegraf
     volumes:
     - ./telegraf_stats/etc/telegraf/:/etc/telegraf/:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
     - /:/hostfs:ro
-    environment:
-    - HOST_ETC=/hostfs/etc
-    - HOST_PROC=/hostfs/proc
-    - HOST_SYS=/hostfs/sys
-    - HOST_VAR=/hostfs/var
-    - HOST_RUN=/hostfs/run
-    - HOST_MOUNT_PREFIX=/hostfs
     env_file:
     - env.influxdb
     - env.telegraf
     - env.telegraf_mqtt
+    environment:
+    # for disk, else docker mounts are considered
+    - HOST_PROC=/hostfs/proc
+    - HOST_MOUNT_PREFIX=/hostfs
+    #
+    #- HOST_ETC=/hostfs/etc
+    - HOST_SYS=/hostfs/sys
+    #- HOST_VAR=/hostfs/var
+    #- HOST_RUN=/hostfs/run
+    - INFLUXDB_DATABASE=telegraf
     depends_on:
     - influxdb
+    user: telegraf:${DOCKER_GID}
 
   telegraf_logs:
     image: docker.io/telegraf:${TELEGRAF_TAG}
@@ -55,6 +59,8 @@ services:
     - env.influxdb
     - env.telegraf
     - env.telegraf_mqtt
+    environment:
+    - INFLUXDB_DATABASE=sensors
     extra_hosts:
     - "mqtt:192.168.176.17"
     depends_on:
@@ -73,6 +79,8 @@ services:
     restart: unless-stopped
     ports:
     - 0.0.0.0:${INFLUXDB_PORT}:${INFLUXDB_PORT}/tcp
+    env_file:
+    - env.influxdb
     environment:
     - INFLUXDB_ADMIN_USER=admin
     - INFLUXDB_ADMIN_PASSWORD=admin123
@@ -81,8 +89,6 @@ services:
     - INFLUX_ORG=private
     - INFLUXDB_LOGGING_LEVEL=warn
     - INFLUXDB_HTTP_LOG_ENABLED=false
-    env_file:
-    - env.influxdb
     volumes:
     #- ./:/imports
     - ./influxdb/etc/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
@@ -103,6 +109,8 @@ services:
     - influxdb
     links:
     - influxdb
+    env_file:
+    - env.influxdb
     environment:
     - GF_SECURITY_ADMIN_USER=admin
     # changed after first login
@@ -110,8 +118,6 @@ services:
     - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,petrslavotinek-carpetplot-panel
     #- GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel
     # hostname: grafana
-    env_file:
-    - env.influxdb
     ports:
     - 0.0.0.0:3000:3000/tcp
     volumes:
@@ -154,6 +160,13 @@ services:
     - nodered_data:/data
     ports:
     - 0.0.0.0:1880:1880/tcp
+
+  rtl433:
+    build:
+      context: ./
+      dockerfile: ./rtl433/Dockerfile
+    devices:
+    - /dev/bus/usb/001/017
 
 volumes:
   grafana_data: {}
