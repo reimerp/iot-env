@@ -1,0 +1,30 @@
+# TODO
+
+# # Gather smart home status from Hue Bridge
+# [[inputs.huebridge]]
+#   bridges = [ "address:http://anonym:nopass@hassbian:80/" ]
+
+
+# [[inputs.ping]]
+# # nur v4
+#   urls = ["2a02:3102:4000:4::d6"]
+#   count = 4
+#   ping_interval = 2.0
+#   deadline = 10
+# # Monitor sensors, requires lm-sensors package
+# # This plugin ONLY supports Linux
+# [[inputs.sensors]]
+#   ## Remove numbers from field names.
+#   ## If true, a field name like 'temp1_input' will be changed to 'temp_input'.
+#   # remove_numbers = true
+#
+#   ## Timeout is the maximum amount of time that the sensors command can run.
+#   # timeout = "5s"
+
+
+# [[inputs.snmp]]
+# agents = ["udp://192.168.176.15:161"]
+
+
+#[[inputs.chrony]]
+#  server = "udp://192.168.176.1:323"
