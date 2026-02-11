@@ -1,0 +1,61 @@
+# Test as: . ./tools ; ping_host 8.8.8.8; echo $PING_VALUE
+PING=/bin/ping
+COUNT=5
+DEADLINE=10
+
+ping_host () {
+	local output
+	local temp
+	local cmd
+	local rc
+	cmd="$PING -q -n -c $COUNT -i 2 -w $DEADLINE $1"
+	output=$($cmd 2>&1)
+	rc=$?	
+	#echo $output
+    # notice $output is quoted to preserve newlines
+    temp=$(echo "$output"| awk '
+        BEGIN           {pl=100; rtt="0.1"; mdev="0"}
+        /packets transmitted/ {
+# this is gawk
+            # match($0, /([0-9]+)% packet loss/, matchstr);
+            # pl=matchstr[1];
+            pl=substr($(NF-4), 1, length($(NF-4))-1);
+        }
+        /^rtt/ {
+            # looking for something like 0.562/0.566/0.571/0.024
+            split($4, matchstr, /\//);
+            rtt=matchstr[2];	# Avg
+            mdev=matchstr[4];	# Stddev
+        }
+        /unknown host/ {
+            # no output at all means network is probably down
+            pl=100
+            rtt="0.1"
+        }
+        END         {print pl ":" rtt ":" mdev}
+        ')
+    PING_VALUE=$temp
+    return $rc
+}
+
+if [ -z "$MQTT_PASS" ]; then
+  export MQTT_SERV=mqtt
+  if [ "_$(hostname -s)" != "_probook" ]; then
+    read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
+    read -r _ _ _ FRITZ_USERNAME _ FRITZ_PASSWORD < <(grep "machine fritz.monitor" ${HOME}/.netrc)
+  else
+    eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
+  fi
+  export MQTT_USER MQTT_PASS FRITZ_USERNAME FRITZ_PASSWORD
+fi
+
+send_mqtt() {
+  # using a subshell, else parsing of next value will fail
+  (readarray -td: PING <<<"$PING_VALUE:"
+  LC_NUMERIC="C"
+  time=$(date -u +%FT%TZ)
+  #pl ":" rtt ":" mdev
+  topic=$(echo $host | tr '.:' '__')
+  printf '{"Time":"%s","ping":{"target":"%s","pl":%i,"rtt":%.3f,"mdev":%.3f}}' "$time" "$host" "${PING[0]}" "${PING[1]}" "${PING[2]}" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "metrics/ping/$topic" -q 1 -l
+)
+}
