@@ -3,7 +3,7 @@
 
 import paho.mqtt.client as mqtt
 from basemqtt import MqttBase
-from time import sleep
+#from time import sleep
 from subprocess import Popen, PIPE
 import json
 from datetime import datetime, timedelta
@@ -90,5 +90,5 @@ def test():
 if __name__ == '__main__':
     #test()
     sensor = RemoteSensor()
-    #sensor.verbose = True
+    sensor.verbose = True
     sensor.connect_mqtt()

@@ -484,30 +484,6 @@
                 "value": "Upload probook eth0"
               }
             ]
-          },
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Download hassbian"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
           }
         ]
       },
@@ -1038,7 +1014,6 @@
   "timezone": "",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
-

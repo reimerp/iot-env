@@ -6,9 +6,11 @@ https://github.com/bcremer/docker-telegraf-influx-grafana-stack.git
 This an example project to show the TIG (Telegraf, InfluxDB and Grafana) stack.
 
 also checked https://github.com/nicolargo/docker-influxdb-grafana.git
+
 ## Start the stack with docker compose
 
 ```bash
+$ docker compose stop service
 $ docker compose up -d
 ```
 
@@ -19,10 +21,19 @@ $ docker compose up -d
 - User: admin
 - Password: admin (initial)
 
+If provisioning file is changed, the volume has to be deleted before restarting container.
+
 ### Telegraf
 - Port: 8125 UDP (StatsD input)
 
 docker run --rm telegraf:1.27-alpine -- config
+docker compose exec telegraf_mqtt telegraf config check
+both commands needs additional commands: env and volumes
+
+split into 3 instances
+- mqtt
+- logs
+- stats
 
 ### InfluxDB
 - Port: 8086 (HTTP API)
@@ -30,8 +41,14 @@ docker run --rm telegraf:1.27-alpine -- config
 - Password: admin
 - Database: influx
 
+changed to 30 days retention policy for hih resolution data and contionious query aggregation to permanent storage, switch is done automatically in DBs.
 
-Run the influx client:
+### Homeassistant
+TBD
+
+# Operations
+
+Run the influx client: (there is a script)
 
 ```bash
 $ docker compose exec influxdb influx -database sensors -execute 'SHOW DATABASES'
@@ -45,9 +62,6 @@ $ docker compose exec influxdb influx -precision=rfc3339
 Connected to http://localhost:8086 version 1.8.10
 InfluxDB shell version: 1.8.10
 >
-
-
-
 ```
 
 [Import data from a file with -import](https://docs.influxdata.com/influxdb/v1.8/tools/shell/#import-data-from-a-file-with-import)
@@ -88,10 +102,13 @@ Killed by Ctrl+C
 ![Example Screenshot](./example.png?raw=true "Example Screenshot")
 
 
-# Grafana
-- Alerts sind im Dashboard (siehe influx) aber nicht in meinen
-- Annotations sind wo?
+# Open Issues
+## Influx
+- still 1.x, since 2 has different query languauge, aon would change all DBs
+- check authorisation
 
-
-
-docker compose exec telegraf_mqtt telegraf config check
+## Grafana
+- storage location of annotations
+## Telegraf
+- cleanup config file re-use between instances: -> hardlinks
+- migrate mqtt and stats together: issue is different influx output config (retention policies)

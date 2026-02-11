@@ -15,7 +15,7 @@ class Fritz:
         if self.fritzurl.endswith('/'):
             self.fritzurl = self.fritzurl[0:-1]
 
-        if 'probook' == platform.node():
+        if 'probook' == platform.node():    # in docker this does not make sense
             from pathlib import Path
             import sys
             sys.path.insert(0, str(Path.home()) + '/projects/python')

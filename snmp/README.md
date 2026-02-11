@@ -6,3 +6,10 @@
 >       "ifPhysAddress": "44:94:fc:77:2f:40"
 
 ist das ok? die xx:yy Version war nie in der DB
+
+
+netgear -> jsontemplate
+        -> snmp
+        -> mqtt_pub
+
+mytt_pub -> paho
