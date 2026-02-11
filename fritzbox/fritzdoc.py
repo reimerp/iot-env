@@ -11,7 +11,7 @@ class FritzDoc(FritzData):
         super().__init__(host)
         self.time = getTime()
         self.debug = False
-        self.QAMrex = re.compile('^(\d+)QAM$')
+        self.QAMrex = re.compile('^(\\d+)QAM$')
 
 # TODO: alte fb (firmware ?) lieferte frequency "650" statt "650.000" und 4K statt 4096QAM
 

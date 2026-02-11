@@ -1,19 +1,21 @@
 #!/bin/bash -e
 
+. $DIR/tools
+
 # das geht ins syslog
 # ps aux | grep [d]nsmasq | awk '{print $2}' | xargs -r kill -USR1
 # ps -eo pid,comm | awk '$2~/^dnsmasq$/ { print $1 }' | xargs -r kill -USR1
 
 server=${1:-fb}
 
-if [ -z "$MQTT_PASS" ]; then
-  MQTT_SERV=hassbian
-  if [ "_$(hostname -s)" = "_hassbian" ]; then
-    read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
-  else
-    eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
-  fi
-fi
+#if [ -z "$MQTT_PASS" ]; then
+#  MQTT_SERV=mqtt
+#  if [ "_$(hostname -s)" = "_hassbian" ]; then
+#    read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote "${HOME}"/.netrc)
+#  else
+#    eval "$(~/projects/python/pykeypass.py -e MQTT mosquitto -p remote)"
+#  fi
+#fi
 
 dodig() {
     dig +short chaos txt "$1" @"$server" | sed 's/"//g'

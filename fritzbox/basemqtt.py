@@ -116,7 +116,7 @@ class MqttBase(object):
             logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.DEBUG)
             logger = logging.getLogger(__name__)
             self.mqttc.enable_logger(logger)
-        self.mqttc.connect('hassbian', 1883, 60)
+        self.mqttc.connect('mqtt', 1883, 60)
         signal.signal(signal.SIGINT, self._sigint_handler)
         self.loop()
 
