@@ -18,6 +18,16 @@
           "type": "dashboard"
         },
         "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P951FEA4DE68E13C5"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "red",
+        "name": "New annotation"
       }
     ]
   },
@@ -83,7 +93,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 1
+        "y": 2
       },
       "id": 61858,
       "maxDataPoints": 100,
@@ -202,7 +212,7 @@
         "h": 4,
         "w": 2,
         "x": 4,
-        "y": 1
+        "y": 2
       },
       "id": 61859,
       "maxDataPoints": 100,
@@ -321,7 +331,7 @@
         "h": 4,
         "w": 2,
         "x": 6,
-        "y": 1
+        "y": 2
       },
       "id": 61862,
       "maxDataPoints": 100,
@@ -440,7 +450,7 @@
         "h": 4,
         "w": 2,
         "x": 8,
-        "y": 1
+        "y": 2
       },
       "id": 61864,
       "maxDataPoints": 100,
@@ -559,7 +569,7 @@
         "h": 4,
         "w": 2,
         "x": 10,
-        "y": 1
+        "y": 2
       },
       "id": 61865,
       "maxDataPoints": 100,
@@ -679,7 +689,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 1
+        "y": 2
       },
       "id": 61861,
       "maxDataPoints": 100,
@@ -809,7 +819,7 @@
         "h": 4,
         "w": 2,
         "x": 14,
-        "y": 1
+        "y": 2
       },
       "id": 61860,
       "maxDataPoints": 100,
@@ -928,7 +938,7 @@
         "h": 4,
         "w": 2,
         "x": 16,
-        "y": 1
+        "y": 2
       },
       "id": 61863,
       "maxDataPoints": 100,
@@ -1047,7 +1057,7 @@
         "h": 4,
         "w": 2,
         "x": 18,
-        "y": 1
+        "y": 2
       },
       "id": 61866,
       "maxDataPoints": 100,
@@ -1171,7 +1181,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 1
+        "y": 2
       },
       "id": 61867,
       "maxDataPoints": 100,
@@ -1258,7 +1268,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 1
       },
       "id": 62045,
       "panels": [],
@@ -2690,190 +2700,6 @@
         "x": 0,
         "y": 50
       },
-      "id": 62049,
-      "panels": [],
-      "title": "Per-cpu usage",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsZero",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsZero",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 51
-      },
-      "id": 61868,
-      "interval": "$inter",
-      "maxPerRow": 4,
-      "options": {
-        "alertThreshold": true,
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.6",
-      "repeat": "cpu",
-      "repeatDirection": "h",
-      "targets": [
-        {
-          "alias": "$tag_host: $cpu $col",
-          "datasource": {
-            "uid": "${datasource}"
-          },
-          "dsType": "influxdb",
-          "function": "mean",
-          "groupBy": [
-            {
-              "interval": "auto",
-              "params": [
-                "auto"
-              ],
-              "type": "time"
-            },
-            {
-              "key": "host",
-              "params": [
-                "tag"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "cpu_percentageBusy",
-          "policy": "default",
-          "query": "SELECT mean(usage_user) as \"user\", mean(usage_system) as \"system\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$server$/ and cpu = '$cpu' AND $timeFilter GROUP BY time($interval), *",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "CPU usage for $cpu",
-      "type": "timeseries"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 58
-      },
       "id": 62050,
       "panels": [],
       "title": "Conntrack",
@@ -2964,7 +2790,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 51
       },
       "id": 61991,
       "options": {
@@ -3089,7 +2915,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 58
       },
       "id": 62051,
       "panels": [],
@@ -3202,7 +3028,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 59
       },
       "id": 61854,
       "interval": "$inter",
@@ -3400,7 +3226,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 66
       },
       "id": 61969,
       "interval": "$inter",
@@ -3870,7 +3696,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 81
+        "y": 73
       },
       "id": 61968,
       "interval": "$inter",
@@ -4208,7 +4034,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 88
+        "y": 80
       },
       "id": 61967,
       "interval": "$inter",
@@ -4510,7 +4336,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 88
+        "y": 80
       },
       "id": 61978,
       "interval": "$inter",
@@ -4864,7 +4690,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 88
+        "y": 80
       },
       "id": 61979,
       "interval": "$inter",
@@ -5166,7 +4992,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 95
+        "y": 87
       },
       "id": 61980,
       "interval": "$inter",
@@ -5624,7 +5450,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 95
+        "y": 87
       },
       "id": 61981,
       "interval": "$inter",
@@ -5970,7 +5796,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 102
+        "y": 94
       },
       "id": 62052,
       "panels": [],
@@ -6055,7 +5881,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 95
       },
       "id": 61893,
       "interval": "$inter",
@@ -6265,7 +6091,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 110
+        "y": 102
       },
       "id": 61989,
       "interval": "$inter",
@@ -6475,7 +6301,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 110
+        "y": 102
       },
       "id": 61990,
       "interval": "$inter",
@@ -6665,7 +6491,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 117
+        "y": 109
       },
       "id": 62053,
       "panels": [],
@@ -6751,7 +6577,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 118
+        "y": 110
       },
       "id": 42026,
       "interval": "$inter",
@@ -6961,7 +6787,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 118
+        "y": 110
       },
       "id": 28572,
       "interval": "$inter",
@@ -7159,7 +6985,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 125
+        "y": 117
       },
       "id": 58901,
       "interval": "$inter",
@@ -7357,7 +7183,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 125
+        "y": 117
       },
       "id": 50643,
       "interval": "$inter",
@@ -7495,7 +7321,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 147
+        "y": 139
       },
       "id": 62054,
       "panels": [],
@@ -7580,7 +7406,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 148
+        "y": 140
       },
       "id": 26024,
       "interval": "$inter",
@@ -7739,7 +7565,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 148
+        "y": 140
       },
       "id": 61850,
       "interval": "$inter",
@@ -7818,7 +7644,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 155
+        "y": 147
       },
       "id": 62055,
       "panels": [],
@@ -7924,7 +7750,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 156
+        "y": 148
       },
       "id": 13782,
       "interval": "$inter",
@@ -8155,7 +7981,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 156
+        "y": 148
       },
       "id": 60200,
       "interval": "$inter",
@@ -8386,7 +8212,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 156
+        "y": 148
       },
       "id": 56720,
       "interval": "$inter",
@@ -8525,7 +8351,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 163
+        "y": 155
       },
       "id": 62056,
       "panels": [],
@@ -8623,7 +8449,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 164
+        "y": 156
       },
       "id": 52240,
       "interval": "$inter",
@@ -8817,7 +8643,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 164
+        "y": 156
       },
       "id": 33458,
       "interval": "$inter",
@@ -8956,7 +8782,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 203
+        "y": 195
       },
       "id": 62057,
       "panels": [],
@@ -9028,7 +8854,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 204
+        "y": 196
       },
       "id": 62001,
       "options": {
@@ -9171,7 +8997,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 204
+        "y": 196
       },
       "id": 62004,
       "options": {
@@ -9314,7 +9140,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 204
+        "y": 196
       },
       "id": 62003,
       "options": {
@@ -9457,7 +9283,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 204
+        "y": 196
       },
       "id": 62002,
       "options": {
@@ -9586,6 +9412,139 @@
       ],
       "title": "Error rate",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 203
+      },
+      "id": 62058,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.8",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "temp",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "temp"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$server$/"
+            }
+          ]
+        }
+      ],
+      "title": "Temperatur",
+      "type": "timeseries"
     }
   ],
   "preload": false,
@@ -9712,24 +9671,6 @@
         "datasource": "$datasource",
         "definition": "",
         "includeAll": true,
-        "label": "CPU",
-        "multi": true,
-        "name": "cpu",
-        "options": [],
-        "query": "SHOW TAG VALUES FROM \"cpu\" WITH KEY = \"cpu\" WHERE host =~ /$server/",
-        "refresh": 1,
-        "regex": "/cpu[0-9]/",
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "$datasource",
-        "definition": "",
-        "includeAll": true,
         "label": "Disk",
         "multi": true,
         "name": "disk",
@@ -9767,6 +9708,6 @@
   "timezone": "browser",
   "title": "Telegraf: system dashboard",
   "uid": "000000127",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
