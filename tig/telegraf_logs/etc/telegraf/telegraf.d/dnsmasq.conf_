@@ -1,0 +1,22 @@
+#https://github.com/influxdata/telegraf/tree/master/plugins/parsers/grok
+#https://grokdebugger.com/
+#
+[[inputs.tail]]
+  pipe = false      # named pipe
+
+# debug
+  files = ["/tmp/input/dnsmasq.log"]
+  initial_read_offset = "beginning"
+
+  data_format = "grok"
+  # appname is already a tag: the filename, this adds an additional field
+  grok_patterns = ["^%{SYSLOGTIMESTAMP:timestamp} %{PROG:appname}\\[%{POSINT:pid}\\]: %{GREEDYDATA:message}"]
+  # [processors.converter] Converting to timestamp [string] failed: invalid number -> timestamp is still actual not the one from logline
+  name_override = "logs"   # heisst sonst tail
+
+[[processors.converter]]
+  namepass = ["logs"]
+  [processors.converter.fields]
+    timestamp = ["timestamp"]
+    # actual year needs to be added
+    timestamp_format = "Jan 02 15:04:05"
