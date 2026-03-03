@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 26,
+  "id": 10,
   "links": [],
   "panels": [
     {
@@ -147,7 +147,7 @@
           ],
           "measurement": "sensors",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -317,7 +317,7 @@
           ],
           "measurement": "sensors",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -367,6 +367,28 @@
         "refresh": 1,
         "regex": "/[sS]ensor/",
         "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "autogen",
+          "value": "autogen"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+        "description": "selects retention policy",
+        "hide": 1,
+        "name": "rp",
+        "options": [],
+        "query": {
+          "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
@@ -378,6 +400,6 @@
   "timezone": "",
   "title": "Heizung",
   "uid": "2-AkxiDVk",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }

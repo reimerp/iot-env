@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 36,
+  "id": 7,
   "links": [],
   "panels": [
     {
@@ -79,7 +79,7 @@
                 "value": 0
               },
               {
-                "color": "semi-dark-orange",
+                "color": "text",
                 "value": 15
               }
             ]
@@ -105,7 +105,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "sensor"
+              "options": "sensor-tasmota"
             },
             "properties": [
               {
@@ -120,7 +120,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "schlaf"
+              "options": "schlaf-tasmota"
             },
             "properties": [
               {
@@ -150,7 +150,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "vorlauf"
+              "options": "warm-tasmota"
             },
             "properties": [
               {
@@ -165,7 +165,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "schlafBT"
+              "options": "schlaf-tasmota_ble"
             },
             "properties": [
               {
@@ -203,7 +203,7 @@
       "pluginVersion": "11.5.8",
       "targets": [
         {
-          "alias": "[[tag_device]],[[tag_source]]",
+          "alias": "[[tag_device]]-[[tag_source]]",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -683,7 +683,7 @@
           "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "$rp",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -803,6 +803,6 @@
   "timezone": "browser",
   "title": "Temperature",
   "uid": "ff8fgihuak9ogf",
-  "version": 15,
+  "version": 2,
   "weekStart": ""
 }

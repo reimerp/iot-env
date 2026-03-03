@@ -1,4 +1,3 @@
-
 # Loads default set of integrations. Do not remove.
 default_config:
 
@@ -40,12 +39,92 @@ homeassistant:
   customize: !include customize.yaml
 
 automation: !include automations.yaml
+command_line: !include_dir_merge_list command_line
+group: !include groups.yaml
 logger: !include logger.yaml
+lovelace: !include lovelace.yaml
 media_player: !include devices/player.yaml
 mqtt: !include_dir_merge_named mqtt/
 #mqtt: !include mqtt/mqtt.yaml
-script: !include scripts.yaml
+#script: !include scripts.yaml
+script directory: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
-
-
+switch: !include devices/switch.yaml
 template: !include templates.yaml
+
+#light: !include light.yaml
+# deprecated, fand eh nur Fritzbox
+#upnp:
+
+# lieber matter
+#emulated_hue: !include emulated_hue.yaml
+
+# Sensors
+sensor: !include devices/sensors.yaml
+
+binary_sensor:
+  - platform: threshold
+    entity_id: sensor.devices_with_low_battery
+    name: Devices with low battery
+    upper: 0.5
+alert:
+  low_battery_devices:
+    name: Devices have low battery
+    entity_id: binary_sensor.devices_with_low_battery
+    title: "{{ states('sensor.devices_with_low_battery') }} devices in house with low battery"
+    message: "Devices all have 10% or less battery, you should change them"
+    state: 'on'
+    can_acknowledge: true
+    repeat: 720
+    notifiers:
+    - 'me'
+
+# Text to speech
+#tts:
+#  - platform: google_translate
+
+# Cloud
+#cloud:
+
+# GUI nuttons
+input_boolean:
+  wakeup_enabled:
+    name: "Wake-up lights"
+    initial: on
+    icon: mdi:theme-light-dark
+  wakeup_weekend:
+    name: "Enable Wake-up on weekends"
+    initial: off # I disable the system on default on weekends
+    icon: mdi:calendar-blank
+  pc_2_game:
+    name: "PC auf Game"
+    initial: off
+
+input_datetime:
+  wakeup_time:
+    name: "Start lights at"
+    has_time: true
+    has_date: false
+    initial: "07:20"
+
+# enables `wake_on_lan` domain
+wake_on_lan:
+
+# deprecated
+#cast:
+#  media_player:
+#    - host: chromecast
+#    - host: chrome2
+
+# energy:
+
+#weather:
+#  - platform: template
+#    name: "Aussenwetter"
+#    unique_id: weather.aussenwetter
+#    condition_template: "{{ states('weather.openweathermap') }}"
+#    humidity_template: "{{ states('sensor.rtl433_aussensensor_luftfeuchtigkeit') | float(0) }}"
+##    #pressure: "{{ states('sensor.sensor_luftdruck') | float(0) }}"
+#    temperature_template: "{{ states('sensor.rtl433_aussensensor_temperatur') | float(0) }}"
+##  #  forecast: "{{ state_attr('weather.openweathermap', 'forecast') }}"
+

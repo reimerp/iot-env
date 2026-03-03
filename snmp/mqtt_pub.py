@@ -59,7 +59,7 @@ class MqttPub():
   def do_publish(self, payload):
     #print(payload, self.auth)
     # qos1 ??
-    publish.single(self.topic, payload=str(payload), qos=1, hostname='hassbian', client_id='cmdline_publisher', auth=self.auth)
+    publish.single(self.topic, payload=str(payload), qos=1, hostname='mqtt', client_id='cmdline_publisher', auth=self.auth)
 
 if __name__ == '__main__':
     print(MqttPub.getUTCTime());

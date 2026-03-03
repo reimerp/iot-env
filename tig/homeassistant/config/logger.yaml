@@ -10,6 +10,8 @@ logs:
   # alexapy.helpers: error
   # custom_components.harmony_helper: debug
 filters:
-  homeassistant.components.media_player:
-    - "Updating webostv media_player took longer than the scheduled update interval"
-
+#  homeassistant.components.media_player:
+#  - "Updating webostv media_player took longer than the scheduled update interval"
+  homeassistant.components.frontier_silicon.media_player:
+  - "failed with 404 to http://192.168.176.47:80/fsapi/GET/netRemote.sys.power"
+#  - "Reconnected to http://192.168.176.47:80/fsapi Did it go offline?"

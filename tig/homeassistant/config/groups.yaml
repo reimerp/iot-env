@@ -1,0 +1,18 @@
+# groups.yaml
+# These are GUI widgets
+alarm_clock:
+  name: "Wake-up Lights"
+  entities:
+  - input_datetime.wakeup_time
+  - input_boolean.wakeup_enabled
+  - input_boolean.wakeup_weekend
+tv_input_control:
+  name: "TV Input"
+  entities:
+  - input_boolean.pc_2_game
+funk:
+  name: "Funksteckdosen"
+  entities:
+  - switch.mqtt_funk_socket_1 
+  - switch.funk_socket_2
+  - switch.funk_socket_all

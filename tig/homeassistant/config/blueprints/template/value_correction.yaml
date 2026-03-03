@@ -1,0 +1,32 @@
+# https://community.home-assistant.io/t/set-icon-and-unit-of-measurement-in-a-template-using-a-blueprint/801905
+blueprint:
+  name: Corrects a given sensor value by given offset
+  description: Creates a sensor which holds the corrected value of a reference sensor
+  domain: template
+  input:
+    reference_entity:
+      name: Sensor to be corrected
+      description: The sensor which needs to have its value corrected
+      selector:
+        entity:
+          domain: sensor
+    offset:
+      name: Numerical offset
+      description: Numerical offset added to the sensors value
+      default: 0
+    unit:
+      name: Unit of Measurement
+      description: The unit used by your source sensor
+variables:
+  reference_entity: !input reference_entity
+  offset: !input offset
+sensor:
+  name: "Adjusted {{ state_attr(reference_entity, 'friendly_name')|default(reference_entity|slugify, 1) }}"
+  unit_of_measurement: !input unit
+  icon: "{{ state_attr(reference_entity, 'icon')}}"
+  state: >
+    {% set h = states(reference_entity) | float(0) %}
+    {% set o = offset | float(0) %}
+    {{ h + o }}
+  availability: "{{ has_value(reference_entity) }}"
+  #availability: "states(reference_entity) not in ('unknown', 'unavailable')"

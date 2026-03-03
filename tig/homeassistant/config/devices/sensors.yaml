@@ -1,0 +1,102 @@
+# Available: online ok, Online nicht
+
+# Weather prediction
+#- platform: yr
+#  name: Weather
+#  forecast: 24
+#  monitored_conditions:
+#  - temperature
+#  - symbol
+#  - humidity
+#  - pressure
+#- platform: time_date
+#  display_options:
+#    - 'time'
+#- platform: mqtt
+#  name: "Temperatur Schlafzimmer"
+#  state_topic: "espurna/ESPURNA-9D5101/temperature"
+#  unique_id: "sensor.espurna-9d5101.temperature"
+#  unit_of_measurement: "°C"
+#  device_class: temperature
+#- platform: mqtt
+#  name: "Batterie Sensor Schlafzimmer"
+#  state_topic: "espurna/ESPURNA-9D5101/vcc"
+#  unique_id: "sensor.espurna-9d5101.vcc"
+#  unit_of_measurement: "mv"
+#  device_class: battery
+# ha default seems "online"
+# entity_id": "sensor.temperatur_aussen" is generated
+# Vcc":3.3=ok
+
+#- platform: mqtt
+## ok, aber die Message kommt viel zu selten: hidden in customize
+#  name: "FlurHelligkeit"
+#  state_topic: "tasmota/zigbee/tele/SENSOR"
+#  value_template: "{{ value_json['ZbReceived']['Motion'].Illuminance }}"
+#  unit_of_measurement: "-"
+#  availability_topic: "tasmota/zigbee/tele/LWT"
+#  payload_available: "Online"
+#  payload_not_available: "Offline"
+#  unique_id: "0x00158d0002f2a43c_illuminance_zigbee"
+#  device:
+#    identifiers:
+#      - "zigbee_0x00158d0002f2a43c"
+#    name: "AqaraMove"
+#    model: "Aqara human body movement and illuminance sensor (RTCGQ11LM)"
+#    manufacturer: "Xiaomi"
+#  device_class: illuminance
+#- platform: mqtt
+#  name: "FlurBattery"
+#  state_topic: "tasmota/zigbee/tele/SENSOR"
+#  value_template: "{{ value_json['ZbReceived']['Motion'].Battery }}"
+#  unit_of_measurement: "%"
+#  availability_topic: "tasmota/zigbee/tele/LWT"
+#  payload_available: "Online"
+#  payload_not_available: "Offline"
+#  unique_id: "0x00158d0002f2a43c_battery_zigbee"
+#  device:
+#    identifiers:
+#      - "zigbee_0x00158d0002f2a43c"
+#    name: "AqaraMove"
+#    model: "Aqara human body movement and illuminance sensor (RTCGQ11LM)"
+#    manufacturer: "Xiaomi"
+#  device_class: battery
+
+- platform: min_max
+  unique_id: "sensor.minmax.temperature"
+  name: Average Home Temperature
+  type: median
+  round_digits: 1
+  entity_ids:
+  - sensor.tasmotaschlaf_bme280_temperature
+  - sensor.schlaftemperatur
+  - sensor.thb2_8af6_temperatur
+  - sensor.bad_temperatur
+  - sensor.tasmotasensor_bme680_temperature
+  - sensor.thb1_wohn_2728_temperatur
+
+- platform: min_max
+  unique_id: "sensor.minmax.humidity"
+  name: Average Home Humidity
+  type: median
+  round_digits: 1
+  entity_ids:
+  - sensor.tasmotaschlaf_bme280_humidity
+  - sensor.schlaffeuchtigkeit
+  - sensor.thb2_8af6_luftfeuchtigkeit
+  - sensor.bad_luftfeuchtigkeit
+  - sensor.tasmotasensor_bme680_humidity
+  - sensor.thb1_wohn_2728_luftfeuchtigkeit
+
+- platform: min_max
+  unique_id: "sensor.minmax.abs_humidity"
+  name: Average Home Absolute Humidity
+  type: median
+  round_digits: 1
+  entity_ids:
+  - sensor.absolute_luftfeuchte_schlafzimmer_luftfeuchtigkeit
+  - sensor.absolute_luftfeuchte_schlaffeuchtigkeit
+  - sensor.absolute_luftfeuchte_abseite_luftfeuchtigkeit
+  - sensor.absolute_luftfeuchte_badfeuchtigkeit_2
+  - sensor.absolute_luftfeuchte_kuche_luftfeuchtigkeit
+  - sensor.absolute_luftfeuchte_wohnzimmer_luftfeuchtigkeit

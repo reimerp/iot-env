@@ -11,8 +11,8 @@ influxdb:1.8-alpine influx -host influxdb -database sensors \
 
 }
 
-#S="sensors"
-S="_internal"
+S="sensors"
+#S="_internal"
 CMD="$C compose exec influxdb influx -precision=rfc3339 -database $S"
 
 ia() {

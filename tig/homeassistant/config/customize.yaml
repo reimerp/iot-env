@@ -17,6 +17,8 @@ switch.tasmotaflur_flur:
 switch.tasmotavorhang_vorhang:
   friendly_name: "Flur Vorhang"
   icon: mdi:led-strip-variant
+binary_sensor.aqaramove_flurmotion:
+  friendly_name: "Flur Bewegung"
 
 sensor.tasmotaschlaf_bme280_dewpoint:
   friendly_name: "Schlafzimmer Taupunkt"
@@ -39,6 +41,12 @@ switch.tasmotaabseite_abseite:
   icon: mdi:fan
 sensor.tasmotaabseite_esp32_temperature:
   friendly_name: "Abseite ShellyPlus1 Temperatur"
+sensor.reimers6660_download_geschwindigkeit:
+  icon: mdi:download-network
+  friendly_name: "Download"
+sensor.reimers6660_upload_geschwindigkeit:
+  icon: mdi:upload-network
+  friendly_name: "Upload"
 
 switch.tasmotabad_bad:
   friendly_name: "Bad Lüfter"
@@ -60,6 +68,9 @@ sensor.tasmotasensor_tsl2561_illuminance:
   friendly_name: "Küche Helligkeit"
 sensor.tasmotasensor_esp32_temperature:
   friendly_name: "Küche ESP32 Temperatur"
+switch.mqtt_funk_socket_1:
+  icon: mdi:power-socket-de
+  friendly_name: "Funk Pi"
 
 sensor.thb1_wohn_2728_luftfeuchtigkeit:
   friendly_name: "Wohnzimmer Luftfeuchtigkeit"
@@ -80,6 +91,40 @@ media_player.andrejasradio:
   icon: mdi:radio
 switch.reiners_echo_dot_bitte_nicht_storen:
   icon: mdi:dots-horizontal-circle-outline
+# media_player.formuler1:
+#  icon: mdi-satellite-uplink
+media_player.dab_2:
+  icon: mdi-radio
+switch.pc_2_game:
+  icon: mdi:desktop-tower
+
+switch.funk_socket_2:
+  icon: mdi:power-socket-de
+switch.funk_socket_all:
+  icon: mdi:power-socket-eu
+binary_sensor.devices_with_low_battery:
+  icon: mdi:battery-alert-variant-outline
+sensor.tasmota_ir_firmware:
+  icon: mdi:update
+sensor.zigbee_controller_battery_level:
+  icon: mdi:battery-50
+input_boolean.pc_2_game:
+  icon: mdi:controller
+sensor.aussensensor_temperatur:
+  icon: mdi:home-thermometer
+#tripod:
+#  floor-lamp-torchiere-variant
+
+
+
+binary_sensor.aqaradoor_terrassentur:
+  friendly_name: "Terrasse Tür"
+sensor.rtl433_aussensensor_humidity:
+  friendly_name: "Aussen Luftfeuchtigkeit"
+sensor.rtl433_aussensensor_temperature:
+  friendly_name: "Aussen Temperatur"
+sensor.aussensensor_battery_level:
+  friendly_name: "Aussen Batterie"
 
 sensor.tasmotawarm_ds18s20_1_temperature:
   friendly_name: "Keller Fussboden"

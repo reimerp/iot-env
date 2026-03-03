@@ -57,6 +57,6 @@ exit
 # daily
 for script in iot/rrd/etot.py
 do
-    echo "${script} "
+    #echo "${script} "
     ${script} || echo "${script} had an error"
 done

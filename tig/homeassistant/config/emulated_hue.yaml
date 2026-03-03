@@ -1,0 +1,16 @@
+# Amazon Echo example configuration.yaml entry
+listen_port: 80
+#listen_port: 8124
+#  # Amazon Echo/Alexa stopped working on different ports. Search for "Philips Hue Bridge V1 (round)" in the Alexa App to discover devices.
+#  #expose_by_default: true
+#  #exposed_domains: ['switch', 'light', 'group', 'input_boolean', 'media_player', 'fan']
+exposed_domains: ['switch', 'light', 'script', 'media_player']
+off_maps_to_on_domains:
+  - script
+  - scene
+#  #entities:
+#  #  light.bedroom_light:
+#  #    name: "Bedside Lamp"	# Besser FriendlyName global umbennen
+#  #  light.ceiling_lights:
+#  #    hidden: true		# verstecken vor Alexa
+

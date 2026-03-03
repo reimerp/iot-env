@@ -1,0 +1,33 @@
+# https://community.home-assistant.io/t/set-icon-and-unit-of-measurement-in-a-template-using-a-blueprint/801905
+blueprint:
+  name: Corrects a given sensor value by given offset
+  description: Creates a sensor which holds the corrected value of a reference sensor
+  domain: template
+  input:
+    reference_temp:
+      name: Temperature for calculation
+      description: The temperature which is calculated in absolute humidity
+      selector:
+        entity:
+          domain: sensor
+          device_class: temperature
+    reference_humi:
+      name: Humidity for calculation
+      description: The humdity which is calculated in absolute humidity
+      selector:
+        entity:
+          domain: sensor
+          device_class: humidity 
+variables:
+  reference_temp: !input reference_temp
+  reference_humi: !input reference_humi
+sensor:
+  name: "Absolute {{ state_attr(reference_humi, 'friendly_name')|default(reference_humi|slugify, 1) }}"
+  unit_of_measurement: 'g/m³'
+  #icon: "{{ state_attr(reference_humi, 'icon')}}"
+  icon: mdi:water-thermometer
+  state: >
+    {% set t = states(reference_temp) | float(0) %}
+    {% set h = states(reference_humi) | float(0) %}
+    {{ ((e ** ((17.67 * t) / (243.5 + t)) * 6.112 * h * 2.1674) / (273.15 + t)) | round(1) }}
+  availability: "{{ has_value(reference_temp) }}"

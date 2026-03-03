@@ -1,0 +1,40 @@
+mqtt:
+
+#broker: hassbian
+#username: hass
+#password: !secret mqtt_password
+#discovery: true
+#discovery_prefix: homeassistant
+#birth_message:
+#  topic: 'lwt/hass'
+#  payload: 'Online'
+#  retain: true
+#will_message:
+#  topic: 'lwt/hass'
+#  payload: 'Offline'
+#  retain: true
+
+
+
+
+# These are autodetected, and just classes are customized
+  - name: "Energy house total"
+    unique_id: "sensor.mt681_total"
+    state_topic: "tasmota/strom/tele/SENSOR"
+    value_template: "{{ value_json['MT681'].Total_in }}"
+    device_class: energy
+    state_class: total_increasing
+  # 'last_reset_topic' "fake/last_reset" deprecated AND 'last_reset_topic' must be same as 'state_topic'
+#    last_reset_value_template: >
+#      {{"1970-01-01T00:00:00+00:00"}}
+#        {{as_datetime(0|timestamp_utc).isoformat()}}
+    unit_of_measurement: "kWh"
+
+  - name: "Energy house current"
+    unique_id: "sensor.mt681_current"
+    state_topic: "tasmota/strom/tele/SENSOR"
+    value_template: "{{ value_json['MT681'].Power_curr }}"
+    device_class: power
+    state_class: measurement
+    unit_of_measurement: 'W'
+

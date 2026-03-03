@@ -90,5 +90,5 @@ def test():
 if __name__ == '__main__':
     #test()
     sensor = RemoteSensor()
-    sensor.verbose = True
+    #sensor.verbose = True
     sensor.connect_mqtt()

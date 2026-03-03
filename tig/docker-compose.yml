@@ -156,8 +156,9 @@ services:
     restart: unless-stopped
     user: node-red
     volumes:
-    #- ./nodered:/data
+    - ./nodered:/usr/src/node-red/apps:ro
     - nodered_data:/data
+    - ~/.netrc:/usr/src/node-red/.netrc:ro
     ports:
     - 0.0.0.0:1880:1880/tcp
 
@@ -166,7 +167,12 @@ services:
       context: ./
       dockerfile: ./rtl433/Dockerfile
     devices:
-    - /dev/bus/usb/001/017
+    - /dev/bus/usb/001/003
+    volumes:
+    - ./rtl433:/opt/python
+    - ~/.netrc:/home/python/.netrc:ro
+    - /etc/localtime:/etc/localtime:ro
+    command: python rtl_pipe.py
 
 volumes:
   grafana_data: {}

@@ -5,7 +5,7 @@ RUN apk add --update rtl_433 py3-pip py3-paho-mqtt py3-requests py3-snmp && rm -
 # py3-paho-mqtt-pyc
 
 # user == homeassistant for netrc, 20 is dialout for rtl-433
-RUN adduser -D python -u 990 -g 20
+RUN adduser -D python -u 990 && addgroup python dialout
 
 #COPY rtl433/.netrc rtl433/rtl_pipe.py rtl433/basemqtt.py /home/python
 COPY rtl433/requirements.txt /home/python

@@ -1,76 +1,76 @@
+# ok
+#- unique_id: sensor_adjustment_bp_0001
+#  # name ist "Adjusted Wohnzimmer Luftfeuchtigkeit"
+#  use_blueprint:
+#    path: value_correction.yaml
+#    input:
+#      reference_entity: sensor.thb1_wohn_2728_luftfeuchtigkeit
+#      offset: -5.0
+#      unit: "%"
+
+- unique_id: sensor_schlaf_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.tasmotaschlaf_bme280_temperature
+      reference_humi: sensor.tasmotaschlaf_bme280_humidity
+- unique_id: sensor_schlaf_bt_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.schlaftemperatur
+      reference_humi: sensor.schlaffeuchtigkeit
+- unique_id: sensor_bad_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.bad_temperatur
+      reference_humi: sensor.bad_luftfeuchtigkeit
+# muell
+#- unique_id: sensor_bad_bt_absolute_humidity_0001
+#  use_blueprint:
+#    path: absolute_humidity.yaml
+#    input:
+#      reference_temp: sensor.atc_edc2_temperature
+#      reference_humi: sensor.atc_edc2_humidity
+- unique_id: sensor_abseite_bt_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.thb2_8af6_temperatur
+      reference_humi: sensor.thb2_8af6_luftfeuchtigkeit
+- unique_id: sensor_kueche_bt_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.tasmotasensor_bme680_temperature
+      reference_humi: sensor.tasmotasensor_bme680_humidity
+- unique_id: sensor_wohn_bt_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.thb1_wohn_2728_temperatur
+      reference_humi: sensor.thb1_wohn_2728_luftfeuchtigkeit
+- unique_id: sensor_rtl433_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.rtl433_aussensensor_temperature
+      reference_humi: sensor.rtl433_aussensensor_humidity
+- unique_id: sensor_openweather_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.openweathermap_temperature
+      reference_humi: sensor.openweathermap_humidity
+- unique_id: sensor_openweather_forecast_absolute_humidity_0001
+  use_blueprint:
+    path: absolute_humidity.yaml
+    input:
+      reference_temp: sensor.openweathermap_forecast_temperature
+      reference_humi: sensor.openweathermap_humidity
+
 - sensor:
-  - name: "Outside Absolute Humidity"
-    unique_id: outside_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    #inv icon_template: mdi:water
-    state: >
-      {% set cur_temp = states('sensor.rtl433_aussensensor_temperatur') | float %}
-      {% set cur_humidity = states('sensor.rtl433_aussensensor_luftfeuchtigkeit') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-    attributes:
-      friendly_name: "Gramm Wasser pro m³ draußen"
-
-  - name: "Openweather Absolute Humidity"
-    unique_id: openweather_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.openweathermap_temperature') | float %}
-      {% set cur_humidity = states('sensor.openweathermap_humidity') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Openweather Forecast Absolute Humidity"
-    unique_id: openweather_forecast_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.openweathermap_forecast_temperature') | float %}
-      {% set cur_humidity = states('sensor.openweathermap_humidity') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Kitchen Absolute Humidity"
-    unique_id: kitchen_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.tasmotasensor_bme680_temperature') | float %}
-      {% set cur_humidity = states('sensor.tasmotasensor_bme680_humidity') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Sleep Absolute Humidity"
-    unique_id: sleep_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.tasmotaschlaf_bme280_temperature') | float %}
-      {% set cur_humidity = states('sensor.tasmotaschlaf_bme280_humidity') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Sleep BT Absolute Humidity"
-    unique_id: sleep_bt_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.schlaftemperatur') | float %}
-      {% set cur_humidity = states('sensor.schlaffeuchtigkeit') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Bath BT Absolute Humidity"
-    unique_id: bath_bt_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.badtemperatur') | float %}
-      {% set cur_humidity = states('sensor.badfeuchtigkeit') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
-
-  - name: "Total Current Power Production"
-    # solar_power_total_current_production:
-    unique_id: 9fb71580-0687-434e-96c0-efc58cdc43cd
-    unit_of_measurement: "W"
-    state: "{{(states('sensor.tasmotastrom_mt681_power_curr')|float) + (states('sensor.tasmotastrom_mt681_power_curr')|float)}}"
-
   - name: ABC Temperature
     unique_id: uniqueid__abc_temperature
     unit_of_measurement: "°C"
@@ -78,12 +78,41 @@
     state_class: measurement
     state: "{{ state_attr('climate.heater', 'current_temperature') | int(0) }}"
 
-  - name: "Bad absolute Luftfeuchtigkeit"
-    unique_id: template.atc_edc2_abs_humidity
-    unit_of_measurement: 'g/m^3'
-    device_class: "humidity"
-    state: >
-      {% set cur_temp = states('sensor.atc_edc2_temperature') | float %}
-      {% set cur_humidity = states('sensor.atc_edc2_humidity') | float %}
-      {{ ((e ** ((17.67 * cur_temp) / (243.5 + cur_temp)) * 6.112 * cur_humidity * 2.1674) / (273.15 + cur_temp)) | round(1) }}
+#tasmota_ble/tele/bad {"Time":"2022-01-20T23:40:57","alias":"bad","mac":"a4c138e4edc2","Temperature":22.6,"Humidity":65.0,"DewPoint":15.7,"Battery":57,"RSSI":-83}
+# https://community.home-assistant.io/t/alert-when-devices-have-low-battery/258072
+# select('ge', 0) b4 list
+  - name: 'Devices with low battery'
+    default_entity_id: sensor.devices_with_low_battery
+    unit_of_measurement: devices
+    state: >-
+      {% set ignore_entities = ['sensor.phone_1_battery_level', 'sensor.phone_2_battery_level', '...'] %}
+      {{ states.sensor
+         | selectattr('attributes.device_class', 'defined')
+         | selectattr('attributes.device_class', 'eq', 'battery')
+         | rejectattr('entity_id', 'in', ignore_entities)
+         | map(attribute='state')
+         | reject('in', ['unknown', 'unavailable', 'Ok'])
+         | map('int', -1) | select('le', 10)
+         | list | count
+      }}
+    icon: >-
+      {% if is_state('sensor.devices_with_low_battery', '0') %}
+        mdi:check-circle
+      {% else %}
+        mdi:battery-alert
+      {% endif %}
+
+#  - weather:
+#    #pressure: "{{ states('sensor.sensor_luftdruck') | float(0) }}"
+#    #temperature: "{{ states('sensor.rtl433_aussensensor_temperatur') | float(0) }}"
+#  #  forecast: "{{ state_attr('weather.openweathermap', 'forecast') }}"
+
+- weather:
+  - name: Aussenwetter
+    unique_id: weather.aussenwetter
+    condition: '{{ states(''weather.openweathermap'') }}'
+    humidity: '{{ states(''sensor.rtl433_aussensensor_luftfeuchtigkeit'') | float(0)
+      }}'
+    temperature: '{{ states(''sensor.rtl433_aussensensor_temperatur'') | float(0)
+      }}'
 

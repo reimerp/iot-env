@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 28,
+  "id": 6,
   "links": [],
   "panels": [
     {
@@ -941,7 +941,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
+            "insertNulls": 3600000,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1071,7 +1071,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": -5,
             "barAlignment": 0,
-            "barWidthFactor": 0.6,
+            "barWidthFactor": 1,
             "drawStyle": "bars",
             "fillOpacity": 100,
             "gradientMode": "none",
@@ -1431,6 +1431,6 @@
   "timezone": "",
   "title": "Sensors",
   "uid": "zOm5PCPGz",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }

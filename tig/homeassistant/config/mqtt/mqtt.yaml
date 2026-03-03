@@ -1,17 +1,3 @@
-#broker: hassbian
-#username: hass
-#password: !secret mqtt_password
-#discovery: true
-#discovery_prefix: homeassistant
-#birth_message:
-#  topic: 'lwt/hass'
-#  payload: 'Online'
-#  retain: true
-#will_message:
-#  topic: 'lwt/hass'
-#  payload: 'Offline'
-#  retain: true
-
 binary_sensor:
   - name: "Terrassentür"
     unique_id: "0x00158d000309b98b_contact_zigbee"
@@ -49,6 +35,7 @@ binary_sensor:
       model: "Aqara human body movement and illuminance sensor (RTCGQ11LM)"
       manufacturer: "Xiaomi"
     device_class: motion
+
 # ok braucht on und off
   - name: "Node-RED"
     state_topic: "lwt/node-red"
@@ -97,33 +84,16 @@ switch:
 #  retain: false
 
 sensor:
-# These are autodetected, and just classes are customized
-  - name: "Energy house total"
-    unique_id: "sensor.mt681_total"
-    state_topic: "tasmota/strom/tele/SENSOR"
-    value_template: "{{ value_json['MT681'].Total_in }}"
-    device_class: energy
-    state_class: total_increasing
-  # 'last_reset_topic' "fake/last_reset" deprecated AND 'last_reset_topic' must be same as 'state_topic'
-#    last_reset_value_template: >
-#      {{"1970-01-01T00:00:00+00:00"}}
-#        {{as_datetime(0|timestamp_utc).isoformat()}}
-    unit_of_measurement: "kWh"
-  - name: "Energy house current"
-    unique_id: "sensor.mt681_current"
-    state_topic: "tasmota/strom/tele/SENSOR"
-    value_template: "{{ value_json['MT681'].Power_curr }}"
-    device_class: power
-    state_class: measurement
-    unit_of_measurement: 'W'
-  - name: "StromBattery"
+  - name: "Keller Strom Battery"
     unique_id: "sensor.mt681_battery_level"
     state_topic: "tasmota/strom/tele/STATE"
     unit_of_measurement: "%"
     # 3.1-3.4
     value_template: "{{ ((value_json.Vcc | float(-1) - 3.1) * 333) | round() }}"
     device_class: battery
+
 #tasmota/strom/tele/STATE {"Time":"2022-01-21T00:03:13","Uptime":"0T00:00:09","UptimeSec":9,"Vcc":3.366,"Heap":24,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"Wifi":{"AP":1,"SSId":"BaseLAN","BSSId":"2C:67:FB:57:17:AC","Channel":6,"Mode":"11n","RSSI":32,"Signal":-84,"LinkCount":1,"Downtime":"0T00:00:03"}}
+
   - name: "Bad ATC Batterie"
     unique_id: "sensor.atc_edc2_battery"
     state_topic: "tasmota_ble/tele/bad"
@@ -134,7 +104,9 @@ sensor:
     - topic: "tasmota/abseite/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+
 # WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'dict object' has no attribute 'Temperature' when rendering '{{ value_json.Temperature }}'
+
   - name: "Bad Temperatur"
     unique_id: "sensor.atc_edc2_temperature"
     state_topic: "tasmota_ble/tele/bad"
@@ -145,6 +117,7 @@ sensor:
     - topic: "tasmota/abseite/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+
   - name: "Bad Luftfeuchtigkeit"
     unique_id: "sensor.atc_edc2_humidity"
     state_topic: "tasmota_ble/tele/bad"
@@ -155,6 +128,7 @@ sensor:
     - topic: "tasmota/abseite/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+
   - name: "Aussensensor Temperature"
     unique_id: "sensor.rtl433aussen_temperature"
     state_topic: "rtl433/inFactory-TH"
@@ -172,6 +146,7 @@ sensor:
       model: "WS 1644 Sensor via DVB-t Stick"
       manufacturer: "Waagen-Schmitt / Terratec"
       sw_version: "20.02-38-gf26830d"
+
   - name: "Aussensensor Humidity" 
     unique_id: "sensor.rtl433aussen_humidity"
     state_topic: "rtl433/inFactory-TH"
@@ -189,6 +164,7 @@ sensor:
       model: "WS 1644 Sensor via DVB-t Stick"
       manufacturer: "Waagen-Schmitt / Terratec"
       sw_version: "20.02-38-gf26830d"
+
   - name: "Aussensensor Battery Level"
     unique_id: "sensor.rtl433aussen_battery_level"
     state_topic: "rtl433/inFactory-TH"
@@ -264,64 +240,6 @@ sensor:
       payload_available: "Online"
       payload_not_available: "Offline"
 
-  - name: "Energy house total"
-    unique_id: "sensor.mt681_total"
-    state_topic: "tasmota/strom/tele/SENSOR"
-    value_template: "{{ value_json['MT681'].Total_in }}"
-    device_class: energy
-    state_class: total_increasing
-  # 'last_reset_topic' "fake/last_reset" deprecated AND 'last_reset_topic' must be same as 'state_topic'
-#    last_reset_value_template: >
-#      {{"1970-01-01T00:00:00+00:00"}}
-#        {{as_datetime(0|timestamp_utc).isoformat()}}
-    unit_of_measurement: "kWh"
-  - name: "Energy house current"
-    unique_id: "sensor.mt681_current"
-    state_topic: "tasmota/strom/tele/SENSOR"
-    value_template: "{{ value_json['MT681'].Power_curr }}"
-    device_class: power
-    state_class: measurement
-    unit_of_measurement: 'W'
-  - name: "StromBattery"
-    unique_id: "sensor.mt681_battery_level"
-    state_topic: "tasmota/strom/tele/STATE"
-    unit_of_measurement: "%"
-    # 3.1-3.4
-    value_template: "{{ ((value_json.Vcc | float(-1) - 3.1) * 333) | round() }}"
-    device_class: battery
-#tasmota/strom/tele/STATE {"Time":"2022-01-21T00:03:13","Uptime":"0T00:00:09","UptimeSec":9,"Vcc":3.366,"Heap":24,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"Wifi":{"AP":1,"SSId":"BaseLAN","BSSId":"2C:67:FB:57:17:AC","Channel":6,"Mode":"11n","RSSI":32,"Signal":-84,"LinkCount":1,"Downtime":"0T00:00:03"}}
-
-  - name: "BadBattery"
-    unique_id: "0xa4c138e4edc2_battery_atc"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Battery }}"
-    unit_of_measurement: "%"
-    device_class: battery
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-# WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'dict object' has no attribute 'Temperature' when rendering '{{ value_json.Temperature }}'
-  - name: "Badtemperatur"
-    unique_id: "0xa4c138e4edc2_temperature_atc"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Temperature }}"
-    unit_of_measurement: "°C"
-    device_class: temperature
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-  - name: "Badfeuchtigkeit"
-    unique_id: "0xa4c138e4edc2_humidity_atc"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Humidity }}"
-    unit_of_measurement: "%"
-    device_class: humidity
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
   - name: "SchlafBattery"
     unique_id: "0xa4c138a08f85_battery_atc"
     state_topic: "tasmota_ble/tele/schlaf"
@@ -332,6 +250,7 @@ sensor:
     - topic: "tasmota/abseite/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+
   - name: "Schlaftemperatur"
     unique_id: "0xa4c138a08f85_temperature_atc"
     state_topic: "tasmota_ble/tele/schlaf"
@@ -342,6 +261,7 @@ sensor:
     - topic: "tasmota/abseite/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+
   - name: "Schlaffeuchtigkeit"
     unique_id: "0xa4c138a08f85_humidity_atc"
     state_topic: "tasmota_ble/tele/schlaf"
@@ -353,30 +273,25 @@ sensor:
       payload_available: "Online"
       payload_not_available: "Offline"
 
-  - name: "Temperatur Raspi"
-    unique_id: "sensor.pi.temperature"
-    state_topic: "test/pi/temperature"
-    unit_of_measurement: "°C"
-    device_class: temperature
-
+# issue is bug in tasmota RSS should be dBm
   - name: "Wi-Fi Quality"
-    unique_id: "sensor.tasmotair_wifi_rssi"
-    state_topic: "tasmota/ir/tele/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{ value_json['Wifi'].RSSI }}"
+    unique_id: "sensor.tasmota.wifi.rssi"
+    state_topic: "tasmota/kerze/tele/STATE"
+    unit_of_measurement: "dBm"
+    value_template: "{{ value_json['Wifi'].Signal }}"
     device_class: signal_strength
     availability:
-    - topic: "tasmota/ir/tele/LWT"
+    - topic: "tasmota/kerze/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
 
 # Track Firmware
-  - name: "Tasmota IR Firmware"
-    # unique_id: "sensor.tasmota.ir.firmware"
-    state_topic: "tasmota/ir/stat/STATUS2"
+  - name: "Tasmota Firmware"
+    unique_id: "sensor.tasmota.firmware"
+    state_topic: "tasmota/flur/stat/STATUS2"
     value_template: "{{value_json['StatusFWR'].Version }}"
     availability:
-    - topic: "tasmota/ir/tele/LWT"
+    - topic: "tasmota/flur/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
     qos: 0

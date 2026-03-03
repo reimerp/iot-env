@@ -1,0 +1,9 @@
+- sensor:
+    unique_id: cpu_temperature
+    name: CPU Temperature
+    # on pi,pb command: "cat /sys/class/thermal/thermal_zone0/temp"
+    # FIXME not portable
+    command: "cat /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+    state_class: measurement

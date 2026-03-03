@@ -18,8 +18,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 12,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -33,11 +33,13 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 60,
             "gradientMode": "opacity",
@@ -46,6 +48,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "stepBefore",
             "lineWidth": 1,
             "pointSize": 2,
@@ -90,7 +93,7 @@
               },
               {
                 "id": "custom.gradientMode",
-                "value": "opacity"
+                "value": "none"
               }
             ]
           },
@@ -106,6 +109,10 @@
                   "fixedColor": "dark-yellow",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
               }
             ]
           }
@@ -128,10 +135,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.8",
       "repeat": "target",
       "repeatDirection": "v",
       "targets": [
@@ -283,32 +292,28 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "5m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
           "text": "InfluxSensors",
           "value": "InfluxSensors"
         },
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "influxdb",
         "refresh": 1,
         "regex": "/[sS]ensor/",
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "current": {
-          "selected": false,
           "text": "ping",
           "value": "ping"
         },
@@ -320,19 +325,15 @@
         "description": "selects potential measurements",
         "hide": 1,
         "includeAll": false,
-        "multi": false,
         "name": "measurement",
         "options": [],
         "query": "SHOW MEASUREMENTS",
         "refresh": 1,
         "regex": "/^ping/",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "m",
           "value": "m"
         },
@@ -344,19 +345,15 @@
         "description": "selects retention policy",
         "hide": 1,
         "includeAll": false,
-        "multi": false,
         "name": "rp",
         "options": [],
         "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -367,14 +364,11 @@
         "definition": "SHOW TAG VALUES FROM \"$measurement\" WITH KEY=\"target\"",
         "hide": 1,
         "includeAll": true,
-        "multi": false,
         "name": "target",
         "options": [],
         "query": "SHOW TAG VALUES FROM \"$measurement\" WITH KEY=\"target\"",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
