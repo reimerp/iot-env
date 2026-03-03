@@ -1,5 +1,5 @@
 __pycache__
-tig/.envrc
 tig/.env
 tig/env.telegraf_mqtt
+tig/.localpass
 .direnv/

@@ -9,11 +9,11 @@ ping_host () {
 	local cmd
 	local rc
 	cmd="$PING -q -n -c $COUNT -i 2 -w $DEADLINE $1"
-	output=$($cmd 2>&1)
-	rc=$?	
+	#output=$($cmd 2>&1)
+	#rc=$?	
 	#echo $output
     # notice $output is quoted to preserve newlines
-    temp=$(echo "$output"| awk '
+    temp=$($cmd | awk '
         BEGIN           {pl=100; rtt="0.1"; mdev="0"}
         /packets transmitted/ {
 # this is gawk
