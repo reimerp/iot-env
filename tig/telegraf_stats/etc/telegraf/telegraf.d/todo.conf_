@@ -1,16 +1,13 @@
-# TODO
-
-# # Gather smart home status from Hue Bridge
-# [[inputs.huebridge]]
-#   bridges = [ "address:http://anonym:nopass@hassbian:80/" ]
-
-
 # [[inputs.ping]]
-# # nur v4
+# # nur v4, v6 unreachable
+# # ping,host=probook,url=192.168.176.1 average_response_ms=1.772,maximum_response_ms=2.446,minimum_response_ms=1.103,packets_received=4i,packets_transmitted=4i,percent_packet_loss=0,result_code=0i,standard_deviation_ms=0.607,ttl=63i 1773093256000000000
+
 #   urls = ["2a02:3102:4000:4::d6"]
+#   #urls = ["192.168.176.1"]
 #   count = 4
 #   ping_interval = 2.0
 #   deadline = 10
+
 # # Monitor sensors, requires lm-sensors package
 # # This plugin ONLY supports Linux
 # [[inputs.sensors]]
@@ -22,9 +19,16 @@
 #   # timeout = "5s"
 
 
-# [[inputs.snmp]]
-# agents = ["udp://192.168.176.15:161"]
+# [[inputs.chrony]]
+#   # listens just to localhost on fb
+#   server = "udp://192.168.176.1:323"
 
-
-#[[inputs.chrony]]
-#  server = "udp://192.168.176.1:323"
+#   ## Metrics to query named according to chronyc commands
+#   ## Available settings are:
+#   ##   activity    -- number of peers online or offline
+#   ##   tracking    -- information about system's clock performance
+#   ##   serverstats -- chronyd server statistics
+#   ##   sources     -- extended information about peers
+#   ##   sourcestats -- statistics on peers
+#   #same as chronyc does
+#   # metrics = ["tracking"]

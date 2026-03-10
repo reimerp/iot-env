@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+DIR=${DIR:-$(cd $(dirname $0)/../scripts && pwd)}
+
 . $DIR/tools
 
 # das geht ins syslog

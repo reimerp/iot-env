@@ -1,6 +1,6 @@
 services:
   telegraf_stats:
-    image: docker.io/telegraf:${TELEGRAF_TAG}
+    image: docker.io/telegraf:1.37.3-alpine-plugin
     command:
     - --strict-env-handling
     restart: unless-stopped
@@ -24,6 +24,12 @@ services:
     - INFLUXDB_DATABASE=telegraf
     depends_on:
     - influxdb
+    devices:
+    - /dev/nvme0:/dev/nvme0
+    #- /dev/sda:/dev/sda
+    cap_add:
+    #- SYS_RAWIO
+    - SYS_ADMIN
     user: telegraf:${DOCKER_GID}
 
   telegraf_logs:
