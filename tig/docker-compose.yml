@@ -22,8 +22,9 @@ services:
     #- HOST_VAR=/hostfs/var
     #- HOST_RUN=/hostfs/run
     - INFLUXDB_DATABASE=telegraf
-    depends_on:
-    - influxdb
+    # just hp
+#    depends_on:
+#    - influxdb
     devices:
     - /dev/nvme0:/dev/nvme0
     #- /dev/sda:/dev/sda
