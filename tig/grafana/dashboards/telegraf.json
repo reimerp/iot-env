@@ -46,19 +46,6 @@
         "x": 0,
         "y": 0
       },
-      "id": 62044,
-      "panels": [],
-      "title": "Quick overview",
-      "type": "row"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
       "id": 62045,
       "panels": [],
       "title": "CPU",
@@ -106,7 +93,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 2
+        "y": 1
       },
       "id": 61858,
       "maxDataPoints": 100,
@@ -225,7 +212,7 @@
         "h": 4,
         "w": 2,
         "x": 4,
-        "y": 2
+        "y": 1
       },
       "id": 61859,
       "maxDataPoints": 100,
@@ -344,7 +331,7 @@
         "h": 4,
         "w": 2,
         "x": 6,
-        "y": 2
+        "y": 1
       },
       "id": 61862,
       "maxDataPoints": 100,
@@ -463,7 +450,7 @@
         "h": 4,
         "w": 2,
         "x": 8,
-        "y": 2
+        "y": 1
       },
       "id": 61864,
       "maxDataPoints": 100,
@@ -582,7 +569,7 @@
         "h": 4,
         "w": 2,
         "x": 10,
-        "y": 2
+        "y": 1
       },
       "id": 61865,
       "maxDataPoints": 100,
@@ -702,7 +689,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 2
+        "y": 1
       },
       "id": 61861,
       "maxDataPoints": 100,
@@ -832,7 +819,7 @@
         "h": 4,
         "w": 2,
         "x": 14,
-        "y": 2
+        "y": 1
       },
       "id": 61860,
       "maxDataPoints": 100,
@@ -951,7 +938,7 @@
         "h": 4,
         "w": 2,
         "x": 16,
-        "y": 2
+        "y": 1
       },
       "id": 61863,
       "maxDataPoints": 100,
@@ -1070,7 +1057,7 @@
         "h": 4,
         "w": 2,
         "x": 18,
-        "y": 2
+        "y": 1
       },
       "id": 61866,
       "maxDataPoints": 100,
@@ -1194,7 +1181,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 2
+        "y": 1
       },
       "id": 61867,
       "maxDataPoints": 100,
@@ -1300,7 +1287,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1308,7 +1295,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1383,7 +1370,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 5
       },
       "id": 28239,
       "interval": "$inter",
@@ -1483,7 +1470,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1491,7 +1478,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1524,7 +1511,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 54694,
       "interval": "$inter",
@@ -1631,7 +1618,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1704,7 +1691,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 13
       },
       "id": 61852,
       "options": {
@@ -1785,7 +1772,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 22
       },
       "id": 62046,
       "panels": [],
@@ -1817,7 +1804,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": false,
             "lineInterpolation": "stepAfter",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1825,7 +1812,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "normal"
@@ -1886,7 +1873,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 23
       },
       "id": 12054,
       "interval": "$inter",
@@ -1968,7 +1955,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 33
       },
       "id": 62047,
       "panels": [],
@@ -2040,7 +2027,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 35
+        "y": 34
       },
       "id": 61855,
       "options": {
@@ -2181,7 +2168,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 35
+        "y": 34
       },
       "id": 61960,
       "options": {
@@ -2290,7 +2277,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -2357,7 +2344,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 35
+        "y": 34
       },
       "id": 62042,
       "options": {
@@ -2489,7 +2476,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 41
       },
       "id": 62048,
       "panels": [],
@@ -2602,7 +2589,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 42
       },
       "id": 62043,
       "options": {
@@ -2698,7 +2685,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 49
       },
       "id": 62050,
       "panels": [],
@@ -2738,7 +2725,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -2790,7 +2777,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 50
       },
       "id": 61991,
       "options": {
@@ -2915,7 +2902,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 57
       },
       "id": 62051,
       "panels": [],
@@ -2947,7 +2934,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2955,7 +2942,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -3028,7 +3015,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 58
       },
       "id": 61854,
       "interval": "$inter",
@@ -3226,7 +3213,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 65
       },
       "id": 61969,
       "interval": "$inter",
@@ -3696,7 +3683,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 73
+        "y": 72
       },
       "id": 61968,
       "interval": "$inter",
@@ -4034,7 +4021,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 80
+        "y": 79
       },
       "id": 61967,
       "interval": "$inter",
@@ -4336,7 +4323,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 80
+        "y": 79
       },
       "id": 61978,
       "interval": "$inter",
@@ -4690,7 +4677,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 80
+        "y": 79
       },
       "id": 61979,
       "interval": "$inter",
@@ -4992,7 +4979,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 87
+        "y": 86
       },
       "id": 61980,
       "interval": "$inter",
@@ -5450,7 +5437,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 87
+        "y": 86
       },
       "id": 61981,
       "interval": "$inter",
@@ -5796,7 +5783,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 94
+        "y": 93
       },
       "id": 62052,
       "panels": [],
@@ -5881,7 +5868,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 95
+        "y": 94
       },
       "id": 61893,
       "interval": "$inter",
@@ -6091,7 +6078,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 102
+        "y": 101
       },
       "id": 61989,
       "interval": "$inter",
@@ -6301,7 +6288,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 102
+        "y": 101
       },
       "id": 61990,
       "interval": "$inter",
@@ -6491,7 +6478,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 109
+        "y": 108
       },
       "id": 62053,
       "panels": [],
@@ -6577,7 +6564,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 110
+        "y": 109
       },
       "id": 42026,
       "interval": "$inter",
@@ -6787,7 +6774,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 110
+        "y": 109
       },
       "id": 28572,
       "interval": "$inter",
@@ -6985,7 +6972,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 117
+        "y": 116
       },
       "id": 58901,
       "interval": "$inter",
@@ -7183,7 +7170,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 117
+        "y": 116
       },
       "id": 50643,
       "interval": "$inter",
@@ -7321,7 +7308,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 139
+        "y": 138
       },
       "id": 62054,
       "panels": [],
@@ -7406,7 +7393,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 140
+        "y": 139
       },
       "id": 26024,
       "interval": "$inter",
@@ -7565,7 +7552,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 140
+        "y": 139
       },
       "id": 61850,
       "interval": "$inter",
@@ -7645,7 +7632,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 147
+        "y": 146
       },
       "id": 62055,
       "panels": [],
@@ -7751,7 +7738,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 148
+        "y": 147
       },
       "id": 13782,
       "interval": "$inter",
@@ -7982,7 +7969,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 148
+        "y": 147
       },
       "id": 60200,
       "interval": "$inter",
@@ -8213,7 +8200,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 148
+        "y": 147
       },
       "id": 56720,
       "interval": "$inter",
@@ -8352,7 +8339,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 155
+        "y": 154
       },
       "id": 62056,
       "panels": [],
@@ -8450,7 +8437,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 156
+        "y": 155
       },
       "id": 52240,
       "interval": "$inter",
@@ -8644,7 +8631,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 156
+        "y": 155
       },
       "id": 33458,
       "interval": "$inter",
@@ -8783,7 +8770,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 195
+        "y": 194
       },
       "id": 62057,
       "panels": [],
@@ -8855,7 +8842,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 196
+        "y": 195
       },
       "id": 62001,
       "options": {
@@ -8998,7 +8985,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 196
+        "y": 195
       },
       "id": 62004,
       "options": {
@@ -9141,7 +9128,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 196
+        "y": 195
       },
       "id": 62003,
       "options": {
@@ -9284,7 +9271,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 196
+        "y": 195
       },
       "id": 62002,
       "options": {
@@ -9481,7 +9468,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "coretemp_core_0"
+                  "k10temp"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -9504,7 +9491,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 203
+        "y": 202
       },
       "id": 62058,
       "options": {
@@ -9592,7 +9579,7 @@
       {
         "current": {
           "text": "InfluxTelegraf",
-          "value": "InfluxTelegraf"
+          "value": "P04E2EA1B5E781F5B"
         },
         "includeAll": false,
         "name": "datasource",
@@ -9607,17 +9594,12 @@
         "auto_count": 100,
         "auto_min": "30s",
         "current": {
-          "text": "auto",
-          "value": "$__auto_interval_inter"
+          "text": "$__auto",
+          "value": "$__auto"
         },
         "label": "Sampling",
         "name": "inter",
         "options": [
-          {
-            "selected": true,
-            "text": "auto",
-            "value": "$__auto_interval_inter"
-          },
           {
             "selected": false,
             "text": "10s",
@@ -9665,8 +9647,8 @@
       },
       {
         "current": {
-          "text": "prolap",
-          "value": "prolap"
+          "text": "hp",
+          "value": "hp"
         },
         "datasource": "InfluxTelegraf",
         "definition": "",
@@ -9734,13 +9716,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Telegraf: system dashboard",
   "uid": "000000127",
-  "version": 5,
+  "version": 7,
   "weekStart": ""
 }

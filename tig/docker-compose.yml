@@ -43,8 +43,9 @@ services:
     - /:/hostfs:ro
     # to read docker.sock, docker gid is req
     user: "telegraf:${DOCKER_GID}"
+    #shm_size: "2gb"	# debug
 
-  # Message formattet (MQTT -> InfluxDB)
+  # Message formatted (MQTT -> InfluxDB)
   # https://hub.docker.com/_/telegraf
   telegraf_mqtt:
     image: docker.io/telegraf:${TELEGRAF_TAG}
@@ -95,7 +96,8 @@ services:
     # Data persistence (could also be a bind mount: /srv/docker/influxdb/data:/var/lib/influxdb)
     - influxdb_data:/var/lib/influxdb
     # Backups...
-    - ./influxdb-backup:/backup
+    #- ./influxdb-backup:/backup
+    - /tmp:/backup
     # Host can run the following on a crontab, then rsnapshot can pickup:
     # docker exec -it influxdb influxd backup -database sensors /backup
 
@@ -131,11 +133,11 @@ services:
     image: "ghcr.io/home-assistant/home-assistant:stable"
     restart: unless-stopped
     volumes:
+    - /etc/localtime:/etc/localtime:ro
     - ./homeassistant/config:/config
     - ./homeassistant/media:/media
     - homeassistant_data:/data
     - homeassistant_storage:/config/.storage
-    - /etc/localtime:/etc/localtime:ro
     - /run/dbus:/run/dbus:ro
     #devices:
     #  - /dev/ttyUSB0:/dev/ttyUSB0
@@ -152,13 +154,17 @@ services:
 
 # The minimal version does not contain build tools or support for projects.
   nodered:
-    image: "docker.io/nodered/node-red:4.1.4-minimal"
+    image: "docker.io/nodered/node-red:4.1.7-minimal"
     restart: unless-stopped
     user: node-red
     volumes:
+    - /etc/localtime:/etc/localtime:ro
     - ./nodered:/usr/src/node-red/apps:ro
     - nodered_data:/data
     - ~/.netrc:/usr/src/node-red/.netrc:ro
+    - ~/.ssh/id_rsa.hassbian:/usr/src/node-red/.id_rsa:ro
+    environment:
+    - NODE_RED_ENABLE_PROJECTS=true
     ports:
     - 0.0.0.0:1880:1880/tcp
 
@@ -166,13 +172,30 @@ services:
     build:
       context: ./
       dockerfile: ./rtl433/Dockerfile
+    restart: unless-stopped
     devices:
     - /dev/bus/usb/001/003
     volumes:
+    - /etc/localtime:/etc/localtime:ro
     - ./rtl433:/opt/python
     - ~/.netrc:/home/python/.netrc:ro
-    - /etc/localtime:/etc/localtime:ro
     command: python rtl_pipe.py
+
+  matterbridge:
+    #container_name: matterbridge
+    image: luligu/matterbridge:3.5.6
+    network_mode: host # Ensures the Matter mdns works
+    command: ["matterbridge", "--docker", "--bridge", "--mdnsinterface", "eth0", "--logger", "error", "--matterlogger", "error" ]
+    restart: unless-stopped
+    depends_on:
+    - homeassistant
+    volumes:
+    # Mounts the Matterbridge plugin directory
+    #- "${HOME}/Matterbridge:/root/Matterbridge"
+    - ./matterbridge:/root/Matterbridge
+    # Mounts the Matterbridge storage directory
+    #- "${HOME}/.matterbridge:/root/.matterbridge"
+    - matterbridge_storage:/root/.matterbridge
 
 volumes:
   grafana_data: {}
@@ -180,3 +203,4 @@ volumes:
   nodered_data: {}
   homeassistant_data: {}
   homeassistant_storage: {}
+  matterbridge_storage: {}
