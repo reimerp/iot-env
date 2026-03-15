@@ -83,24 +83,12 @@ notify_area:
           options:
             - label: Basement
               value: basement
-            - label: Bonus Room
-              value: bonus_room
-            - label: Downstairs
-              value: downstairs
             - label: Everywhere
               value: everywhere
-            - label: Game Room
-              value: game_room
-            - label: Garage
-              value: garage
-            - label: Great Room
-              value: great_room
             - label: Kitchen
               value: kitchen
             - label: Living Room
               value: living_room
-            - label: Master
-              value: master
     message:
       description: Message to send
       example: "Hello"
@@ -123,33 +111,15 @@ notify_area:
     - area: basement
       announce: notify.basement_echo_dot_announce
       speak: notify.basement_echo_dot_speak
-    - area: bonus_room
-      announce: notify.bonus_room_echo_dot_announce
-      speak: notify.bonus_room_echo_dot_speak
-    - area: downstairs
-      announce: notify.downstairs_announce
-      speak: notify.downstairs_speak
     - area: everywhere
       announce: notify.everywhere_announce
       speak: notify.everywhere_speak
-    - area: game_room
-      announce: notify.game_room_echo_dot_announce
-      speak: notify.game_room_echo_dot_speak
-    - area: garage
-      announce: notify.garage_echo_dot_announce
-      speak: notify.garage_echo_dot_speak
-    - area: great_room
-      announce: notify.great_room_announce
-      speak: notify.great_room_speak
     - area: kitchen
       announce: notify.kitchen_echo_dot_announce
       speak: notify.kitchen_echo_dot_speak
     - area: living_room
       announce: notify.living_room_echo_dot_announce
       speak: notify.living_room_echo_dot_speak
-    - area: master
-      announce: notify.master_echo_dot_announce
-      speak: notify.master_echo_dot_speak
     timestamp: >
       {{ (datetime | default(now())).isoformat() }}
     input: >

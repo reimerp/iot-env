@@ -1,0 +1,3 @@
+{%- macro macro_is_switch(entity_name, returns) -%}
+  {%- do returns(entity_name.startswith('switch.')) -%}
+{%- endmacro -%}

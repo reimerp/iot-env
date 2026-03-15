@@ -41,12 +41,12 @@ homeassistant:
 automation: !include automations.yaml
 command_line: !include_dir_merge_list command_line
 group: !include groups.yaml
+# logger is not useful in docker, but even w/o it logs
 logger: !include logger.yaml
 lovelace: !include lovelace.yaml
 media_player: !include devices/player.yaml
 mqtt: !include_dir_merge_named mqtt/
 #mqtt: !include mqtt/mqtt.yaml
-#script: !include scripts.yaml
 script directory: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
 switch: !include devices/switch.yaml
@@ -55,9 +55,6 @@ template: !include templates.yaml
 #light: !include light.yaml
 # deprecated, fand eh nur Fritzbox
 #upnp:
-
-# lieber matter
-#emulated_hue: !include emulated_hue.yaml
 
 # Sensors
 sensor: !include devices/sensors.yaml

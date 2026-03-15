@@ -1,18 +1,100 @@
-# ok automatischer trigger alle 5 min
 - id: '1549980351867'
   alias: Raster
-  trigger:
-  - minutes: /5
-    platform: time_pattern
-  condition: []
-  action:
-  - alias: ''
+  description: automatischer trigger alle 5 min
+  mode: single
+  triggers:
+  - trigger: time_pattern
+    minutes: /5
+  conditions: []
+  actions:
+  - action: mqtt.publish
     data:
       payload: raster from hp homeasssistent at {{ now() }}
       topic: test/topic
-    service: mqtt.publish
+- id: '1665511011214'
+  alias: Notify Internet
+  description: Notify LG when Internet is gone
+  mode: single
+  triggers:
+  - trigger: mqtt
+    topic: test/monitor/inet
+  conditions: []
+  variables:
+    notification_action: notify.lg_webos_tv_uj6309
+    message: 'Internet {{ trigger.payload_json[''server''] }}: {{ trigger.payload_json[''error'']
+      }}'
+  actions:
+  - action: '{{ notification_action }}'
+    data:
+      message: '{{ message }}'
+- id: '1640877499206'
+  alias: Kein Internet
+  description: ''
+  mode: single
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.reimers6660_wan_status
+    to: 'on'
+  conditions: []
+  actions:
+  - action: notify.lg_webos_tv_uj6309
+    data:
+      message: Internet offline
+- id: '1592816091306'
+  alias: Reimer Mqtt Test
+  description: wenn irgendeine Nachricht kommt
+  mode: single
+  triggers:
+  - trigger: mqtt
+    topic: test/monitor/test
+  conditions: []
+  actions:
+  - action: persistent_notification.create
+    data:
+      title: Inet Status
+      message: '# Inet Status
 
-# untested
+        Your message goes *here* {{ trigger.payload_json[''server''] }}
+
+        '
+      notification_id: inet_state_notification
+- id: notify_flur_tv
+  alias: Notify on Status
+  description: Notify when mqtt message arrives
+  mode: single
+  triggers:
+  - trigger: state
+    entity_id:
+    - switch.tasmotaflur_flur
+    to:
+    - 'on'
+  conditions: []
+  actions:
+  - action: notify.lg_webos_tv_uj6309
+    data:
+      message: Flur Licht angegangen
+- id: b4a6eeee95f943f38b2fda58ef067cb4
+  alias: Tasmota Firmware Version Check
+  triggers:
+  - trigger: homeassistant
+    event: start
+  actions:
+  - action: mqtt.publish
+    data:
+      topic: groups/tasmotas/cmnd/STATUS
+      payload: '2'
+- id: 92c5adbf2e9443fc98fbb2be6c231ea4
+  alias: Backup Home Assistant every night at 3 AM
+  description: ''
+  mode: single
+  triggers:
+  - trigger: time
+    at: 03:00:00
+  actions:
+  - action: backup.create
+    metadata: {}
+    data: {}
 - alias: Wake-me up using bedroom lights
   trigger:
     platform: template
@@ -41,46 +123,6 @@
       transition: 600
       brightness: 255
   id: 4db819644f234463ac35152c956b9d78
-
-# ok wenn irgendeine Nachricht kommt
-- id: '1592816091306'
-  alias: Reimer Mqtt Test
-  description: description
-  trigger:
-  - platform: mqtt
-    topic: test/monitor/inet
-  condition: []
-  action:
-  - service: persistent_notification.create
-    data:
-      title: Inet Status
-      message: '# Inet Status
-
-        Your message goes *here*
-        {{ trigger.payload_json[''server''] }}
-
-        '
-      notification_id: inet_state_notification
-
-# ok
-- id: '1665511011214'
-  alias: Notify Internet
-  description: Notify LG when Internet is gone
-  triggers:
-  - trigger: mqtt
-    topic: test/monitor/test
-  condition: []
-  variables:
-    notification_action: notify.lg_webos_tv_uj6309
-    message: "Internet {{ trigger.payload_json['server'] }}: {{ trigger.payload_json['error'] }}"
-    #notification_action: notify.mobile_app_sm_s921b
-  actions:
-  - action: "{{ notification_action }}"
-    data:
-      message: "{{ message }}"
-  mode: single
-
-# no:
 - id: '1640869317480'
   alias: TV auf PC
   description: ''
@@ -98,27 +140,14 @@
   - service: switch.turn_on
     target:
       entity_id: switch.pc
-
-- id: b4a6eeee95f943f38b2fda58ef067cb4
-  alias: Tasmota Firmware Version Check
-  trigger:
-  - platform: homeassistant
-    event: start
-  action:
-  - service: mqtt.publish
-    data:
-      topic: groups/tasmotas/cmnd/STATUS
-      payload: '2'
-
 - id: '1660755876743'
   alias: LG webOS Smart TV - Turn On Action
   description: ''
   use_blueprint:
     path: cvroque/webostv_turn_on.yaml
     input:
-      webostv: media_player.lg
+      webostv: media_player.lg_webos_tv_uj6309
       webostv_mac: DC-4F-22-F8-F5-77
-
 - id: '1665249726951'
   alias: Package Lost
   description: Note when ping loss is > 90
@@ -138,115 +167,63 @@
         '
       notification_id: package_loss_notification
   mode: single
-
-- id: '1640877499206'
-  alias: Kein Internet
-  description: ''
-  trigger:
-  - platform: state
-    #entity_id: sensor.fritz_box_6490_cable_wan_status
-    #sensor.reimers6660_wan_status
-    entity_id: binary_sensor.reimers6660_wan_status
-    from: 'on'
-  condition: []
-  action:
-  - service: notify.lg_webos_tv_uj6309
-    data:
-      message: Internet offline
-  mode: single
-
-- alias: Backup Home Assistant every night at 3 AM
-  trigger:
-  - platform: time
-    at: 03:00:00
-  action:
-  - service: backup.create
-  id: 92c5adbf2e9443fc98fbb2be6c231ea4
-
 - id: '1729109608364'
   alias: Handy Laden
   description: ''
-  trigger:
-  - type: battery_level
-    platform: device
-    # FIXME how to avoid the numbers here
-    device_id: sensor.sm_s921b_battery_level
-    entity_id: de149c1764febd2b5ec2b118c6cb39e2
-    domain: sensor
+  mode: single
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.sm_s921b_battery_level
     below: 10
-  condition: []
-  action:
-  - service: notify.lg_webos_tv_uj6309
-    data: {}
-  mode: single
-
-# ok, SEND ANNOUNCEMENT WHEN YOU ARRIVE HOME
-- alias: "Alexa Announce"
-  id: "alexa_announce"
-  triggers:
-    - platform: state
-      entity_id: person.reimer
-      to: "home"
-  actions:
-    - action: notify.send_message
-      data:
-        message: Welcome home Reimer
-      target:
-        entity_id: notify.reiners_echo_dot_durchsagen
-
-# neu gemäss GUI
-- id: notify_flur_tv
-  alias: Notify on Status
-  description: Notify when mqtt message arrives
-  mode: single
-  triggers:
-  - type: turned_on
-#    entity_id: switch.tasmotaflur_flur
-#    # device_id is req
-    # FIXME how to avoid the numbers here
-#    device_id: ef266682a87447ac81a9e9b0ecea29b3
-    device_id: 20470cebaae40541bf1179aa6d5605ee
-    entity_id: d4439ef190d2b16141ee0fd58
-    domain: switch
-#    metadata:
-#      secondary: false
-    platform: device
   conditions: []
   actions:
-#  - data:
-#      message: flur on
-#    service: notify.notify
   - action: notify.lg_webos_tv_uj6309
     data:
-      message: Flur Licht angegangen
-
-# ok
-- description: ""
+      message: Handy Laden
+- alias: Alexa Announce
+  id: alexa_announce
+  triggers:
+  - platform: state
+    entity_id: person.reimer
+    to: home
+  actions:
+  - action: notify.send_message
+    data:
+      message: Welcome home Reimer
+    target:
+      entity_id: notify.reiners_echo_dot_durchsagen
+- alias: "test mqtt trigger"
   id: tv_power_on
   mode: single
   triggers:
-    - trigger: mqtt
-      options:
-        topic: tasmota/tv/stat/POWER
-        payload: "OFF"
+  - trigger: mqtt
+    options:
+      topic: tasmota/tv/stat/POWER
+      payload: 'OFF'
   conditions: []
   actions:
-    - action: notify.lg_webos_tv_uj6309
-      data:
-        message: BG on
-  alias: test
+  - action: notify.lg_webos_tv_uj6309
+    data:
+      message: BG off
+- id: auto.alexa_quiet_on
+  alias: Alexa ruhig
+  mode: single
+  triggers:
+  - trigger: time
+    at: 01:00:00
+  actions:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.reiners_echo_dot_bitte_nicht_storen
+- id: auto.alexa_quiet_off
+  alias: Alexa an
+  mode: single
+  triggers:
+  - trigger: time
+    at: 08:00:00
+  actions:
+  - action: switch.turn_off
+    target:
+      entity_id: switch.reiners_echo_dot_bitte_nicht_storen
 
-#ok:
-
-#action: notify.send_message
-#data:
-#  message: hallo alexa
-#target:
-#  entity_id: notify.reiners_echo_dot_sprechen
-#  # das ist das mit nem gong davor, geht auch an alexa Gruppen entity_id: notify.reiners_echo_dot_durchsagen
-
-# das entity_id geht mit lg nicht
-# ok
-#action: notify.mobile_app_sm_s921b
-#data:
-#  message: hallo

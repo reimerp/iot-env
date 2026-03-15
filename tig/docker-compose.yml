@@ -28,7 +28,7 @@ services:
     devices:
     - ${SMART_DEV}:${SMART_DEV}
     cap_add:
-    #- SYS_RAWIO
+    - SYS_RAWIO
     - SYS_ADMIN
     user: telegraf:${DOCKER_GID}
 

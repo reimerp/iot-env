@@ -302,11 +302,11 @@ light:
     command_topic: "tasmota/zigbee/cmnd/ZbSend"
     state_topic: "tasmota/zigbee/STATE"
     state_value_template: "{{ value_json.POWER }}"
-    brightness_command_topic: "cmnd/tasmota/Dimmer"
-    brightness_state_topic: "tele/tasmota/STATE"
-    brightness_scale: 100
-    on_command_type: "brightness"
-    brightness_value_template: "{{ value_json.Dimmer }}"
+#    brightness_command_topic: "tasmota/Dimmer"
+#    brightness_state_topic: "tele/tasmota/STATE"
+#    brightness_scale: 100
+#    on_command_type: "brightness"
+#    brightness_value_template: "{{ value_json.Dimmer }}"
     payload_on: "{'Device':'Tripod','Send':{'Power':'ON'}}"
     payload_off: "{'Device':'Tripod','Send':{'Power':'ON'}}"
     availability:

@@ -1,0 +1,33 @@
+# no notify.tv
+tv_auf_sat:
+  alias: TV auf Receiver
+  sequence:
+  - action: notify.lg_webos_tv_uj6309
+    data:
+      message: "Selecting Receiver"
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.lg_webos_tv_uj6309
+    data:
+      volume_level: 0
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.waipu_tv_stick
+    data:
+      volume_level: 0.5
+# 40dB
+  - action: mqtt.publish
+    data:
+      payload: '{"Protocol":"DENON","Bits":15,"Data":0x1984}'
+      topic: tasmota/ir/cmnd/irsend
+  - action: media_player.select_source
+    data:
+      source: Receiver
+    target:
+      entity_id: media_player.lg_webos_tv_uj6309
+# Waipu
+  - action: mqtt.publish
+    data:
+      payload: '{"Protocol":"DENON","Bits":15,"Data":0x214C}'
+      topic: tasmota/ir/cmnd/irsend
+
