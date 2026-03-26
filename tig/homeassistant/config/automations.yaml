@@ -181,18 +181,18 @@
   - action: notify.lg_webos_tv_uj6309
     data:
       message: Handy Laden
-- alias: Alexa Announce
-  id: alexa_announce
-  triggers:
-  - platform: state
-    entity_id: person.reimer
-    to: home
-  actions:
-  - action: notify.send_message
-    data:
-      message: Welcome home Reimer
-    target:
-      entity_id: notify.reiners_echo_dot_durchsagen
+#- alias: Alexa Announce
+#  id: alexa_announce
+#  triggers:
+#  - platform: state
+#    entity_id: person.reimer
+#    to: home
+#  actions:
+#  - action: notify.send_message
+#    data:
+#      message: Welcome home Reimer
+#    target:
+#      entity_id: notify.reiners_echo_dot_durchsagen
 - alias: "test mqtt trigger"
   id: tv_power_on
   mode: single

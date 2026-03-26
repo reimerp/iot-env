@@ -1,0 +1,15 @@
+# no notify.tv
+tv_on:
+  alias: TV on
+  sequence:
+# Receiver ON
+  - action: mqtt.publish
+    data:
+      payload: '{"Protocol":"DENON","Bits":15,"Data":0x221C}'
+      topic: tasmota/ir/cmnd/irsend
+# TV geht automatisch an
+  - action: mqtt.publish
+    data:
+      payload: '{"Protocol":"NEC,"Bits":32,""DataLSB":0x04FBC43B'
+      topic: tasmota/ir/cmnd/irsend
+

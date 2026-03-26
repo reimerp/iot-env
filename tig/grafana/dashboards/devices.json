@@ -188,7 +188,7 @@
           "hide": false,
           "measurement": "sensors",
           "orderByTime": "ASC",
-          "policy": "autogen",
+          "policy": "$rp",
           "refId": "Temp_int",
           "resultFormat": "time_series",
           "select": [

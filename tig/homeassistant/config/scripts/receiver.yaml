@@ -1,10 +1,12 @@
 # no notify.tv
-tv_auf_sat:
+tv_auf_receicer:
   alias: TV auf Receiver
   sequence:
   - action: notify.lg_webos_tv_uj6309
     data:
       message: "Selecting Receiver"
+      #  title: is ignored
+# no "is_volume_muted: true" since icon would be visable
   - action: media_player.volume_set
     target:
       entity_id: media_player.lg_webos_tv_uj6309
