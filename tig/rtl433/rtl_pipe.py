@@ -17,6 +17,9 @@ class RemoteSensor(MqttBase):
         self.models = ['inFactory-TH', 'GT-WT02']
         # alt: 433198200 434000 434087
         self.pipe = Popen(['rtl_433', '-p20', '-g42', '-f434086k', '-R91', '-R25', '-Csi', '-Fjson'], stdout=PIPE, stdin=PIPE, stderr=None)
+        #res = self.pipe.communicate()   # erst das setzt den returncode
+        #print(f'retcode={self.pipe.returncode} {res}')
+        #print(self.pipe)
 
     def on_publish(self, client, userdata, mid):
         print(client, userdata, mid)
@@ -34,6 +37,7 @@ class RemoteSensor(MqttBase):
         return '{{"Time":"{time}","RTL433":{{"Temperature":{temperature_C},"Humidity":{humidity},"Vcc":{Vcc},"TempUnit":"C"}}}}'.format(**r)
 
     def publish(self):
+        if not self.run: return
         self.oldTS = datetime.now();
         val = RemoteSensor.format(self.val)
         retain = True
@@ -47,7 +51,11 @@ class RemoteSensor(MqttBase):
         log_ignore = True
         while self.pipe.poll() is None:
             child_output = self.pipe.stdout.readline()
-            if self.verbose: print(child_output)
+            if self.verbose: print(f'out="{child_output}" retcode={self.pipe.returncode}')
+            if not child_output:
+                self.run = 0
+                return
+            # wird b'' wenn Device stirbt
             j_data = json.loads(child_output)
             # id changes on each battery insertion
             if not j_data['model'] in self.models or j_data['channel'] != 1:
@@ -90,5 +98,5 @@ def test():
 if __name__ == '__main__':
     #test()
     sensor = RemoteSensor()
-    #sensor.verbose = True
+    sensor.verbose = True
     sensor.connect_mqtt()
