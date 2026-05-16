@@ -24,9 +24,8 @@
   "description": "A beautiful one-stop-shop dashboard to monitor ALL your Influx instances. Both Influx specific metrics, as well key OS metrics.",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 13109,
   "graphTooltip": 1,
-  "id": 17,
+  "id": 4,
   "links": [
     {
       "icon": "doc",
@@ -56,12 +55,11 @@
       "url": "https://docs.influxdata.com/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring"
     }
   ],
-  "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
@@ -70,7 +68,6 @@
         "y": 0
       },
       "id": 68,
-      "links": [],
       "options": {
         "code": {
           "language": "plaintext",
@@ -80,24 +77,12 @@
         "content": "### This dashboard aims to provide detailed visibility into the runtime stats for an InfluxDB instance using Influx's own metrics db - *_internal*, as well as a quick OS overview using *telegraf*. \n\nSimply chose the instance you want to monitor with the dropdown: \"InfluxDB Metric Database\". This dashboard also hosts all the **alerts** related to InfluxDB monitoring. \n\n> Please only add alerts to the row titled \"Alerts\", everything other than this row uses Grafana's Template variables in the panels, which does not support alerting.\n",
         "mode": "markdown"
       },
-      "pluginVersion": "9.5.8",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P951FEA4DE68E13C5"
-          },
-          "refId": "A"
-        }
-      ],
+      "pluginVersion": "11.5.8",
+      "title": "",
       "type": "text"
     },
     {
       "collapsed": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -106,54 +91,10 @@
       },
       "id": 29,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P951FEA4DE68E13C5"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Alerts",
       "type": "row"
     },
     {
-      "alert": {
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                70
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "B",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "5m",
-        "handler": 1,
-        "message": "CPU usage for InfluxDB host HIGH > 70% for 5m\n<br>\nCheck if this is due to high IO Wait, if it is there may be too many http connections being made to influx for it to complete compactions in fast enough.\n<br><br>\n<a href=\"https://duckduckgo.com\">Duckduckgo</a>",
-        "name": "InfluxDB CPU Usage alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "datasource": {
         "type": "influxdb",
         "uid": "P04E2EA1B5E781F5B"
@@ -164,11 +105,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -177,6 +120,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -220,8 +164,6 @@
         "y": 4
       },
       "id": 62,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -233,11 +175,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "desc"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -292,41 +235,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                60
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "5m",
-        "handler": 1,
-        "message": "MEM usage for InfluxDB host HIGH > 60% for 5m\n<br>\nThe host will eventually run out of MEM, and oom will kill influx.\n<br><br>\n<a href=\"https://duckduckgo.com/\">Duckduckgo</a>",
-        "name": "InfluxDB RAM usage alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "datasource": {
         "type": "influxdb",
         "uid": "P04E2EA1B5E781F5B"
@@ -337,11 +245,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -350,6 +260,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -393,8 +304,6 @@
         "y": 4
       },
       "id": 64,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -405,11 +314,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host",
@@ -458,41 +368,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                5000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "B",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "5m",
-        "handler": 1,
-        "message": "DISK IO Read Time for InfluxDB host HIGH > 5s for 5m\n<br>\nInflux is probably having a hard time compacting. Shards may be exploding. You may need to drop a few shards, if this is not resolved soon.\n<br><br>\n<a href=\"https://duckduckgo.com/\">Duckduckgo</a>",
-        "name": "InfluxDB Disk I/O read time for /dev/sda alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "datasource": {
         "type": "influxdb",
         "uid": "P04E2EA1B5E781F5B"
@@ -503,11 +378,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -516,6 +393,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -572,8 +450,6 @@
         "y": 4
       },
       "id": 66,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -585,11 +461,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $tag_name: $col",
@@ -651,10 +528,6 @@
     },
     {
       "collapsed": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -663,15 +536,6 @@
       },
       "id": 31,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P951FEA4DE68E13C5"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Overview",
       "type": "row"
     },
@@ -721,13 +585,13 @@
         "y": 14
       },
       "id": 26,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -735,10 +599,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -830,13 +696,13 @@
         "y": 14
       },
       "id": 42,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -844,10 +710,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Write Request {host: $tag_hostname}",
@@ -949,13 +817,13 @@
         "y": 14
       },
       "id": 43,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -963,10 +831,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Query Request {host: $tag_hostname}",
@@ -1067,13 +937,13 @@
         "y": 14
       },
       "id": 45,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1081,10 +951,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -1182,9 +1054,10 @@
         "y": 14
       },
       "id": 47,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -1195,9 +1068,10 @@
         },
         "showThresholdLabels": false,
         "showThresholdMarkers": true,
+        "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -1295,9 +1169,10 @@
         "y": 14
       },
       "id": 49,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -1308,9 +1183,10 @@
         },
         "showThresholdLabels": false,
         "showThresholdMarkers": true,
+        "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -1407,13 +1283,13 @@
         "y": 14
       },
       "id": 51,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1421,10 +1297,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "datasource": {
@@ -1482,11 +1360,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "none",
@@ -1495,6 +1375,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1534,8 +1415,6 @@
         "y": 18
       },
       "id": 55,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -1549,11 +1428,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1617,11 +1497,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -1630,6 +1512,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1673,8 +1556,6 @@
         "y": 18
       },
       "id": 57,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -1686,11 +1567,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "desc"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1755,11 +1637,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -1768,6 +1652,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1822,8 +1707,6 @@
         "y": 18
       },
       "id": 60,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -1837,11 +1720,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $tag_interface: $col",
@@ -1966,11 +1850,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "points",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -1979,6 +1865,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 3,
@@ -2021,8 +1908,6 @@
         "y": 25
       },
       "id": 25,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2034,11 +1919,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$col",
@@ -2109,11 +1995,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "bars",
             "fillOpacity": 100,
             "gradientMode": "none",
@@ -2122,6 +2010,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2164,8 +2053,6 @@
         "y": 25
       },
       "id": 58,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2177,11 +2064,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$col",
@@ -2252,11 +2140,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -2265,6 +2155,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2320,8 +2211,6 @@
         "y": 32
       },
       "id": 53,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2333,11 +2222,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_host: $tag_name: $col",
@@ -2351,101 +2241,90 @@
             {
               "interval": "auto",
               "params": [
-                "auto"
+                "$__interval"
               ],
               "type": "time"
             },
             {
               "key": "host",
               "params": [
-                "tag"
+                "host::tag"
               ],
               "type": "tag"
             },
             {
               "key": "path",
               "params": [
-                "tag"
+                "name::tag"
               ],
               "type": "tag"
             }
           ],
-          "measurement": "io_reads",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(read_time),1s) as \"read\" FROM \"diskio\" WHERE \"host\" =~ /$hostname$/ AND \"name\" =~ /nvme0n1$/  AND $timeFilter GROUP BY time($interval), *",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "$tag_host: $tag_name: $col",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P04E2EA1B5E781F5B"
-          },
-          "dsType": "influxdb",
-          "function": "mean",
-          "groupBy": [
-            {
-              "interval": "auto",
-              "params": [
-                "auto"
-              ],
-              "type": "time"
-            },
-            {
-              "key": "host",
-              "params": [
-                "tag"
-              ],
-              "type": "tag"
-            },
-            {
-              "key": "path",
-              "params": [
-                "tag"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "io_reads",
+          "hide": false,
+          "measurement": "diskio",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT non_negative_derivative(mean(write_time),1s) as \"write\" FROM \"diskio\" WHERE \"host\" =~ /$hostname$/ AND \"name\" =~ /nvme0n1$/ AND $timeFilter GROUP BY time($interval), *",
-          "rawQuery": true,
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "value"
+                  "write_time"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "mean"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  "write"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "read_time"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  "read"
+                ],
+                "type": "alias"
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "name::tag",
+              "operator": "=",
+              "value": "nvme0n1"
+            }
+          ]
         }
       ],
       "title": "Disk I/O time for /dev/nvme0n1",
@@ -2453,10 +2332,6 @@
     },
     {
       "collapsed": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2465,15 +2340,6 @@
       },
       "id": 33,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P951FEA4DE68E13C5"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Httpd",
       "type": "row"
     },
@@ -2488,11 +2354,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -2501,6 +2369,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -2543,8 +2412,6 @@
         "y": 39
       },
       "id": 13,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2556,11 +2423,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Query {host: $tag_hostname}",
@@ -2696,11 +2564,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -2709,6 +2579,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -2751,8 +2622,6 @@
         "y": 39
       },
       "id": 41,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2764,11 +2633,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Server Errors {host: $tag_hostname}",
@@ -2901,11 +2771,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -2914,6 +2786,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -2956,8 +2829,6 @@
         "y": 39
       },
       "id": 9,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -2968,11 +2839,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Write Request {host: $tag_hostname}",
@@ -3080,10 +2952,6 @@
     },
     {
       "collapsed": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3092,15 +2960,6 @@
       },
       "id": 35,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P951FEA4DE68E13C5"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Db - Shards/DBs",
       "type": "row"
     },
@@ -3115,11 +2974,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "none",
@@ -3128,6 +2989,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3170,8 +3032,6 @@
         "y": 49
       },
       "id": 8,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3182,11 +3042,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_database",
@@ -3249,11 +3110,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "none",
@@ -3262,6 +3125,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3304,8 +3168,6 @@
         "y": 49
       },
       "id": 7,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3316,11 +3178,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "$tag_database",
@@ -3383,11 +3246,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -3396,6 +3261,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3438,7 +3304,6 @@
         "y": 49
       },
       "id": 6,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3449,11 +3314,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "{host: $tag_hostname}",
@@ -3528,11 +3394,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -3541,6 +3409,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3582,7 +3451,6 @@
         "y": 49
       },
       "id": 2,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3593,11 +3461,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Query OK",
@@ -3706,11 +3575,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -3719,6 +3590,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3761,8 +3633,6 @@
         "y": 56
       },
       "id": 11,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3773,11 +3643,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "{host: $tag_hostname}",
@@ -3852,11 +3723,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -3865,6 +3738,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "stepAfter",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3907,8 +3781,6 @@
         "y": 56
       },
       "id": 10,
-      "interval": "",
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -3919,11 +3791,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "{host: $tag_hostname}",
@@ -3997,11 +3870,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 50,
             "gradientMode": "none",
@@ -4010,6 +3885,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "stepAfter",
             "lineWidth": 1,
             "pointSize": 5,
@@ -4051,7 +3927,6 @@
         "y": 56
       },
       "id": 40,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -4063,11 +3938,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.5.8",
+      "pluginVersion": "11.5.8",
       "targets": [
         {
           "alias": "Write Fail",
@@ -4158,9 +4034,9 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "influxdb"
   ],
@@ -4168,26 +4044,21 @@
     "list": [
       {
         "current": {
-          "selected": false,
           "text": "InfluxInternal",
           "value": "InfluxInternal"
         },
-        "hide": 0,
         "includeAll": false,
         "label": "InfluxDB Metric Database",
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "influxdb",
         "refresh": 1,
         "regex": "/[Ii]nternal/",
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -4196,7 +4067,6 @@
           "uid": "$datasource"
         },
         "definition": "show tag values with key=\"hostname\"",
-        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "hostname",
@@ -4204,23 +4074,16 @@
         "query": "show tag values with key=\"hostname\"",
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "auto": true,
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
           "text": "auto",
           "value": "$__auto_interval_Interval"
         },
-        "hide": 0,
         "name": "Interval",
         "options": [
           {
@@ -4280,9 +4143,7 @@
           }
         ],
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
-        "queryValue": "",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       }
     ]
@@ -4291,31 +4152,7 @@
     "from": "now-3h",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "browser",
   "title": "InfluxDB Overview",
   "uid": "Ekiwl0JmzP3",

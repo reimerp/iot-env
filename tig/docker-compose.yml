@@ -161,7 +161,7 @@ services:
 
 # The minimal version does not contain build tools or support for projects.
   nodered:
-    image: "docker.io/nodered/node-red:4.1.7-minimal"
+    image: "docker.io/nodered/node-red:4.1.10-minimal"
     restart: unless-stopped
     user: node-red
     volumes:

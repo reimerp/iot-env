@@ -300,6 +300,7 @@ light:
   - name: "Tripod"
     unique_id: "light.zigbee_tripod_0xec1bbdfffeae209a"
     command_topic: "tasmota/zigbee/cmnd/ZbSend"
+    # does not work correctly
     state_topic: "tasmota/zigbee/STATE"
     state_value_template: "{{ value_json.POWER }}"
 #    brightness_command_topic: "tasmota/Dimmer"
@@ -307,8 +308,8 @@ light:
 #    brightness_scale: 100
 #    on_command_type: "brightness"
 #    brightness_value_template: "{{ value_json.Dimmer }}"
-    payload_on: "{'Device':'Tripod','Send':{'Power':'ON'}}"
-    payload_off: "{'Device':'Tripod','Send':{'Power':'ON'}}"
+    payload_on: '{"Device":"Tripod","Send":{"Power":"ON"}}'
+    payload_off: '{"Device":"Tripod","Send":{"Power":"OFF"}}'
     availability:
     - topic: "tasmota/zigbee/tele/LWT"
       payload_available: "Online"

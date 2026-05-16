@@ -3,3 +3,6 @@ tig/.env
 tig/env.telegraf_mqtt
 tig/.localpass
 .direnv/
+tig/homeassistant/config/.cache
+tig/homeassistant/config/secrets.yaml
+tig/matterbridge/matterbridge-hass/

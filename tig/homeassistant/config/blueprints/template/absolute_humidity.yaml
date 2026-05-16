@@ -1,7 +1,7 @@
 # https://community.home-assistant.io/t/set-icon-and-unit-of-measurement-in-a-template-using-a-blueprint/801905
 blueprint:
-  name: Corrects a given sensor value by given offset
-  description: Creates a sensor which holds the corrected value of a reference sensor
+  name: Calculates absolute humidity
+  description: Creates a sensor which holds the calculated absolute humidity calculated from temperature and humidity
   domain: template
   input:
     reference_temp:

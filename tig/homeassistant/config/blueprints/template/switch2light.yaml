@@ -1,0 +1,27 @@
+blueprint:
+  name: Converts Switches to light
+  description: A given switch is converted to a light
+  domain: template
+  input:
+    reference_switch:
+      name: Referended Switch
+      description: The switch to be converted
+      selector:
+        entity:
+          domain: switch
+variables:
+  reference_switch: !input reference_switch
+light:
+  name: "{{ state_attr(reference_switch, 'friendly_name')|default(reference_switch|slugify, 1) }} Light"
+  unique_id: "light_{{ state_attr(reference_switch, 'unique_id')}}"
+  icon: "{{ state_attr(reference_switch, 'icon')}}"
+  availability: "{{ has_value(reference_switch) }}"
+  state: "{{ is_state(reference_switch, 'on') }}"
+  turn_on:
+    - action: switch.turn_on
+      target:
+        entity_id: "{{ reference_switch }}"
+  turn_off:
+    - action: switch.turn_off
+      target:
+        entity_id: "{{ reference_switch }}"

@@ -1,0 +1,4 @@
+# does not work: try template
+#- platform: switch
+#  name: Wohnzimmer Kerzenleuchter
+#  entity_id: switch.tasmotakerze_kerze

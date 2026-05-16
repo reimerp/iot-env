@@ -94,9 +94,32 @@
 - weather:
   - name: Aussenwetter
     unique_id: weather.aussenwetter
+    # Received invalid weather condition: unknown for entity weather.aussenwetter, expected one of clear-night, cloudy, exceptional, fog, hail, lightning-rainy, lightning, partlycloudy, pouring, rainy, snowy-rainy, snowy, sunny, windy-variant, windy
     condition_template: '{{ states(''weather.openweathermap'') }}'
-    humidity_template: '{{ states(''sensor.rtl433_aussensensor_luftfeuchtigkeit'') | float(0)
-      }}'
-    temperature_template: '{{ states(''sensor.rtl433_aussensensor_temperatur'') | float(0)
-      }}'
+    humidity_template: '{{ states(''sensor.rtl433_aussensensor_luftfeuchtigkeit'') | float(0) }}'
+    temperature_template: '{{ states(''sensor.rtl433_aussensensor_temperatur'') | float(0) }}'
+
+- unique_id: light_switch.tasmotakerze_kerze
+  use_blueprint:
+    path: switch2light.yaml
+    input:
+      reference_switch: switch.tasmotakerze_kerze
+
+- unique_id: light_switch.tasmotavorhang_vorhang
+  use_blueprint:
+    path: switch2light.yaml
+    input:
+      reference_switch: switch.tasmotavorhang_vorhang
+
+- unique_id: light_switch.tasmotabaum_baum
+  use_blueprint:
+    path: switch2light.yaml
+    input:
+      reference_switch: switch.tasmotabaum_baum
+
+- unique_id: light_switch.tasmotaflur_flur
+  use_blueprint:
+    path: switch2light.yaml
+    input:
+      reference_switch: switch.tasmotaflur_flur
 

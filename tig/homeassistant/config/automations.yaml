@@ -84,17 +84,17 @@
     data:
       topic: groups/tasmotas/cmnd/STATUS
       payload: '2'
-- id: 92c5adbf2e9443fc98fbb2be6c231ea4
-  alias: Backup Home Assistant every night at 3 AM
-  description: ''
-  mode: single
-  triggers:
-  - trigger: time
-    at: 03:00:00
-  actions:
-  - action: backup.create
-    metadata: {}
-    data: {}
+#- id: 92c5adbf2e9443fc98fbb2be6c231ea4
+#  alias: Backup Home Assistant every night at 3 AM
+#  description: ''
+#  mode: single
+#  triggers:
+#  - trigger: time
+#    at: 03:00:00
+#  actions:
+#  - action: backup.create
+#    metadata: {}
+#    data: {}
 - alias: Wake-me up using bedroom lights
   trigger:
     platform: template

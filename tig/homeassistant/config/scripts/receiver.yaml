@@ -22,6 +22,7 @@ tv_auf_receicer:
     data:
       payload: '{"Protocol":"DENON","Bits":15,"Data":0x1984}'
       topic: tasmota/ir/cmnd/irsend
+# ginge auch via ir auf HDMI2 (0x04FBCC33)
   - action: media_player.select_source
     data:
       source: Receiver
