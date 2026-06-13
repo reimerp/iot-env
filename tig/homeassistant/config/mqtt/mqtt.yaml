@@ -71,15 +71,17 @@ switch:
     availability:
     - topic: "omg/bridge/LWT"
 
+# example
 #  - name: "Tasmota Switch 1"
-#  state_topic: "tasmota/tv/stat/RESULT"
-#  value_template: "{{ value_json.POWER }}"
-#  command_topic: "tasmota/tv/cmnd/POWER"
-#  payload_on: "ON"
-#  payload_off: "OFF"
-#  availability_topic: "tasmota/tv/tele/LWT"
-#  payload_available: "Online"
-#  payload_not_available: "Offline"
+#    state_topic: "tasmota/kerze/stat/POWER"
+#    value_template: "{{ value_json.POWER }}"
+#    command_topic: "tasmota/kerze/cmnd/POWER"
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    availability_topic: "tasmota/kerze/tele/LWT"
+#    payload_available: "Online"
+#    payload_not_available: "Offline"
+
 #  qos: 1
 #  retain: false
 
@@ -93,88 +95,6 @@ sensor:
     device_class: battery
 
 #tasmota/strom/tele/STATE {"Time":"2022-01-21T00:03:13","Uptime":"0T00:00:09","UptimeSec":9,"Vcc":3.366,"Heap":24,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"Wifi":{"AP":1,"SSId":"BaseLAN","BSSId":"2C:67:FB:57:17:AC","Channel":6,"Mode":"11n","RSSI":32,"Signal":-84,"LinkCount":1,"Downtime":"0T00:00:03"}}
-
-  - name: "Bad ATC Batterie"
-    unique_id: "sensor.atc_edc2_battery"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Battery }}"
-    unit_of_measurement: "%"
-    device_class: battery
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
-# WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'dict object' has no attribute 'Temperature' when rendering '{{ value_json.Temperature }}'
-
-  - name: "Bad Temperatur"
-    unique_id: "sensor.atc_edc2_temperature"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Temperature }}"
-    unit_of_measurement: "°C"
-    device_class: temperature
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
-  - name: "Bad Luftfeuchtigkeit"
-    unique_id: "sensor.atc_edc2_humidity"
-    state_topic: "tasmota_ble/tele/bad"
-    value_template: "{{ value_json['ATCe4edc2'].Humidity }}"
-    unit_of_measurement: "%"
-    device_class: humidity
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
-  - name: "Aussensensor Temperature"
-    unique_id: "sensor.rtl433aussen_temperature"
-    state_topic: "rtl433/inFactory-TH"
-    value_template: "{{ value_json.RTL433.Temperature }}"
-    unit_of_measurement: "°C"
-    device_class: temperature
-    availability:
-    - topic: "lwt/rtl_pipe"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-    device:
-      identifiers:
-      - "rtl433.93.inFactory-TH.0x01"
-      name: "RTL433"
-      model: "WS 1644 Sensor via DVB-t Stick"
-      manufacturer: "Waagen-Schmitt / Terratec"
-      sw_version: "20.02-38-gf26830d"
-
-  - name: "Aussensensor Humidity" 
-    unique_id: "sensor.rtl433aussen_humidity"
-    state_topic: "rtl433/inFactory-TH"
-    value_template: "{{ value_json.RTL433.Humidity }}"
-    unit_of_measurement: "%"
-    device_class: humidity
-    availability:
-    - topic: "lwt/rtl_pipe"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-    device:
-      identifiers:
-      - "rtl433.93.inFactory-TH.0x01"
-      name: "RTL433"
-      model: "WS 1644 Sensor via DVB-t Stick"
-      manufacturer: "Waagen-Schmitt / Terratec"
-      sw_version: "20.02-38-gf26830d"
-
-  - name: "Aussensensor Battery Level"
-    unique_id: "sensor.rtl433aussen_battery_level"
-    state_topic: "rtl433/inFactory-TH"
-    value_template: "{{ (value_json.RTL433.Vcc | float(-1) * 30) | round() }}"
-    unit_of_measurement: "%"
-    device_class: battery
-    availability:
-    - topic: "lwt/rtl_pipe"
-      payload_available: "Online"
-      payload_not_available: "Offline"
 
 # Overwrite Deepsleep -> no availability
 #  - name: "Sensor Temperatur"
@@ -240,39 +160,6 @@ sensor:
       payload_available: "Online"
       payload_not_available: "Offline"
 
-  - name: "SchlafBattery"
-    unique_id: "0xa4c138a08f85_battery_atc"
-    state_topic: "tasmota_ble/tele/schlaf"
-    value_template: "{{ value_json['ATCa08f85'].Battery }}"
-    unit_of_measurement: "%"
-    device_class: battery
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
-  - name: "Schlaftemperatur"
-    unique_id: "0xa4c138a08f85_temperature_atc"
-    state_topic: "tasmota_ble/tele/schlaf"
-    value_template: "{{ value_json['ATCa08f85'].Temperature }}"
-    unit_of_measurement: "°C"
-    device_class: temperature
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
-  - name: "Schlaffeuchtigkeit"
-    unique_id: "0xa4c138a08f85_humidity_atc"
-    state_topic: "tasmota_ble/tele/schlaf"
-    value_template: "{{ value_json['ATCa08f85'].Humidity }}"
-    unit_of_measurement: "%"
-    device_class: humidity 
-    availability:
-    - topic: "tasmota/abseite/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-
 # issue is bug in tasmota RSS should be dBm
   - name: "Wi-Fi Quality"
     unique_id: "sensor.tasmota.wifi.rssi"
@@ -298,21 +185,19 @@ sensor:
 
 light:
   - name: "Tripod"
+    schema: template
     unique_id: "light.zigbee_tripod_0xec1bbdfffeae209a"
     command_topic: "tasmota/zigbee/cmnd/ZbSend"
-    # does not work correctly
-    state_topic: "tasmota/zigbee/STATE"
-    state_value_template: "{{ value_json.POWER }}"
+    command_on_template: '{"Device":"Tripod","Send":{"Power":"ON"}}'
+    command_off_template: '{"Device":"Tripod","Send":{"Power":"OFF"}}'
+    state_topic: "zigbee/tripod/stat/POWER"
+    state_template: "{{ value.lower() }}"
 #    brightness_command_topic: "tasmota/Dimmer"
 #    brightness_state_topic: "tele/tasmota/STATE"
 #    brightness_scale: 100
 #    on_command_type: "brightness"
 #    brightness_value_template: "{{ value_json.Dimmer }}"
-    payload_on: '{"Device":"Tripod","Send":{"Power":"ON"}}'
-    payload_off: '{"Device":"Tripod","Send":{"Power":"OFF"}}'
     availability:
     - topic: "tasmota/zigbee/tele/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
-    qos: 1
-    retain: false

@@ -8,14 +8,14 @@
   use_blueprint:
     path: absolute_humidity.yaml
     input:
-      reference_temp: sensor.schlaftemperatur
-      reference_humi: sensor.schlaffeuchtigkeit
+      reference_temp: sensor.schlaf_atc_temperatur
+      reference_humi: sensor.schlaf_atc_luftfeuchtigkeit
 - unique_id: sensor_bad_absolute_humidity_0001
   use_blueprint:
     path: absolute_humidity.yaml
     input:
-      reference_temp: sensor.bad_temperatur
-      reference_humi: sensor.bad_luftfeuchtigkeit
+      reference_temp: sensor.bad_atc_temperatur
+      reference_humi: sensor.bad_atc_luftfeuchtigkeit
 # muell
 #- unique_id: sensor_bad_bt_absolute_humidity_0001
 #  use_blueprint:
@@ -45,8 +45,8 @@
   use_blueprint:
     path: absolute_humidity.yaml
     input:
-      reference_temp: sensor.rtl433_aussensensor_temperature
-      reference_humi: sensor.rtl433_aussensensor_humidity
+      reference_temp: sensor.aussensensor_temperatur
+      reference_humi: sensor.aussensensor_luftfeuchtigkeit
 - unique_id: sensor_openweather_absolute_humidity_0001
   use_blueprint:
     path: absolute_humidity.yaml
@@ -59,6 +59,30 @@
     input:
       reference_temp: sensor.openweathermap_forecast_temperature
       reference_humi: sensor.openweathermap_humidity
+
+#- light:
+#  - name: "Ambilight"
+#    unique_id: hue_ambilight
+#    state: "{{ states('number.sync_box_brightness') | int > 0 }}"
+#    level: "{{ (states('number.sync_box_brightness') | int * 255 / 100) | int }}"
+#    turn_on:
+#      - service: number.set_value
+#        target:
+#          entity_id: number.sync_box_brightness
+#        data:
+#          value: 100
+#    turn_off:
+#      - service: number.set_value
+#        target:
+#          entity_id: number.sync_box_brightness
+#        data:
+#          value: 0
+#    set_level:
+#      - service: number.set_value
+#        target:
+#          entity_id: number.sync_box_brightness
+#        data:
+#          value: "{{ (brightness / 255 * 100) | round(0) }}"
 
 - sensor:
 #tasmota_ble/tele/bad {"Time":"2022-01-20T23:40:57","alias":"bad","mac":"a4c138e4edc2","Temperature":22.6,"Humidity":65.0,"DewPoint":15.7,"Battery":57,"RSSI":-83}
@@ -87,7 +111,7 @@
 
 #  - weather:
 #    #pressure: "{{ states('sensor.sensor_luftdruck') | float(0) }}"
-#    #temperature: "{{ states('sensor.rtl433_aussensensor_temperatur') | float(0) }}"
+#    #temperature: "{{ states('sensor.aussensensor_temperatur') | float(0) }}"
 #  #  forecast: "{{ state_attr('weather.openweathermap', 'forecast') }}"
 
 # 'condition_template'
@@ -95,9 +119,9 @@
   - name: Aussenwetter
     unique_id: weather.aussenwetter
     # Received invalid weather condition: unknown for entity weather.aussenwetter, expected one of clear-night, cloudy, exceptional, fog, hail, lightning-rainy, lightning, partlycloudy, pouring, rainy, snowy-rainy, snowy, sunny, windy-variant, windy
-    condition_template: '{{ states(''weather.openweathermap'') }}'
-    humidity_template: '{{ states(''sensor.rtl433_aussensensor_luftfeuchtigkeit'') | float(0) }}'
-    temperature_template: '{{ states(''sensor.rtl433_aussensensor_temperatur'') | float(0) }}'
+    condition_template: "{{ states('weather.openweathermap') }}"
+    humidity_template: "{{ states('sensor.aussensensor_luftfeuchtigkeit') | float(0) }}"
+    temperature_template: "{{ states('sensor.aussensensor_temperatur') | float(0) }}"
 
 - unique_id: light_switch.tasmotakerze_kerze
   use_blueprint:

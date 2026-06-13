@@ -2,3 +2,8 @@
 #- platform: switch
 #  name: Wohnzimmer Kerzenleuchter
 #  entity_id: switch.tasmotakerze_kerze
+
+# - platform: mqtt_template   # Platform error 'light' from integration 'mqtt_template' - Integration 'mqtt_template' not found.
+
+# - platform: mqtt	# The mqtt platform for the light integration does not support platform setup. Please remove it from your config.
+

@@ -128,10 +128,10 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "line+area"
@@ -210,7 +210,7 @@
           "measurement": "cpu_percentageBusy",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT 100-mean(usage_idle) as \"used\" FROM \"cpu\" WHERE \"host\" =~ /^$hostname$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
+          "query": "SELECT 100-mean(usage_idle) as \"used\" FROM \"cpu\" WHERE \"host\" =~ /^$hostname$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY host, time($interval), *",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -343,7 +343,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"used_percent\") FROM \"mem\" WHERE (\"host\" =~ /^$hostname$/) AND $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+          "query": "SELECT last(\"used_percent\") FROM \"mem\" WHERE (\"host\" =~ /^$hostname$/) AND $timeFilter GROUP BY time($interval), \"host\" fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -502,7 +502,7 @@
           "measurement": "io_reads",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(read_time),1s) as \"read\" FROM \"diskio\" WHERE \"host\" =~ /^$hostname$/ AND \"name\" =~ /nvme0n1$/  AND $timeFilter GROUP BY time($interval), *",
+          "query": "SELECT non_negative_derivative(mean(read_time),1s) as \"read\" FROM \"diskio\" WHERE \"host\" =~ /^$hostname$/ AND \"name\" =~ /sda3$/  AND $timeFilter GROUP BY time($interval), *",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -523,7 +523,7 @@
           "tags": []
         }
       ],
-      "title": "Disk I/O time for /dev/nvme0n1",
+      "title": "Disk I/O time for /dev/sda3",
       "type": "timeseries"
     },
     {
@@ -2322,7 +2322,13 @@
             {
               "key": "name::tag",
               "operator": "=",
-              "value": "nvme0n1"
+              "value": "sda3"
+            },
+            {
+              "condition": "AND",
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$hostname$/"
             }
           ]
         }
@@ -4064,14 +4070,17 @@
         },
         "datasource": {
           "type": "influxdb",
-          "uid": "$datasource"
+          "uid": "P04E2EA1B5E781F5B"
         },
-        "definition": "show tag values with key=\"hostname\"",
+        "definition": "show tag values from system with key=host",
         "includeAll": true,
         "multi": true,
         "name": "hostname",
         "options": [],
-        "query": "show tag values with key=\"hostname\"",
+        "query": {
+          "query": "show tag values from system with key=host",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
         "refresh": 2,
         "regex": "",
         "type": "query"
@@ -4156,6 +4165,6 @@
   "timezone": "browser",
   "title": "InfluxDB Overview",
   "uid": "Ekiwl0JmzP3",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

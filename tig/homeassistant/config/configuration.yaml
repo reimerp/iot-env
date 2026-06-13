@@ -124,8 +124,8 @@ wake_on_lan:
 #    name: "Aussenwetter"
 #    unique_id: weather.aussenwetter
 #    condition_template: "{{ states('weather.openweathermap') }}"
-#    humidity_template: "{{ states('sensor.rtl433_aussensensor_luftfeuchtigkeit') | float(0) }}"
+#    humidity_template: "{{ states('sensor.aussensensor_luftfeuchtigkeit') | float(0) }}"
 ##    #pressure: "{{ states('sensor.sensor_luftdruck') | float(0) }}"
-#    temperature_template: "{{ states('sensor.rtl433_aussensensor_temperatur') | float(0) }}"
+#    temperature_template: "{{ states('sensor.aussensensor_temperatur') | float(0) }}"
 ##  #  forecast: "{{ state_attr('weather.openweathermap', 'forecast') }}"
 

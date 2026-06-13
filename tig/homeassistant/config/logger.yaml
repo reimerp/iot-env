@@ -17,5 +17,7 @@ filters:
   homeassistant.components.frontier_silicon.media_player:
   - "failed with 404 to http://192.168.176.47:80/fsapi/GET/netRemote.sys.power"
 #  - "Reconnected to http://192.168.176.47:80/fsapi Did it go offline?"
+  homeassistant.helpers.entity:
+  - "Update of media_player.dab_andrejasradio is taking over 10 seconds"
   homeassistant.components.automation.test:
-  - Device is off and cannot be controlled
+  - "Device is off and cannot be controlled"

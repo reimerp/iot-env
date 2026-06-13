@@ -16,7 +16,8 @@ class RemoteSensor(MqttBase):
         self.getcred('mqtt_remote')
         self.models = ['inFactory-TH', 'GT-WT02']
         # alt: 433198200 434000 434087
-        self.pipe = Popen(['rtl_433', '-p20', '-g42', '-f434086k', '-R91', '-R25', '-Csi', '-Fjson'], stdout=PIPE, stdin=PIPE, stderr=None)
+        # mit Mlevel geht caching nicht
+        self.pipe = Popen(['rtl_433', '-p20', '-g42', '-f434200k', '-R91', '-R25', '-Csi', '-Fjson'], stdout=PIPE, stdin=PIPE, stderr=None)
         #res = self.pipe.communicate()   # erst das setzt den returncode
         #print(f'retcode={self.pipe.returncode} {res}')
         #print(self.pipe)
@@ -98,5 +99,5 @@ def test():
 if __name__ == '__main__':
     #test()
     sensor = RemoteSensor()
-    sensor.verbose = True
+    #sensor.verbose = True
     sensor.connect_mqtt()
