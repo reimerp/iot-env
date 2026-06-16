@@ -1,4 +1,4 @@
-FROM docker.io/telegraf:1.37.3-alpine
+FROM docker.io/telegraf:1.39-alpine
 
 RUN apk add --update smartmontools sudo nvme-cli && rm -rf /var/cache/apk/*
 

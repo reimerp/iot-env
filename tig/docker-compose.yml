@@ -1,6 +1,6 @@
 services:
   telegraf_stats:
-    image: docker.io/telegraf:1.37.3-alpine-plugin
+    image: docker.io/telegraf:1.39-alpine-plugin
     command:
     - --strict-env-handling
     restart: unless-stopped
@@ -81,7 +81,7 @@ services:
     # - Grafana data source
     # - Telegraf config
     #container_name: tig_influxdb
-    image: docker.io/influxdb:1.8-alpine
+    image: docker.io/influxdb:1.11.8-alpine
     # image: quay.io/influxdb/influxdb:v2.0.3
     restart: unless-stopped
     ports:
@@ -98,7 +98,7 @@ services:
     - INFLUXDB_HTTP_LOG_ENABLED=false
     volumes:
     #- ./:/imports
-    - ./influxdb/etc/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+    - ./influxdb/etc/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     # Data persistence (could also be a bind mount: /srv/docker/influxdb/data:/var/lib/influxdb)
     - influxdb_data:/var/lib/influxdb
     # Backups...
@@ -111,7 +111,7 @@ services:
   # https://hub.docker.com/r/grafana/grafana
   grafana:
     #container_name: tig_grafana
-    image: docker.io/grafana/grafana-oss:11.5.8
+    image: docker.io/grafana/grafana-oss:12.4.3
     restart: unless-stopped
     depends_on:
     - influxdb
@@ -132,8 +132,8 @@ services:
     volumes:
     # Grafana gets grumpy over bind mount permissions, use a volume
     - grafana_data:/var/lib/grafana
-    - ./grafana/provisioning/:/etc/grafana/provisioning/
-    - ./grafana/dashboards/:/var/lib/grafana/dashboards/
+    - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
+    - ./grafana/dashboards/:/var/lib/grafana/dashboards/:ro
 
   homeassistant:
     #container_name: homeassistant
@@ -161,7 +161,7 @@ services:
 
 # The minimal version does not contain build tools or support for projects.
   nodered:
-    image: "docker.io/nodered/node-red:4.1.10-minimal"
+    image: "docker.io/nodered/node-red:4.1.11-minimal"
     restart: unless-stopped
     user: node-red
     volumes:
@@ -190,7 +190,7 @@ services:
 
   matterbridge:
     #container_name: matterbridge
-    image: luligu/matterbridge:3.5.6
+    image: luligu/matterbridge:3.8.0
     network_mode: host # Ensures the Matter mdns works
     command: ["matterbridge", "--docker", "--bridge", "--mdnsinterface", "eth0", "--logger", "error", "--matterlogger", "error" ]
     restart: unless-stopped
