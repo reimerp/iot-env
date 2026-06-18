@@ -4,12 +4,12 @@
 /^# DDL/a \
 CREATE DATABASE sensors WITH NAME autogen \
 CREATE RETENTION POLICY "forever" ON "sensors" DURATION INF REPLICATION 1 \
-CREATE RETENTION POLICY "m" ON "sensors" DURATION 31d REPLICATION 1
+CREATE RETENTION POLICY "m" ON "sensors" DURATION 31d REPLICATION 1 DEFAULT
 
 # rename
 # s/^CREATE DATABASE sensors /CREATE DATABASE sensors2 /
 #
-#/GT-WT02 Temperature=[4-9][0-9]/d
+#/sensors,device=GT-WT02 Temperature=[4-9][0-9]/d
 #/GT-WT02 Temperature=1[0-9][0-9]/d
 #/GT-WT02 Temperature=-/d
 #/,device=GT-WT02,source=rtl433 Humidity=/d

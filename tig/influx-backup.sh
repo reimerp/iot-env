@@ -11,8 +11,7 @@ CONTAINER_ID="$(${C} ps --filter "name=influxdb" --format "{{.ID}}")"
 # backup is a bind mount to host
 BACKUP_PATH=/backup
 
-DB=sensors
-#DB=telegraf
+DB=${DB:-"sensors"}
 
 B_FILE="influx_$DB.export"
 
@@ -63,6 +62,7 @@ copy() {
 }
 
 # oneline ASCII export, editable by sed
+# 920M uncompressed for sensors db
 backup_inspect() {
   ${C} compose exec influxdb influx_inspect export -waldir /var/lib/influxdb/wal -datadir /var/lib/influxdb/data -database "$DB" -out "${BACKUP_PATH}/$B_FILE"
   # default: all rps are exported
@@ -73,7 +73,7 @@ backup_inspect() {
   #-retention autogen
 
   B_PATH="/tmp/$B_FILE"
-  [ -f "$B_PATH" ] && sudo chown $(id -u) "$B_PATH"  
+  [ -f "$B_PATH" ] && sudo chown $(id -u) "$B_PATH"
   #scp hp:"$B_PATH" "$B_PATH"                   # just jor test
 
 

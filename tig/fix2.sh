@@ -1,30 +1,33 @@
 #!/bin/sh
 
-set -e
+C=${C:-"docker"}
 
-DB=sensors
+DB=${DB:-"sensors"}
+
 B_FILE="influx_$DB.export"
 B_PATH="/tmp/$B_FILE"
 
 #./influx-backup.sh backup      # for safety
-./influx-backup.sh backup_inspect
-
-sudo chown $(id -u) "$B_PATH"
+#./influx-backup.sh backup_inspect
+# scp hp:$B_PATH $B_PATH
 
 # Das cleanup ist nicht erforderlich
 # sed -e "/^#/d" -e "/^$/d" -e "s#/d*\$#/p#" -n -e "/^s*\//p" ../fix2.sed | while IFS= read -r l; do echo $l#; sed -n -e "$l" "$B_PATH" ; done
 
 sed -f fix2.sed -i "$B_PATH"
 
-docker compose down telegraf_mqtt
+$C compose down telegraf_mqtt
 
-docker compose exec influxdb influx -execute 'DROP DATABASE "'"$DB"'"'
-# TODO alle continous queries muessen neu
+$C compose exec influxdb influx -execute 'DROP DATABASE "'"$DB"'"'
 
-# ohne 2> dauerts ewig
-docker compose exec influxdb influx -import -path "/backup/$B_FILE" 2>/dev/null
+# needs tons of more time without  2>
+# This command can es to error, mainly because imports into rps are done when they are already retired
+$C compose exec influxdb influx -import -path "/backup/$B_FILE" 2>/dev/null
 
-docker compose up -d
+# rebuild all continous queries
+./continous.sh cont_sens
+
+$C compose up -d
 
 : <<'END_COMMENT'
 
