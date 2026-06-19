@@ -8,11 +8,11 @@ B_FILE="influx_$DB.export"
 B_PATH="/tmp/$B_FILE"
 
 #./influx-backup.sh backup      # for safety
-#./influx-backup.sh backup_inspect
+./influx-backup.sh backup_inspect
 # scp hp:$B_PATH $B_PATH
 
 # Das cleanup ist nicht erforderlich
-# sed -e "/^#/d" -e "/^$/d" -e "s#/d*\$#/p#" -n -e "/^s*\//p" ../fix2.sed | while IFS= read -r l; do echo $l#; sed -n -e "$l" "$B_PATH" ; done
+# sed -e "/^#/d" -e "/^$/d" -e "s#/d*\$#/p#" -n -e "/^s*\//p" fix2.sed | while IFS= read -r l; do echo $l#; sed -n -e "$l" "$B_PATH" ; done
 
 sed -f fix2.sed -i "$B_PATH"
 

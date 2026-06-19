@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
   "links": [],
   "panels": [
     {
@@ -53,15 +52,16 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": 36000000,
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 2,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": 3600000,
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -76,7 +76,7 @@
             "steps": [
               {
                 "color": "orange",
-                "value": null
+                "value": 0
               },
               {
                 "color": "transparent",
@@ -111,7 +111,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_server $col",
@@ -204,7 +204,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": 3600000,
+            "insertNulls": 36000000,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -212,7 +212,8 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": 3600000,
+            "showValues": false,
+            "spanNulls": false,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -227,7 +228,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -285,7 +286,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_server $col",
@@ -307,7 +308,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "dnscache",
           "orderByTime": "ASC",
           "policy": "default",
@@ -374,7 +374,7 @@
   ],
   "preload": false,
   "refresh": "5m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
@@ -414,6 +414,7 @@
         },
         "refresh": 1,
         "regex": "/(?<value>[^,]*),.*/",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -434,6 +435,7 @@
         "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       }
     ]
@@ -443,9 +445,9 @@
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "DNS",
   "uid": "gcIAqlCGz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

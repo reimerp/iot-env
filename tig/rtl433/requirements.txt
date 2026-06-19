@@ -1,10 +1,10 @@
 # for fritz.py
 fritzconnection==1.15.1
 # snmp
+pyasn1==0.6.0
+pysnmp==5.1.0
 #pycrypto==2.4.1
-#pysnmp==4.3
-pyasn1==0.4.8
-zombie-imp
-pyasyncore
+#zombie-imp
+#pyasyncore
 #
 #paho.mqtt==1.6.1
