@@ -20,3 +20,11 @@
   included_keys = [ "hits", "miss" ]
   tags = [ "server", "size" ]
 ```
+
+# add tag
+```
+[inputs.mqtt_consumer.tags]
+  rp = "m"
+```
+works in root and below inputs.mqtt_consumer.
+unneeded now, since rp=m is default
