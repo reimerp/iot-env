@@ -1,0 +1,46 @@
+{
+  "dev": {
+    "ids": "0x00158d000309b98b_contact_zigbee",
+    "name": "Terrassentür",
+    "mf": "Xiaomi",
+    "mdl": "Aqara door & window contact sensor (MCCGQ11LM)",
+    "mdl_id": "via zigbee"
+  },
+  "stat_t": "tasmota/zigbee/tele/SENSOR",
+  "avty": {
+    "t": "tasmota/zigbee/tele/LWT",
+    "pl_avail": "Online",
+    "pl_not_avail": "Offline"
+  },
+  "cmps": {
+    "sensor.ap01_contact": {
+      "name": "Contact",
+      "p": "binary_sensor",
+      "dev_cla": "door",
+      "val_tpl": "{% if 'Terrasse' in value_json.ZbReceived %}{{ value_json.ZbReceived.Terrasse.Contact }}{% endif %}",
+      "pl_on": "1",
+      "pl_off": "0",
+      "uniq_id": "sensor.ap01_c"
+    },
+    "sensor.ap01_temperature": {
+      "name": "Temperatur",
+      "p": "sensor",
+      "dev_cla": "temperature",
+      "unit_of_meas": "°C",
+      "val_tpl": "{% if 'Terrasse' in value_json.ZbReceived and 'AqaraTemperature' in value_json.ZbReceived.Terrasse %}{{ value_json.ZbReceived.Terrasse.AqaraTemperature }}{% endif %}",
+      "uniq_id": "sensor.ap01_t"
+    },
+    "sensor.ap01_battery": {
+      "name": "Batterie",
+      "p": "sensor",
+      "dev_cla": "battery",
+      "unit_of_meas": "%",
+      "val_tpl": "{% if 'Terrasse' in value_json.ZbReceived and 'BatteryPercentage' in value_json.ZbReceived.Terrasse %}{{ value_json.ZbReceived.Terrasse.BatteryPercentage }}{% endif %}",
+      "uniq_id": "sensor.ap01_b"
+    }
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.2"
+  }
+}

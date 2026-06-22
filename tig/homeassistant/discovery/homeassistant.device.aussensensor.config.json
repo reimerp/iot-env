@@ -1,0 +1,46 @@
+{
+  "dev": {
+    "ids": "ws01",
+    "name": "Aussensensor",
+    "mf": "Waagen-Schmitt",
+    "mdl": "WS 1644",
+    "mdl_id": "via DVB-t Stick",
+    "sw": "20.02-38-gf26830d"
+  },
+  "stat_t": "rtl433/inFactory-TH",
+  "avty": {
+    "t": "lwt/rtl_pipe",
+    "pl_avail": "Online",
+    "pl_not_avail": "Offline"
+  },
+  "cmps": {
+    "sensor.ws01_temperature": {
+      "name": "Temperatur",
+      "p": "sensor",
+      "dev_cla": "temperature",
+      "unit_of_meas": "°C",
+      "val_tpl": "{{ value_json['RTL433']['Temperature'] }}",
+      "uniq_id": "sensor.ws01_t"
+    },
+    "sensor.ws01_humidity": {
+      "name": "Luftfeuchtigkeit",
+      "p": "sensor",
+      "dev_cla": "humidity",
+      "unit_of_meas": "%",
+      "val_tpl": "{{ value_json['RTL433']['Humidity'] }}",
+      "uniq_id": "sensor.ws01_h"
+    },
+    "sensor.ws01_battery": {
+      "name": "Batterie",
+      "p": "sensor",
+      "dev_cla": "battery",
+      "unit_of_meas": "%",
+      "val_tpl": "{{ (value_json['RTL433']['Vcc'] | float(-1) * 30) | round() }}",
+      "uniq_id": "sensor.ws01_b"
+    }
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.1"
+  }
+}

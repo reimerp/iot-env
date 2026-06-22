@@ -1,0 +1,22 @@
+{
+  "name": null,
+  "uniq_id": "tradbulb01ad_light",
+  "cmd_t": "tasmota/zigbee/cmnd/ZbSend",
+  "stat_t": "zigbee/tripod/stat/POWER",
+  "avty": {
+    "t": "tasmota/zigbee/tele/LWT",
+    "pl_avail": "Online",
+    "pl_not_avail": "Offline"
+  },
+  "dev": {
+    "ids": "tradbulb01ad",
+    "name": "Tripod",
+    "mf": "IKEA of Sweden",
+    "mdl": "TRADFRI bulb",
+    "mdl_id": "E27 WW 806lm"
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.1"
+  }
+}

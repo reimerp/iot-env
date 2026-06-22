@@ -1,0 +1,46 @@
+{
+  "dev": {
+    "ids": "0x00158d0002f2a43c_occupancy_zigbee",
+    "name": "FlurMotion",
+    "mf": "Xiaomi",
+    "mdl": "Aqara human body movement and illuminance sensor (RTCGQ11LM)",
+    "mdl_id": "via zigbee"
+  },
+  "stat_t": "tasmota/zigbee/tele/SENSOR",
+  "avty": {
+    "t": "tasmota/zigbee/tele/LWT",
+    "pl_avail": "Online",
+    "pl_not_avail": "Offline"
+  },
+  "cmps": {
+    "sensor.am01_motion": {
+      "name": "Montion",
+      "p": "binary_sensor",
+      "dev_cla": "motion",
+      "val_tpl": "{% if 'Motion' in value_json.ZbReceived and 'Occupancy' in value_json.ZbReceived.Motion %}{{ value_json.ZbReceived.Motion.Occupancy }}{% endif %}",
+      "pl_on": "1",
+      "pl_off": "0",
+      "uniq_id": "sensor.am01_m"
+    },
+    "sensor.am01_temperature": {
+      "name": "Temperatur",
+      "p": "sensor",
+      "dev_cla": "temperature",
+      "unit_of_meas": "°C",
+      "val_tpl": "{% if 'Motion' in value_json.ZbReceived and 'AqaraTemperature' in value_json.ZbReceived.Motion %}{{ value_json.ZbReceived.Motion.AqaraTemperature }}{% endif %}",
+      "uniq_id": "sensor.am01_t"
+    },
+    "sensor.am01_battery": {
+      "name": "Batterie",
+      "p": "sensor",
+      "dev_cla": "battery",
+      "unit_of_meas": "%",
+      "val_tpl": "{% if 'Motion' in value_json.ZbReceived and 'BatteryPercentage' in value_json.ZbReceived.Motion %}{{ value_json.ZbReceived.Motion.BatteryPercentage }}{% endif %}",
+      "uniq_id": "sensor.am01_b"
+    }
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.2"
+  }
+}

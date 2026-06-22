@@ -1,0 +1,22 @@
+{
+  "~": "tasmota/kerze",
+  "name": null,
+  "uniq_id": "blitz01ad_switch",
+  "cmd_t": "~/cmnd/POWER",
+  "stat_t": "~/stat/POWER",
+  "dev": {
+    "ids": "blitz01ad_switch",
+    "name": "Kerze switch",
+    "mf": "BlitzWolf",
+    "mdl": "BW-SHP2",
+    "mdl_id": "ABC123",
+    "sw": "15.4.0",
+    "sn": "ea334450945afc",
+    "hw": "1.0rev2"
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.1",
+    "url": "http://hp.reimersnet.test:90/support"
+  }
+}

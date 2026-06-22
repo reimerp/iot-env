@@ -1,0 +1,64 @@
+{
+  "dev": {
+    "ids": "atc_8f85",
+    "name": "Schlaf ATC",
+    "mf": "ATC",
+    "mdl": "Temp & Humidity Sensor",
+    "mdl_id": "LYWSD03MMC",
+    "sw": "V5.3",
+    "sn": "a4c138a08f85",
+    "hw": "B1.5"
+  },
+  "stat_t": "tasmota_ble/tele/schlaf",
+  "avty": {
+    "t": "tasmota/abseite/tele/LWT",
+    "pl_avail": "Online",
+    "pl_not_avail": "Offline"
+  },
+  "cmps": {
+    "sensor.atc_8f85_temperature": {
+      "name": "Temperatur",
+      "p": "sensor",
+      "dev_cla": "temperature",
+      "unit_of_meas": "°C",
+      "val_tpl": "{{ value_json['ATCa08f85']['Temperature'] }}",
+      "uniq_id": "sensor.atc_8f85_t"
+    },
+    "sensor.atc_8f85_humidity": {
+      "name": "Luftfeuchtigkeit",
+      "p": "sensor",
+      "dev_cla": "humidity",
+      "unit_of_meas": "%",
+      "val_tpl": "{{ value_json['ATCa08f85']['Humidity'] }}",
+      "uniq_id": "sensor.atc_8f85_h"
+    },
+    "sensor.atc_8f85_battery": {
+      "name": "Batterie",
+      "p": "sensor",
+      "dev_cla": "battery",
+      "unit_of_meas": "%",
+      "val_tpl": "{{ value_json['ATCa08f85']['Battery'] }}",
+      "uniq_id": "sensor.atc_8f85_b"
+    },
+    "sensor.atc_8f85_dewpoint": {
+      "name": "DewPoint",
+      "p": "sensor",
+      "dev_cla": "temperature",
+      "unit_of_meas": "°C",
+      "val_tpl": "{{ value_json['ATCa08f85']['DewPoint'] }}",
+      "uniq_id": "sensor.atc_8f85_d"
+    },
+    "sensor.atc_8f85_rssi": {
+      "name": "Quality",
+      "p": "sensor",
+      "dev_cla": "signal_strength",
+      "unit_of_meas": "dBm",
+      "val_tpl": "{{ value_json['ATCa08f85']['RSSI'] }}",
+      "uniq_id": "sensor.atc_8f85_r"
+    }
+  },
+  "o": {
+    "name":"json2mqtt",
+    "sw": "0.1"
+  }
+}
