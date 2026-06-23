@@ -48,4 +48,4 @@ LinkQuality:0-16 ?
 
 # TODO
 - abbreveation not working (nicht: door, aber bei Kerze)
-- kerze ist ein Switckein Light
+- kerze ist ein Switch kein Light

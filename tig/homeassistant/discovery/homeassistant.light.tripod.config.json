@@ -2,6 +2,7 @@
   "name": null,
   "uniq_id": "tradbulb01ad_light",
   "cmd_t": "tasmota/zigbee/cmnd/ZbSend",
+  "cmd_tpl": "{\"Device\":\"Tripod\",\"Send\":{\"Power\":\"{{value}}\"}}",
   "stat_t": "zigbee/tripod/stat/POWER",
   "avty": {
     "t": "tasmota/zigbee/tele/LWT",
@@ -9,7 +10,7 @@
     "pl_not_avail": "Offline"
   },
   "dev": {
-    "ids": "tradbulb01ad",
+    "ids": "0xEC1BBDFFFEAE209A",
     "name": "Tripod",
     "mf": "IKEA of Sweden",
     "mdl": "TRADFRI bulb",

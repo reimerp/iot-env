@@ -21,7 +21,7 @@
       "p": "sensor",
       "dev_cla": "temperature",
       "unit_of_meas": "°C",
-      "val_tpl": "{{ value_json['ATCa08f85']['Temperature'] }}",
+      "val_tpl": "{{value_json['ATCa08f85']['Temperature']}}",
       "uniq_id": "sensor.atc_8f85_t"
     },
     "sensor.atc_8f85_humidity": {
@@ -29,7 +29,7 @@
       "p": "sensor",
       "dev_cla": "humidity",
       "unit_of_meas": "%",
-      "val_tpl": "{{ value_json['ATCa08f85']['Humidity'] }}",
+      "val_tpl": "{{value_json['ATCa08f85']['Humidity']}}",
       "uniq_id": "sensor.atc_8f85_h"
     },
     "sensor.atc_8f85_battery": {
@@ -37,7 +37,7 @@
       "p": "sensor",
       "dev_cla": "battery",
       "unit_of_meas": "%",
-      "val_tpl": "{{ value_json['ATCa08f85']['Battery'] }}",
+      "val_tpl": "{{value_json['ATCa08f85']['Battery']}}",
       "uniq_id": "sensor.atc_8f85_b"
     },
     "sensor.atc_8f85_dewpoint": {
@@ -45,7 +45,7 @@
       "p": "sensor",
       "dev_cla": "temperature",
       "unit_of_meas": "°C",
-      "val_tpl": "{{ value_json['ATCa08f85']['DewPoint'] }}",
+      "val_tpl": "{{value_json['ATCa08f85']['DewPoint']}}",
       "uniq_id": "sensor.atc_8f85_d"
     },
     "sensor.atc_8f85_rssi": {
@@ -53,7 +53,7 @@
       "p": "sensor",
       "dev_cla": "signal_strength",
       "unit_of_meas": "dBm",
-      "val_tpl": "{{ value_json['ATCa08f85']['RSSI'] }}",
+      "val_tpl": "{{value_json['ATCa08f85']['RSSI']}}",
       "uniq_id": "sensor.atc_8f85_r"
     }
   },

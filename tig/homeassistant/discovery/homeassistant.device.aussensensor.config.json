@@ -19,7 +19,7 @@
       "p": "sensor",
       "dev_cla": "temperature",
       "unit_of_meas": "°C",
-      "val_tpl": "{{ value_json['RTL433']['Temperature'] }}",
+      "val_tpl": "{{value_json['RTL433']['Temperature']}}",
       "uniq_id": "sensor.ws01_t"
     },
     "sensor.ws01_humidity": {
@@ -27,7 +27,7 @@
       "p": "sensor",
       "dev_cla": "humidity",
       "unit_of_meas": "%",
-      "val_tpl": "{{ value_json['RTL433']['Humidity'] }}",
+      "val_tpl": "{{value_json['RTL433']['Humidity']}}",
       "uniq_id": "sensor.ws01_h"
     },
     "sensor.ws01_battery": {
@@ -35,7 +35,7 @@
       "p": "sensor",
       "dev_cla": "battery",
       "unit_of_meas": "%",
-      "val_tpl": "{{ (value_json['RTL433']['Vcc'] | float(-1) * 30) | round() }}",
+      "val_tpl": "{{(value_json['RTL433']['Vcc']|float(-1)*30)|round()}}",
       "uniq_id": "sensor.ws01_b"
     }
   },

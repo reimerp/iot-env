@@ -1,10 +1,12 @@
 {
   "dev": {
-    "ids": "0x00158d0002f2a43c_occupancy_zigbee",
+    "ids": "0x680AE2FFFE4AC45C",
     "name": "TradMotion",
-    "mf": "Ikea",
-    "mdl": "Aqara human body movement and illuminance sensor (RTCGQ11LM)",
-    "mdl_id": "via zigbee"
+    "mf": "IKEA of Sweden",
+    "mdl": "TRADFRI motion sensor",
+    "mdl_id": "E1745",
+    "sw": "2.0.022",
+    "hw": "1"
   },
   "stat_t": "tasmota/zigbee/tele/SENSOR",
   "avty": {
@@ -13,30 +15,14 @@
     "pl_not_avail": "Offline"
   },
   "cmps": {
-    "sensor.am01_motion": {
-      "name": "Montion",
+    "sensor.tm01_motion": {
+      "name": "Motion",
       "p": "binary_sensor",
       "dev_cla": "motion",
-      "val_tpl": "{% if 'Motion' in value_json.ZbReceived %}{{ value_json.ZbReceived.Motion.Occupancy }}{% endif %}",
+      "val_tpl": "{%if 'TradMotion' in value_json.ZbReceived%}{{value_json.ZbReceived.TradMotion['Power']}}{%endif%}",
       "pl_on": "1",
       "pl_off": "0",
-      "uniq_id": "sensor.am01_m"
-    },
-    "sensor.am01_temperature": {
-      "name": "Temperatur",
-      "p": "sensor",
-      "dev_cla": "temperature",
-      "unit_of_meas": "°C",
-      "val_tpl": "{% if 'Motion' in value_json.ZbReceived and 'AqaraTemperature' in value_json.ZbReceived.Motion %}{{ value_json.ZbReceived.Motion.AqaraTemperature }}{% endif %}",
-      "uniq_id": "sensor.am01_t"
-    },
-    "sensor.am01_battery": {
-      "name": "Batterie",
-      "p": "sensor",
-      "dev_cla": "battery",
-      "unit_of_meas": "%",
-      "val_tpl": "{% if 'Motion' in value_json.ZbReceived and 'BatteryPercentage' in value_json.ZbReceived.Motion %}{{ value_json.ZbReceived.Motion.BatteryPercentage }}{% endif %}",
-      "uniq_id": "sensor.am01_b"
+      "uniq_id": "sensor.tm01_m"
     }
   },
   "o": {
