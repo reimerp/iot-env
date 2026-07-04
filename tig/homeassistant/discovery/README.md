@@ -49,3 +49,5 @@ LinkQuality:0-16 ?
 # TODO
 - abbreveation not working (nicht: door, aber bei Kerze)
 - kerze ist ein Switch kein Light
+
+mosquitto_pub -h broker -t home/cmnd/tasmota_zigbee_xxx/ZbSend -m '{"Device":"0x1234", "Send":{"color":"30000,65534"}}'
