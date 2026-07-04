@@ -1,0 +1,106 @@
+mqtt:
+ binary_sensor:
+  - name: "FlurMotion"
+    unique_id: "0x00158d0002f2a43c_occupancy_zigbee"
+    state_topic: "zigbee/motion"
+    json_attributes_topic: "zigbee/motion"
+    value_template: "{{ value_json.motion }}"
+    payload_on: "on"
+    payload_off: "off"
+    availability:
+    - topic: "tasmota/zigbee/tele/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+    device:
+      identifiers:  
+      - "zigbee_0x00158d0002f2a43c"
+      name: "AqaraMove"
+      model: "Aqara human body movement and illuminance sensor (RTCGQ11LM)"
+      manufacturer: "Xiaomi"
+    device_class: motion
+
+---
+
+binary_sensor:
+- unique_id: washer_power_mqtt
+  name: Washer Power MQTT
+  state_topic: shellies/shellyem-E45D78/emeter/0/power
+  qos: 0
+  device_class: power
+  value_template: "{{ 'ON' if is_number(value) and value | int > 80 else 'OFF' }}"
+
+- unique_id: dryer_power_mqtt
+  name: Dryer Power MQTT
+  state_topic: shellies/shellyem-E45D78/emeter/1/power
+  qos: 0
+  device_class: power
+  value_template: "{{ 'ON' if is_number(value) and value | int > 150 else 'OFF' }}"
+
+---
+
+# example
+#  - name: "Tasmota Switch 1"
+#    state_topic: "tasmota/kerze/stat/POWER"
+#    value_template: "{{ value_json.POWER }}"
+#    command_topic: "tasmota/kerze/cmnd/POWER"
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    availability_topic: "tasmota/kerze/tele/LWT"
+#    payload_available: "Online"
+#    payload_not_available: "Offline"
+
+#  qos: 1
+#  retain: false
+
+# Overwrite Deepsleep -> no availability
+#  - name: "Sensor Temperatur"
+#    unique_id: "sensor.sensor_bme680_temperature"
+#    state_topic: "tasmota/sensor/tele/SENSOR"
+#    value_template: "{{ value_json['BME680'].Temperature }}"
+#    unit_of_measurement: "°C"
+#    device_class: temperature
+#    availability:
+#    - topic: "tasmota/sensor/tele/LWT"
+#      payload_available: "Online"
+#      payload_not_available: "Offline"
+#  - name: "Sensor Luftfeuchte"
+#    unique_id: "sensor.sensor_bme680_humidity"
+#    state_topic: "tasmota/sensor/tele/SENSOR"
+#    value_template: "{{ value_json['BME680'].Humidity }}"
+#    unit_of_measurement: "%"
+#    device_class: humidity
+#    availability:
+#    - topic: "tasmota/sensor/tele/LWT"
+#      payload_available: "Online"
+#      payload_not_available: "Offline"
+#  - name: "Sensor Luftdruck"
+#    unique_id: "sensor.sensor_bme680_pressure"
+#    state_topic: "tasmota/sensor/tele/SENSOR"
+#    value_template: "{{ value_json['BME680'].Pressure }}"
+#    unit_of_measurement: "hPa"
+#    device_class: pressure
+#    availability:
+#    - topic: "tasmota/sensor/tele/LWT"
+#      payload_available: "Online"
+#      payload_not_available: "Offline"
+#  - name: "Sensor Licht"
+#    unique_id: "sensor.sensor_tls2561_.illuminance"
+#    state_topic: "tasmota/sensor/tele/SENSOR"
+#    value_template: "{{ value_json['TSL2561'].Illuminance }}"
+#    unit_of_measurement: "lx"
+#    device_class: illuminance
+#    availability:
+#    - topic: "tasmota/sensor/tele/LWT"
+#      payload_available: "Online"
+#      payload_not_available: "Offline"
+#  - name: "Sensor interne Temperatur"
+#    unique_id: "sensor.sensor_esp32_temperature"
+#    state_topic: "tasmota/sensor/tele/SENSOR"
+#    value_template: "{{ value_json['ESP32'].Temperature }}"
+#    unit_of_measurement: "°C"
+#    device_class: temperature
+#    availability:
+#    - topic: "tasmota/sensor/tele/LWT"
+#      payload_available: "Online"
+#      payload_not_available: "Offline"
+

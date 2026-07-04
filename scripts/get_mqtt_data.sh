@@ -28,7 +28,7 @@ ps -eo pid,etimes,comm | awk '$3~/^speedtest$/ && $2>2000 { print $1 }' | xargs 
 
 # sensoren ca 30s
 # ping braucht ca 1min, daher am Schluss!
-for script in $DIR/../fritzbox/fritz.sh $DIR/../snmp/netgear.sh $DIR/../dnsstat/dnsstat.sh $DIR/check_net.sh $DIR/ping.sh
+for script in $DIR/../fritzbox/fritz.sh $DIR/../snmp/netgear.sh $DIR/../digitemp/readtemp.py $DIR/../dnsstat/dnsstat.sh $DIR/check_net.sh $DIR/ping.sh
 do
     echo "${script} "
     ${script} || echo "${script} had an error"

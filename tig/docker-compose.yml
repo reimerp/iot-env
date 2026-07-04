@@ -137,7 +137,7 @@ services:
 
   homeassistant:
     #container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: "ghcr.io/home-assistant/home-assistant:2026.6.4"
     restart: unless-stopped
     volumes:
     - /etc/localtime:/etc/localtime:ro

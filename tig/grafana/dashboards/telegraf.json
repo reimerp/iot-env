@@ -35,7 +35,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 17,
   "links": [],
   "panels": [
     {
@@ -77,7 +76,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -115,7 +114,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -192,7 +191,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -234,7 +233,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -311,7 +310,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -353,7 +352,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -430,7 +429,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -472,7 +471,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -549,7 +548,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -591,7 +590,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -669,7 +668,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -709,7 +708,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -799,7 +798,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -839,7 +838,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -918,7 +917,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -958,7 +957,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -1037,7 +1036,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -1077,7 +1076,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -1161,7 +1160,7 @@
             "steps": [
               {
                 "color": "rgba(245, 54, 54, 0.9)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -1203,7 +1202,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "datasource": {
@@ -1295,10 +1294,11 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1313,7 +1313,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1393,7 +1393,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1418,7 +1418,6 @@
               "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "cpu_percentageBusy",
           "policy": "default",
           "query": "SELECT mean(usage_user) as \"user\", mean(usage_system) as \"system\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$server$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
@@ -1478,6 +1477,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -1495,7 +1495,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1534,7 +1534,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1618,6 +1618,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1634,7 +1635,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1712,7 +1713,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1812,6 +1813,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -1829,7 +1831,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1905,7 +1907,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -1930,7 +1932,6 @@
               "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "mem_inactive",
           "policy": "default",
           "query": "SELECT mean(total) as total, mean(used) as used, mean(cached) as cached, mean(free) as free, mean(buffered) as buffered FROM \"mem\" WHERE host =~ /$server$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
@@ -2140,6 +2141,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2156,7 +2158,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2194,7 +2196,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -2281,6 +2283,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2297,7 +2300,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2335,7 +2338,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -2422,6 +2425,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2438,7 +2442,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2511,7 +2515,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -2533,7 +2537,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "kernel",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2583,7 +2586,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "kernel",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2663,6 +2665,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2679,7 +2682,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2755,7 +2758,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_irq",
@@ -2872,6 +2875,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -2888,7 +2892,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2945,7 +2949,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$server: current",
@@ -3089,6 +3093,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -3105,7 +3110,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3184,7 +3189,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -3275,6 +3280,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -3291,7 +3297,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3382,7 +3388,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "on close",
@@ -3745,6 +3751,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -3761,7 +3768,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -3852,7 +3859,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "estabresets",
@@ -4083,6 +4090,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -4099,7 +4107,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -4190,7 +4198,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "failed",
@@ -4385,6 +4393,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -4401,7 +4410,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -4492,7 +4501,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "in echos",
@@ -4739,6 +4748,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -4755,7 +4765,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -4846,7 +4856,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "in errors",
@@ -5041,6 +5051,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -5057,7 +5068,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -5148,7 +5159,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "in discards",
@@ -5499,6 +5510,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -5515,7 +5527,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -5606,7 +5618,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "in discards",
@@ -5970,6 +5982,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -5986,7 +5999,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -6037,7 +6050,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -6180,6 +6193,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -6196,7 +6210,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -6247,7 +6261,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "Send buffer errors",
@@ -6390,6 +6404,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -6406,7 +6421,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -6457,7 +6472,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "checksum errors",
@@ -6666,6 +6681,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -6682,7 +6698,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -6733,7 +6749,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_interface: $col",
@@ -6876,6 +6892,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -6892,7 +6909,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -6939,7 +6956,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_interface: $col",
@@ -7082,6 +7099,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -7099,7 +7117,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -7137,7 +7155,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_interface: $col",
@@ -7280,6 +7298,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -7297,7 +7316,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -7335,7 +7354,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_interface: $col",
@@ -7491,6 +7510,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -7507,7 +7527,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -7558,7 +7578,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -7642,6 +7662,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -7659,7 +7680,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -7718,7 +7739,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $col",
@@ -7816,6 +7837,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -7832,7 +7854,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -7904,7 +7926,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_name: $col",
@@ -7936,7 +7958,6 @@
               "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "io_reads",
           "policy": "default",
           "query": "SELECT non_negative_derivative(mean(reads),1s) as \"read\" FROM \"diskio\" WHERE \"host\" =~ /$server$/ AND \"name\" =~ /$disk$/ AND $timeFilter GROUP BY time($interval), * fill(none)",
@@ -8048,6 +8069,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -8064,7 +8086,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -8136,7 +8158,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_name: $col",
@@ -8279,6 +8301,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -8295,7 +8318,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -8367,7 +8390,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: $tag_name: $col",
@@ -8483,7 +8506,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 154
+        "y": 178
       },
       "id": 62056,
       "panels": [],
@@ -8524,6 +8547,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": 3600000,
             "stacking": {
               "group": "A",
@@ -8541,7 +8565,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -8581,7 +8605,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 155
+        "y": 179
       },
       "id": 52240,
       "interval": "$inter",
@@ -8604,7 +8628,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: mountpoint $tag_path - $col",
@@ -8695,6 +8719,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -8712,7 +8737,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -8775,7 +8800,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 155
+        "y": 179
       },
       "id": 33458,
       "interval": "$inter",
@@ -8798,7 +8823,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_host: mountpoint $tag_path - $col",
@@ -8914,7 +8939,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 194
+        "y": 266
       },
       "id": 62057,
       "panels": [],
@@ -8954,6 +8979,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -8970,7 +8996,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -8986,7 +9012,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 195
+        "y": 267
       },
       "id": 62001,
       "options": {
@@ -9006,7 +9032,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "Delivery time",
@@ -9098,6 +9124,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -9114,7 +9141,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -9130,7 +9157,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 195
+        "y": 267
       },
       "id": 62004,
       "options": {
@@ -9150,7 +9177,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "Gather time",
@@ -9244,6 +9271,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -9260,7 +9288,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -9272,7 +9300,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 195
+        "y": 267
       },
       "id": 62003,
       "options": {
@@ -9292,7 +9320,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "Metrics written",
@@ -9384,6 +9412,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -9400,7 +9429,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -9416,7 +9445,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 195
+        "y": 267
       },
       "id": 62002,
       "options": {
@@ -9436,7 +9465,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "Gather errors",
@@ -9582,6 +9611,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -9597,7 +9627,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -9613,7 +9643,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 202
+        "y": 274
       },
       "id": 62058,
       "options": {
@@ -9629,7 +9659,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "[[tag_sensor]]",
@@ -9691,7 +9721,7 @@
   ],
   "preload": false,
   "refresh": "1m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [
     "influxdb",
     "telegraf"
@@ -9772,15 +9802,22 @@
           "text": "hp",
           "value": "hp"
         },
-        "datasource": "InfluxTelegraf",
-        "definition": "",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SHOW TAG VALUES FROM system WITH KEY=host",
         "includeAll": false,
         "label": "Server",
         "name": "server",
         "options": [],
-        "query": "SHOW TAG VALUES FROM system WITH KEY=host",
+        "query": {
+          "query": "SHOW TAG VALUES FROM system WITH KEY=host",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -9788,7 +9825,9 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "uid": "$datasource"
+        },
         "definition": "",
         "includeAll": true,
         "label": "Mountpoint",
@@ -9798,6 +9837,7 @@
         "query": "SHOW TAG VALUES FROM \"disk\" WITH KEY = \"path\" WHERE host =~ /$server/",
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -9805,7 +9845,9 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "uid": "$datasource"
+        },
         "definition": "",
         "includeAll": true,
         "label": "Disk",
@@ -9815,6 +9857,7 @@
         "query": "SHOW TAG VALUES FROM \"diskio\" WITH KEY = \"name\" WHERE host =~ /$server/",
         "refresh": 1,
         "regex": "[a-z]d[\\D]$|nvme[\\d]n[\\d]$",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -9822,7 +9865,9 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "uid": "$datasource"
+        },
         "definition": "",
         "includeAll": true,
         "label": "Network interface",
@@ -9832,6 +9877,7 @@
         "query": "SHOW TAG VALUES FROM \"net\" WITH KEY = \"interface\" WHERE host =~ /$server/",
         "refresh": 1,
         "regex": "^(?!.*veth|all|tap).*$",
+        "regexApplyTo": "value",
         "sort": 1,
         "type": "query"
       }
@@ -9845,6 +9891,6 @@
   "timezone": "browser",
   "title": "Telegraf: system dashboard",
   "uid": "000000127",
-  "version": 11,
+  "version": 13,
   "weekStart": ""
 }

@@ -98,6 +98,8 @@ def test():
 
 if __name__ == '__main__':
     #test()
+    print('Starting')
     sensor = RemoteSensor()
-    #sensor.verbose = True
+    sensor.verbose = True
+    print(sensor)
     sensor.connect_mqtt()

@@ -1,40 +1,4 @@
 binary_sensor:
-  - name: "Terrassentür"
-    unique_id: "0x00158d000309b98b_contact_zigbee"
-    state_topic: "zigbee/terrasse"
-    json_attributes_topic: "zigbee/terrasse"
-    value_template: "{{ value_json.contact }}"
-    payload_on: "open"
-    payload_off: "closed"
-    availability:
-    - topic: "tasmota/zigbee/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-    device:
-      identifiers:
-      - "zigbee_0x00158d000309b98b"
-      name: "AqaraDoor"
-      model: "Aqara door & window contact sensor (MCCGQ11LM)"
-      manufacturer: "Xiaomi"
-    device_class: door   # also: window, garage_door or opening
-  - name: "FlurMotion"
-    unique_id: "0x00158d0002f2a43c_occupancy_zigbee"
-    state_topic: "zigbee/motion"
-    json_attributes_topic: "zigbee/motion"
-    value_template: "{{ value_json.motion }}"
-    payload_on: "on"
-    payload_off: "off"
-    availability:
-    - topic: "tasmota/zigbee/tele/LWT"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-    device:
-      identifiers:
-      - "zigbee_0x00158d0002f2a43c"
-      name: "AqaraMove"
-      model: "Aqara human body movement and illuminance sensor (RTCGQ11LM)"
-      manufacturer: "Xiaomi"
-    device_class: motion
 
 # ok braucht on und off
   - name: "Node-RED"
@@ -71,20 +35,6 @@ switch:
     availability:
     - topic: "omg/bridge/LWT"
 
-# example
-#  - name: "Tasmota Switch 1"
-#    state_topic: "tasmota/kerze/stat/POWER"
-#    value_template: "{{ value_json.POWER }}"
-#    command_topic: "tasmota/kerze/cmnd/POWER"
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    availability_topic: "tasmota/kerze/tele/LWT"
-#    payload_available: "Online"
-#    payload_not_available: "Offline"
-
-#  qos: 1
-#  retain: false
-
 sensor:
   - name: "Keller Strom Battery"
     unique_id: "sensor.mt681_battery_level"
@@ -95,58 +45,6 @@ sensor:
     device_class: battery
 
 #tasmota/strom/tele/STATE {"Time":"2022-01-21T00:03:13","Uptime":"0T00:00:09","UptimeSec":9,"Vcc":3.366,"Heap":24,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"Wifi":{"AP":1,"SSId":"BaseLAN","BSSId":"2C:67:FB:57:17:AC","Channel":6,"Mode":"11n","RSSI":32,"Signal":-84,"LinkCount":1,"Downtime":"0T00:00:03"}}
-
-# Overwrite Deepsleep -> no availability
-#  - name: "Sensor Temperatur"
-#    unique_id: "sensor.sensor_bme680_temperature"
-#    state_topic: "tasmota/sensor/tele/SENSOR"
-#    value_template: "{{ value_json['BME680'].Temperature }}"
-#    unit_of_measurement: "°C"
-#    device_class: temperature
-#    availability:
-#    - topic: "tasmota/sensor/tele/LWT"
-#      payload_available: "Online"
-#      payload_not_available: "Offline"
-#  - name: "Sensor Luftfeuchte"
-#    unique_id: "sensor.sensor_bme680_humidity"
-#    state_topic: "tasmota/sensor/tele/SENSOR"
-#    value_template: "{{ value_json['BME680'].Humidity }}"
-#    unit_of_measurement: "%"
-#    device_class: humidity
-#    availability:
-#    - topic: "tasmota/sensor/tele/LWT"
-#      payload_available: "Online"
-#      payload_not_available: "Offline"
-#  - name: "Sensor Luftdruck"
-#    unique_id: "sensor.sensor_bme680_pressure"
-#    state_topic: "tasmota/sensor/tele/SENSOR"
-#    value_template: "{{ value_json['BME680'].Pressure }}"
-#    unit_of_measurement: "hPa"
-#    device_class: pressure
-#    availability:
-#    - topic: "tasmota/sensor/tele/LWT"
-#      payload_available: "Online"
-#      payload_not_available: "Offline"
-#  - name: "Sensor Licht"
-#    unique_id: "sensor.sensor_tls2561_.illuminance"
-#    state_topic: "tasmota/sensor/tele/SENSOR"
-#    value_template: "{{ value_json['TSL2561'].Illuminance }}"
-#    unit_of_measurement: "lx"
-#    device_class: illuminance
-#    availability:
-#    - topic: "tasmota/sensor/tele/LWT"
-#      payload_available: "Online"
-#      payload_not_available: "Offline"
-#  - name: "Sensor interne Temperatur"
-#    unique_id: "sensor.sensor_esp32_temperature"
-#    state_topic: "tasmota/sensor/tele/SENSOR"
-#    value_template: "{{ value_json['ESP32'].Temperature }}"
-#    unit_of_measurement: "°C"
-#    device_class: temperature
-#    availability:
-#    - topic: "tasmota/sensor/tele/LWT"
-#      payload_available: "Online"
-#      payload_not_available: "Offline"
 
 # zigbee does not autodiscover
   - name: "Zigbee Controller Battery Level"
@@ -184,14 +82,16 @@ sensor:
     qos: 0
 
 light:
-  - name: "Tripod"
+  - name: "Tripod mqtt"
     schema: template
     unique_id: "light.zigbee_tripod_0xec1bbdfffeae209a"
     command_topic: "tasmota/zigbee/cmnd/ZbSend"
     command_on_template: '{"Device":"Tripod","Send":{"Power":"ON"}}'
     command_off_template: '{"Device":"Tripod","Send":{"Power":"OFF"}}'
+    # on + off are req error: command__template: '{"Device":"Tripod","Send":{"Power":"{{value}}"}}'
     state_topic: "zigbee/tripod/stat/POWER"
-    state_template: "{{ value.lower() }}"
+    # convert OFF to off, else "Invalid state value 'OFF'" is reported
+    #state_template: "{{ value.lower() }}"
 #    brightness_command_topic: "tasmota/Dimmer"
 #    brightness_state_topic: "tele/tasmota/STATE"
 #    brightness_scale: 100

@@ -17,7 +17,7 @@ from basemqtt import MqttBase
 
 from arduino.usbdevice import ArduinoUsbDevice
 from basemqtt import MqttBase
-getTime = MqttBase.getUTCTime
+getTime = MqttBase.getTime
 
 class DigiTemp(ArduinoUsbDevice):
   DallasId = '000000C94107'
@@ -59,7 +59,7 @@ class RemoteSensor(MqttBase):
     def publish(self):
         val = self.data
         if self.verbose: print('#', val)
-        (rc, mid) = self.mqttc.publish('test/digi/temperature', val)
+        (rc, mid) = self.mqttc.publish('digi/tele/fussboden', val)
         if rc != mqtt.MQTT_ERR_SUCCESS: MqttBase.eprint('Publish Error {} {}'.format(rc, mqtt.error_string(rc)))
         if rc == mqtt.MQTT_ERR_QUEUE_SIZE: self.run = 0
 
@@ -74,9 +74,6 @@ class RemoteSensor(MqttBase):
             self.measure()
             self.publish()
         self.disconnect()
-
-
-
 
 if __name__ == '__main__':
   sensor = RemoteSensor()

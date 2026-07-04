@@ -23,6 +23,7 @@ CREATE RETENTION POLICY "m" ON "sensors" DURATION 31d REPLICATION 1 DEFAULT
 
 # measurement löschen
 #/^tmp,/d
+/^sensors,device=esp32dev/d
 
 # negative timestamp
 #/\-[0-9]\+$/d
