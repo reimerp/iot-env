@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 7,
   "links": [],
   "panels": [
     {
@@ -26,7 +25,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -57,7 +55,8 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": 7200000,
+            "showValues": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -72,7 +71,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-blue",
@@ -200,7 +199,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "[[tag_device]]-[[tag_source]]",
@@ -222,11 +221,10 @@
               "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"Temperature\")-((100 - mean(\"Humidity\")) / 5)\n FROM $rp./^$measurement$/ WHERE $timeFilter GROUP BY time($__interval), \"device\", \"source\"",
+          "query": "SELECT mean(\"Temperature\")-((100 - mean(\"Humidity\")) / 5)\n FROM $rp./^$measurement$/ WHERE $timeFilter AND \"device\" =~ /$devices/  GROUP BY time($__interval), \"device\", \"source\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -255,7 +253,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -286,7 +283,8 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": 7200000,
+            "showValues": false,
+            "spanNulls": 3600000,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -301,7 +299,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-blue",
@@ -405,6 +403,30 @@
                 }
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "schlaf-tasmota"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
           }
         ]
       },
@@ -429,10 +451,10 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
-          "alias": "[[tag_device]]",
+          "alias": "[[tag_device]]-[[tag_source]]",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -449,9 +471,14 @@
                 "device::tag"
               ],
               "type": "tag"
+            },
+            {
+              "params": [
+                "source::tag"
+              ],
+              "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
@@ -484,7 +511,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -515,7 +541,8 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": 7200000,
+            "showValues": false,
+            "spanNulls": false,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -530,7 +557,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-blue",
@@ -634,6 +661,30 @@
                 }
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "schlaf-tasmota"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
           }
         ]
       },
@@ -658,10 +709,10 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
-          "alias": "[[tag_device]]",
+          "alias": "[[tag_device]]-[[tag_source]]",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -678,9 +729,14 @@
                 "device::tag"
               ],
               "type": "tag"
+            },
+            {
+              "params": [
+                "source::tag"
+              ],
+              "type": "tag"
             }
           ],
-          "hide": false,
           "measurement": "/^$measurement$/",
           "orderByTime": "ASC",
           "policy": "$rp",
@@ -709,7 +765,7 @@
   ],
   "preload": false,
   "refresh": "5m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
@@ -745,6 +801,7 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -766,6 +823,35 @@
         },
         "refresh": 1,
         "regex": "/(?<value>[^,]*),.*/",
+        "regexApplyTo": "value",
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${datasource}"
+        },
+        "definition": "SELECT distinct device from (SELECT Humidity,device from \"sensors\" where Humidity>0)",
+        "description": "",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "devices",
+        "options": [],
+        "query": {
+          "query": "SELECT distinct device from (SELECT Humidity,device from \"sensors\" where Humidity>0)",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -803,6 +889,6 @@
   "timezone": "browser",
   "title": "Temperature",
   "uid": "ff8fgihuak9ogf",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }

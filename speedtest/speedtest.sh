@@ -19,6 +19,7 @@ fi
 # 13.07.23: stimmt so nicht mehr.
 # mehrfach accept ist egal
 # accept licence loggt auf stdout
-speedtest --accept-license --accept-gdpr -s 4087 -f json | \
+# 4087 willitel ist langsam geworden
+speedtest --accept-license --accept-gdpr -s 5733 -f json | \
   jq -cR '. as $line|try (fromjson|del(.download.bytes,.download.elapsed,.interface.internalIp,.interface.name,.interface.isVpn,.isp,.result,.server.port,.server.name,.server.location,.server.host,.server.country,.server.ip,.type,.upload.bytes,.upload.elapsed)|{"Time":.timestamp,"speedtest":.}|del(.speedtest.timestamp)) catch $line' | tail -1 | \
   mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "test/speedtest/${HOST}" -l
