@@ -661,30 +661,6 @@
                 }
               }
             ]
-          },
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "schlaf-tasmota"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": true,
-                  "viz": true
-                }
-              }
-            ]
           }
         ]
       },
@@ -712,7 +688,7 @@
       "pluginVersion": "12.4.3",
       "targets": [
         {
-          "alias": "[[tag_device]]-[[tag_source]]",
+          "alias": "[[tag_source]]-[[tag_device]]-[[tag_Id]]",
           "datasource": {
             "type": "influxdb",
             "uid": "${datasource}"
@@ -733,6 +709,12 @@
             {
               "params": [
                 "source::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "Id::tag"
               ],
               "type": "tag"
             }
@@ -889,6 +871,6 @@
   "timezone": "browser",
   "title": "Temperature",
   "uid": "ff8fgihuak9ogf",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

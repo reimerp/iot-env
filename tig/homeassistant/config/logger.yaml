@@ -2,6 +2,8 @@ default: warning
 logs:
   custom_components.enigma: critical
   homeassistant.components.frontier_silicon.media_player: critical
+  homeassistant.components.rest: debug
+  homeassistant.components.http: debug
   homeassistant.components.media_player: critical
   homeassistant.components.mjpeg: critical
   pychromecast.socket_client: critical
