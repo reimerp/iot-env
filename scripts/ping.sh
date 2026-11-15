@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 
 DIR=$(cd "$(dirname "$0")" && pwd)
 . "$DIR"/tools
