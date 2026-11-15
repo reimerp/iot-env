@@ -1,4 +1,6 @@
-# V1
+# Json
+
+## V1
 ```
 [[inputs.file]]
   files = ["/tmp/input/fritz_docsis.json"]
@@ -6,14 +8,14 @@
 #  json_query = "data"
 ```
 
-# V2
+## V2
 ```
 [[inputs.file]]
   files = ["tmp/input/dns.json"]
   data_format = "json_v2"
 ```
 
-# root object
+### root object
 ```
 [[inputs.mqtt_consumer.json_v2.object]]
   path = "@this"
@@ -26,5 +28,6 @@
 [inputs.mqtt_consumer.tags]
   rp = "m"
 ```
-works in root and below inputs.mqtt_consumer.
-unneeded now, since rp=m is default
+- works in root and below inputs.mqtt_consumer.
+- unneeded now, since rp=m is default
+- does just add, no overwrite if exists

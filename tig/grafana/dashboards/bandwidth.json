@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -32,7 +31,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -62,6 +60,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -77,7 +76,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -260,7 +259,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "repeat": "mode",
       "repeatDirection": "v",
       "targets": [
@@ -290,7 +289,6 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "/^$docinfo$/",
           "orderByTime": "ASC",
           "policy": "$rp",
@@ -341,7 +339,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -371,6 +368,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -386,7 +384,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               },
               {
                 "color": "super-light-yellow",
@@ -420,72 +418,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Download B8:27:EB:01:98:50"
+              "options": "Download 48:0F:CF:C2:FC:66"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Download hassbian"
+                "value": "Download hp"
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Upload B8:27:EB:01:98:50"
+              "options": "Upload 48:0F:CF:C2:FC:66"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Upload hassbian"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Download 90:61:AE:55:4E:ED"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Download probook wlan"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Upload 90:61:AE:55:4E:ED"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Upload probook wlan"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Download 48:BA:4E:F7:1B:1C"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Download probook eth0"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Upload 48:BA:4E:F7:1B:1C"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Upload probook eth0"
+                "value": "Upload hp"
               }
             ]
           }
@@ -517,7 +467,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$col $tag_interface_macAddr",
@@ -617,7 +567,6 @@
         "type": "influxdb",
         "uid": "${datasource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -650,6 +599,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -665,29 +615,13 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
           "unit": "ms"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "latency"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 11,
@@ -715,7 +649,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_interface_macAddr",
@@ -970,6 +904,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -985,7 +920,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1014,7 +949,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.8",
+      "pluginVersion": "12.4.3",
       "targets": [
         {
           "alias": "$tag_interface_macAddr",
@@ -1076,7 +1011,7 @@
   ],
   "preload": false,
   "refresh": "5m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
@@ -1112,6 +1047,7 @@
         "query": "select time,rp from forever.grafana_rp where time > now() - ${__from}ms order by time asc limit 1",
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -1135,6 +1071,7 @@
         },
         "refresh": 1,
         "regex": "^(?<value>[^,]+),channelID.*",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -1158,6 +1095,7 @@
         },
         "refresh": 1,
         "regex": "^(?<value>[^,]+),interface_macAddr.*",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -1176,6 +1114,7 @@
         "query": "SHOW TAG VALUES FROM $docinfo WITH KEY = \"mode\"",
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -1197,6 +1136,7 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
@@ -1223,6 +1163,7 @@
         },
         "refresh": 1,
         "regex": "/^(?<value>ping.*)/",
+        "regexApplyTo": "value",
         "type": "query"
       }
     ]
@@ -1232,9 +1173,9 @@
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "Bandwidth",
   "uid": "ySGwuWjMk",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

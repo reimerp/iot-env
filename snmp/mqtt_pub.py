@@ -23,7 +23,7 @@ class MqttPub():
 
   @staticmethod
   def getcred(param: str) -> dict:
-    if 'probook' == platform.node():
+    if platform.node().endswith('book'):
         try:
           from pykeypass import KeePass
         except ImportError:

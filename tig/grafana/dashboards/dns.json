@@ -402,14 +402,14 @@
           "type": "influxdb",
           "uid": "${datasource}"
         },
-        "definition": "SHOW SERIES WHERE \"server\"='probook'",
+        "definition": "SHOW SERIES WHERE \"size\"!=''",
         "description": "selects potential measurements",
         "hide": 1,
         "includeAll": false,
         "name": "measurement",
         "options": [],
         "query": {
-          "query": "SHOW SERIES WHERE \"server\"='probook'",
+          "query": "SHOW SERIES WHERE \"size\"!=''",
           "refId": "InfluxVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -448,6 +448,6 @@
   "timezone": "browser",
   "title": "DNS",
   "uid": "gcIAqlCGz",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

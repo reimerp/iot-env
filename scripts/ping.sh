@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. $DIR/tools
+set -euo pipefail
+
+DIR=$(cd "$(dirname "$0")" && pwd)
+. "$DIR"/tools
 
 # ping a host on the local lan (default GW)
 DG=$(ip route list default | cut -d" " -f 3)

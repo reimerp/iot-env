@@ -4,18 +4,25 @@
 
 C=${C:-"docker"}
 
+. ./.env
+
 run_docker() {
 
-. ./.env
 . ./env.telegraf_mqtt
 #set | grep INF
 #echo $TELEGRAF_TAG
 
-$C run --rm -v $(pwd)/telegraf_mqtt/etc/telegraf/:/etc/telegraf/:ro \
+$C run --rm -v $(pwd)/telegraf_test/etc/telegraf/:/etc/telegraf/:ro \
   -e MQTT_SERV=${MQTT_SERV} -e MQTT_USER=${MQTT_USER} -e MQTT_PASS=${MQTT_PASS} \
   -v $(pwd)/telegraf_test/tmp/input:/tmp/input -it telegraf:$TELEGRAF_TAG telegraf --test --test-wait 300
-}
 # geht nicht weil dyn: --env-file env.telegraf_mqtt \
+}
+
+secrets() {
+$C run --rm -v $(pwd)/telegraf_test/etc/telegraf/:/etc/telegraf/:ro \
+  -v $(pwd)/telegraf_test/etc/telegraf/secrets:/etc/telegraf/secrets:rw \
+  -it telegraf:$TELEGRAF_TAG telegraf secrets set jose_store $1
+}
 
 conv() {
   IN="fritz.conf"
@@ -31,5 +38,5 @@ conv() {
 }
 
 cmd="${1:-run_docker}"
-#shift
+[ -n "$1" ] && shift
 $cmd $*

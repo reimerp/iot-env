@@ -1124,80 +1124,7 @@
           },
           "unit": "binbps"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Download B8:27:EB:01:98:50"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Download hassbian"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Upload B8:27:EB:01:98:50"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Upload hassbian"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Download 90:61:AE:55:4E:ED"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Download probook wlan"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Upload 90:61:AE:55:4E:ED"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Upload probook wlan"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Download 48:BA:4E:F7:1B:1C"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Download probook eth0"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Upload 48:BA:4E:F7:1B:1C"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Upload probook eth0"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 7,
@@ -1879,6 +1806,6 @@
   "timezone": "browser",
   "title": "Retentention Policy",
   "uid": "b44aa8a7-ca68-41a6-a0ca-26b54747bd2c",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }

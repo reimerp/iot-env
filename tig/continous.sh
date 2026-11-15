@@ -56,6 +56,8 @@ INSERT INTO forever grafana_rp rp="autogen" 9223372036854775806
 1692195416 Mi 16. Aug 16:16:56 CEST 2023
 1692195416687 in ms
 
+ALTER RETENTION POLICY "autogen" ON "sensors" duration 1827d
+
 
 select * from "autogen"."devices" ORDER BY time DESC LIMIT 10
 

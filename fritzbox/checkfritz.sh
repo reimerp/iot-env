@@ -1,12 +1,10 @@
 #!/bin/bash
 
-
-set -e
+set -euo pipefail
 
 #if [ -z "$MQTT_PASS" ]; then
   MQTT_SERV=mqtt
-
-  if [ "_$(hostname -s)" != "_probook" ]; then
+  if ! hostname -s | grep -qE "book$"; then
     read -r _ _ _ MQTT_USER _ MQTT_PASS < <(grep mqtt_remote ${HOME}/.netrc)
     read -r _ _ _ FRITZ_USERNAME _ FRITZ_PASSWORD < <(grep fritz.monitor ${HOME}/.netrc)
     export FRITZ_USERNAME FRITZ_PASSWORD

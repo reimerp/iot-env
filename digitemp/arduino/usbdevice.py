@@ -16,17 +16,23 @@ import usb # 1.0 not 0.4
 def getStringDescriptor(device, index) -> str:
   """
   """
-  response = device.ctrl_transfer(usb.util.ENDPOINT_IN,
-    usb.legacy.REQ_GET_DESCRIPTOR,
-    (usb.util.DESC_TYPE_STRING << 8) | index,
-    0, # language id
-    255) # length
+  return usb.util.get_string(device, index)
 
+#   response = device.ctrl_transfer(usb.util.ENDPOINT_IN,
+#     usb.legacy.REQ_GET_DESCRIPTOR,
+#     (usb.util.DESC_TYPE_STRING << 8) | index,
+#     0, # language id
+#     255) # length
 
-  # response is array.array cannot be converted to string
+#   # array.array
 
-  # TODO: Refer to 'libusb_get_string_descriptor_ascii' for error handling
-  return response.tobytes().decode('utf-16')
+#   print(response.tolist())
+#   print(response.tobytes())
+
+#   # response is array.array cannot be converted to string
+
+#   # TODO: Refer to 'libusb_get_string_descriptor_ascii' for error handling
+#   return response.tobytes().decode('utf-16')
 
 REQUEST_TYPE_SEND = usb.util.build_request_type(usb.util.CTRL_OUT,
     usb.util.CTRL_TYPE_CLASS,

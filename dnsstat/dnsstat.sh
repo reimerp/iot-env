@@ -1,8 +1,10 @@
-#!/bin/bash -e
+#!/bin/bash
 
-DIR=${DIR:-$(cd $(dirname $0)/../scripts && pwd)}
+set -euo pipefail
 
-. $DIR/tools
+DIR=${DIR:-$(cd "$(dirname "$0")"/../scripts && pwd)}
+
+. "$DIR"/tools
 
 # das geht ins syslog
 # ps aux | grep [d]nsmasq | awk '{print $2}' | xargs -r kill -USR1
@@ -33,7 +35,7 @@ doserver() {
     printf '{"Time":"%s","dnscache":{"server":"%s","size":%i,"hits_total":%i,"miss_total":%i}}' "$time" "$server" "$csize" "$chits" "$cmiss"
 }
 
-if [ "_$server" = "_fb" ] || [ "_$server" = "_probook" ]; then
+if [ "_$server" = "_fb" ] || echo "$server" | grep -qE "book$"; then
   doserver "$server" | mosquitto_pub -h "${MQTT_SERV}" -u "${MQTT_USER}" -P "${MQTT_PASS}" -t "metrics/dnscache/$server" -l
 else
   doserver "$server"

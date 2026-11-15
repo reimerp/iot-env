@@ -1,6 +1,6 @@
 services:
   telegraf_stats:
-    image: docker.io/telegraf:1.39-alpine-plugin
+    image: docker.io/telegraf:${TELEGRAF_TAG}-plugin
     command:
     - --strict-env-handling
     restart: unless-stopped
