@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 
 DIR=${DIR:-$(cd "$(dirname "$0")"/../scripts && pwd)}
 
